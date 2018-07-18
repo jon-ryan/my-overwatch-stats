@@ -1,0 +1,22 @@
+{
+  "name": "my-overwatch-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hex7cd/my-overwatch-stats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hex7cd/my-overwatch-stats/issues"
+  },
+  "homepage": "https://github.com/hex7cd/my-overwatch-stats#readme",
+  "dependencies": {
+    "electron": "^2.0.5"
+  }
+}
