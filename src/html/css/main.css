@@ -7,23 +7,29 @@ remove default styling
     font-family: 'Open Sans', sans-serif;
 }
 
+/* set the background color for the body*/
 body{
     background-color: rgb(211, 211, 211);
 }
 
-.tm-container{
+/* Specify the width and the centered orientation of the content*/
+.content-container{
     max-width: 70%;
     margin: 0 auto;
 }
 
+
+/* ------- Style the header ------- */
+/* Specify the color and the height of the header*/
 .tm-header{
     background-color: rgb(46, 46, 46);
     height: 3cm;
-    border-bottom: 5px solid rgb(249,158,26);
+    border-bottom: 3px solid rgb(249,158,26);
 }
 
 .tm-logo{
-    padding-top: 5px;
+    padding-top: 0.16cm;
+    display: inline-block;
 }
 
 .tm-header::after{
@@ -33,130 +39,27 @@ body{
     visibility: none;
 }
 
-.tm-logo{
+
+/* ------- Style the header ------- */
+
+
+/* Define classes to float an object left or right */
+.float-right{
+    float: right;
+}
+.float-left{
     float: left;
 }
 
 
-
-.button-wrapper{
-    display: block;
-    float: right;
-}
-
-.actions-button-wrapper{
-    display: block;
-    float: right;
-    padding-right: 25px;
-    padding-top: 30px;
-}
-
-button{
-    border: none;
-    background-color: rgb(33,143,254);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    color: rgb(235,235,235);
-    font-size: 0.6cm;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 3px;
-    font-weight: bolder;
-    margin-left: 10 px;
-}
-
-
-button:hover{
-    background-color: rgb(64,82,117);
-
-}
-
-
-p{
-    margin-bottom: 0.25cm;
-    margin-top: 0.25cm;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-/* ----------------- Styling checkboxes -------------------- */
-
-.checkbox-container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.checkbox-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: rgb(211, 211, 211);
-}
-
-/* On mouse-over, add a grey background color */
-.checkbox-container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.checkbox-container input:checked ~ .checkmark {
-    background-color: rgb(33,143,254);
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.checkbox-container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.checkbox-container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-/* ~~~~~~~~~~~~~~~~~~~~~~~ Style checkboxes ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
+/* Define styling for an settings element */
 .setting-element{
-    margin-top:15px;
-    margin-bottom: 15px;
-    font-size: 22px;
+    margin-top:0.396cm;
+    margin-bottom: 0.396cm;
+    font-size: 0.582cm;
 }
 
+/* Style a separator */
 .separator{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -164,27 +67,8 @@ p{
     clear: both;
 }
 
-h1, h2{
-    margin-bottom: 0.3cm;
-}
 
-.image{
-    border-radius: 0.2cm;
-    margin-bottom: 0.5cm;
-    max-width: 100%;
-}
-
-ul, ol{
-    margin-left: 1cm;
-    margin-bottom: 1cm;
-}
-
-.tm-content{
-    margin-top: 1cm;
-    margin-bottom: 1cm;
-    
-}
-
+/* Specify the styling for a body element */
 .tm-body-element{
     background-color: rgb(235, 235, 235);
     padding: 25px;
@@ -200,23 +84,14 @@ ul, ol{
     visibility: none;
 }
 
+
+/* Style the footer */
 .tm-footer{
     background-color: rgb(235, 235, 235);
     text-align: center;
     padding: 20px;
 }
 
-/*
-.tm-sidebar{
-    margin-top: 1cm;
-    margin-bottom: 1cm;
-    max-width: 23%;
-    border-radius: 0.2cm;
-    float: left;
-    width: 15%;
-    padding-left: 1%;
-    padding-right: 1%;
-}*/
 
 .clearfix::after{
     content: " ";
@@ -225,16 +100,6 @@ ul, ol{
     visibility: none;
 }
 
-
-.tm-sidebar div{
-    background-color: rgb(235, 235, 235);
-    padding: 25px;
-    border-radius: 0.2cm;
-}
-
-.action-heading{
-    font-weight: 1200;
-}
 
 
 /*
@@ -254,7 +119,7 @@ ul, ol{
     visibility: none;
 }
 
-.form-paragraph{
+.form-element{
     margin-bottom: 15px;
     font-weight: 1000;
     font-size: 20px;

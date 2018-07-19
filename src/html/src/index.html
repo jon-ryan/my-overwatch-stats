@@ -4,49 +4,35 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Overwatch Statistics</title>
+
+    <!-- Include the main.css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+    <!-- Include the button.css file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/button.css" />
+    <!-- Include the input-element.css file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/input-element.css" />
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Header -->
     <header class="tm-header">
-        <div class="tm-container">
-        <img src="../../../img/logo.svg" height="100" alt="logo" class="tm-logo" class="tm-logo">
-        <!--Actionbuttons-->
-        <div class="actions-button-wrapper"> 
-            <button onclick="location.href='settings.html'" id="btn-settings">Settings</button>
-            <button id="btn-add-season">+ Season</button>
-            <button onclick="location.href='form.html'" id="btn-add-match">+ Match</button>
-    </div>
-    </div>
-    </header>
-
-
-
-   <!--
-    <aside class="tm-sidebar">
-        <div class="button-wrapper">
-            <h1>Actions</h1>
-            <button>Add New Match</button>
-            <button>New Season</button>
-            <button class="undo-button">Undo Last Action</button>
-                          
-        </div>
-    </aside>
--->
-
-    <div class="tm-container clearfix">
-
-        <!-- Div holding the buttons 
-        <div class="tm-body-element">
-            <div class="button-wrapper"> 
-                    <button>Settings</button>
-                    <button>+ Season</button>
-                    <button>+ Match</button>
+        <div class="content-container">
+            <img src="../../../img/logo.svg" height="100" alt="logo" class="tm-logo float-left">
+            <!--Actionbuttons-->
+            <div class="action-button-wrapper float-right"> 
+                <button onclick="location.href='settings.html'" class="blue-button" id="btn-settings">Settings</button>
+                <button class="blue-button" id="btn-add-season">+ Season</button>
+                <button onclick="location.href='form.html'" class="blue-button" id="btn-add-match">+ Match</button>
             </div>
-            <h1>Activities</h1>
         </div>
-        -->
+    </header>
+    <!-- ~~ Header ~~ -->
+
+
+    <!-- Content -->
+    <div class="content-container clearfix">
 
         <!-- Div holding the overall sr rating -->
         <div class="tm-body-element">
@@ -62,17 +48,16 @@
             <h1>Top Heroes</h1>
         </div>
 
-
-
     </div>
-        
+    <!-- ~~ Content ~~ -->
     
 
-    
 
+    <!-- Footer -->
     <footer class="tm-footer">
         &copy; Copyright Jonathan R. Herrmann 2018
     </footer>
+    <!-- ~~ Footer ~~ -->
 
     
 </body>

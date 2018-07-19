@@ -26,9 +26,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="1689.4765"
-     inkscape:cy="-131.06674"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="1053.4107"
+     inkscape:cy="54.081442"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -89,16 +89,16 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:58.04845047px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ebebeb;fill-opacity:1;stroke:none;stroke-width:1.45121133"
        x="140.17249"
-       y="212.76987"
+       y="215.94482"
        id="text849"><tspan
          sodipodi:role="line"
          id="tspan847"
          x="140.17249"
-         y="212.76987"
+         y="215.94482"
          style="fill:#ebebeb;fill-opacity:1;stroke-width:1.45121133">MyOverwatch</tspan><tspan
          sodipodi:role="line"
          x="140.17249"
-         y="285.33044"
+         y="288.5054"
          style="fill:#ebebeb;fill-opacity:1;stroke-width:1.45121133"
          id="tspan832">Statistics</tspan></text>
     <rect
@@ -107,7 +107,7 @@
        width="368.83234"
        height="4.8108559"
        x="143.25661"
-       y="230.71713" />
+       y="233.89209" />
     <rect
        style="opacity:1;fill:#ff9e1a;fill-opacity:1;stroke:none;stroke-width:3.21141624;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect857-0"
