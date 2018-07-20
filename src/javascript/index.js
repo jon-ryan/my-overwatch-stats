@@ -17,7 +17,7 @@ const shell = require('electron').shell
   function createWindow () {
     // Create the browser window
     //set the default width to 1500px, default height to 1000px and the minimum width to 1250px
-    win = new BrowserWindow({width: 1500, height: 1000, minWidth: 1250});
+    win = new BrowserWindow({width: 1500, height: 1000, minWidth: 700});
 
     win.setMenu(null);
 

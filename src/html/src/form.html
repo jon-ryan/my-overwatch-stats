@@ -6,175 +6,161 @@
     <title>My Overwatch Statistics</title>
 
     <!-- Include the main.css file -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
-    <!-- Include the button.css file -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/button.css" />
-    <!-- Include the input-element.css file -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/input-element.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/newMain.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header class="tm-header">
-        <div class="content-container">
-            <img src="../../../img/logo.svg" height="100" alt="logo" class="tm-logo float-left">
-            <!--Actionbuttons-->
-            <div class="action-button-wrapper float-right"> 
-                <button onclick="location.href='index.html'" class="blue-button" id="btn-submit">Submit</button>
-            </div>
+    <div class="spacer"></div>
+
+    <header>
+        <div class="content-container navbar-container">
+            <ul>
+                <li> <a class="" href="index.html">Overview</a></li>
+                <li> <a href="settings.html">Settings</a></li>
+                <li> <a >+ Season</a></li>
+                <li> <a href="form.html">+ Match</a></li>
+            </ul>
         </div>
     </header>
-    <!-- ~~ Header ~~ -->
-
 
     <!-- Content -->
-    <div class="content-container clearfix">
+    <div class="content-container">
 
-        <!--Div holding the form-->
-        <div class="tm-body-element">
-
-            <h1>General Match Statistics</h1>
+        <div class="body-element">
+                <h1>General Match Statistics</h1>
             
-            <form method="post">
-
-                <!-- this div is floating on the left side -->
-                <div class="tm-content-generall-match-stats">
-                    <!--Input for SR-->
+                <form method="post">
+    
+                    <!-- this div is floating on the left side -->
+                    <div class="content-generall-match-stats-left-float">
+                        <!--Input for SR-->
+                        <div class="form-element">
+                            New SR-Rating <br>
+                            <input type="number" name="sr-rating" id="sr-rating">
+                        </div>           
+    
+                        <!--Input for Win/Loss-->
+                        <div class="form-element">
+                            <input type="radio" name="win_loss" value="won"> Victory &ensp;
+                            <input type="radio" name="win_loss" value="loss"> Defeat
+                        </div>
+    
+                        <!--Input for Matchtime-->
+                        <div class="form-element">
+                            Match Duration <br>
+                            <input type="time" name="match-duration" id="match-duration"> 
+                            <br>
+                            <br>
+                            Date of Match <br>
+                            <input type="date" name="match-date" id="match-date"> &ensp; 
+                            <br> <br>
+                            Time of Match <br>
+                            <input type="time" name="match-time" id="match-time" step="1">
+                            <br>
+                        </div>
+    
+                        <!--Input for the score of team blue and team red-->
+                        <div class="form-element">
+                            Score of Team Blue
+                            <br>
+                            <input type="number" name="score-blue" id="score-blue"> 
+                            <br> <br>
+                            Score of Team Red
+                            <br>
+                            <input type="number" name="score-red" id="score-red">
+                        </div>
+                    </div>
+    
+                    <!-- left floating div end-->
+    
+                    <!-- right floating div -->
+                    <div>
+                        <div class="form-element">
+                            Eliminations <br>
+                            <input type="number" id="eliminations"> 
+                        </div>
+    
+                        <div class="form-element">
+                            Objective Kills <br>
+                            <input type="number" id="objective-kills">
+                        </div>
+    
+                        <div class="form-element">
+                            Objective Time <br>
+                            <input type="time" id="objective-time">
+                        </div>
+    
+                        <div class ="form-element">
+                            Hero Damage Done <br>
+                            <input type="number" id="hero-damage-done">
+                        </div>
+    
+                        <div class ="form-element">
+                            Healing Done <br>
+                            <input type="number" id="healing-done">
+                        </div>
+    
+                        <div class="form-element">
+                            Deaths <br>
+                            <input type="number" id="deaths">
+                        </div>
+                    </div>
+                    <!-- right floating div end -->
+    
+                    <!-- General statistics end -->
+    
+    
+                    <!-- Separate the general statistics from the hero specific ones-->
+                    <div class="separator"></div>
+    
+                    <!-- Hero specific statistics-->
+                    <h1>Hero Specific Statistics</h1>
+    
                     <div class="form-element">
-                        New SR-Rating <br>
-                        <input type="number" name="sr-rating" id="sr-rating">
-                    </div>           
-
-                    <!--Input for Win/Loss-->
-                    <div class="form-element">
-                        <input type="radio" name="win_loss" value="won"> Victory &ensp;
-                        <input type="radio" name="win_loss" value="loss"> Defeat
+                        <select name="heroes">
+                            <option value="null">---</option>
+                            <option value="ana">Ana</option>
+                            <option value="bastion">Bastion</option>
+                            <option value="brigitte">Brigitte</option>
+                            <option value="d_va">D.VA</option>
+                            <option value="doomfist">Doomfist</option>
+                            <option value="genji">Genji</option>
+                            <option value="hanzo">Hanzo</option>
+                            <option value="junkrat">Junkrat</option>
+                            <option value="lucio">Lúcio</option>
+                            <option value="mccree">McCree</option>
+                            <option value="mei">Mei</option>
+                            <option value="mercy">Mercy</option>
+                            <option value="moira">Moira</option>
+                            <option value="orisa">Orisa</option>
+                            <option value="pharah">Pharah</option>
+                            <option value="reaper">Reaper</option>
+                            <option value="reinhardt">Reinhardt</option>
+                            <option value="roadhog">Roadhog</option>
+                            <option value="soldier">Soldier: 76</option>
+                            <option value="sombra">Sombra</option>
+                            <option value="symetra">Symetra</option>
+                            <option value="torbjörn">Torbjörn</option>
+                            <optoin value="tracer">Tracer</option>
+                            <option value="widowmaker">Widowmaker</option>
+                            <option value="winston">Winston</option>
+                            <option value="zarya">Zarya</option>
+                            <option value="zenyatta">Zenyatta</option>
+                        </select>
                     </div>
-
-                    <!--Input for Matchtime-->
-                    <div class="form-element">
-                        Match Duration <br>
-                        <input type="time" name="match-duration" id="match-duration"> 
-                        <br>
-                        <br>
-                        Date of Match <br>
-                        <input type="date" name="match-date" id="match-date"> &ensp; 
-                        <br> <br>
-                        Time of Match <br>
-                        <input type="time" name="match-time" id="match-time" step="1">
-                        <br>
+    
+                    <!-- add a new hero-->
+                    <div class="button-wrapper">
+                        <button class="blue-button" id="add-another-hero">Add Another Hero</button>
                     </div>
-
-                    <!--Input for the score of team blue and team red-->
-                    <div class="form-element">
-                        Score of Team Blue
-                        <br>
-                        <input type="number" name="score-blue" id="score-blue"> 
-                        <br> <br>
-                        Score of Team Red
-                        <br>
-                        <input type="number" name="score-red" id="score-red">
-                    </div>
-                </div>
-
-                <!-- left floating div end-->
-
-                <!-- right floating div -->
-                <div>
-                    <div class="form-element">
-                        Eliminations <br>
-                        <input type="number" id="eliminations"> 
-                    </div>
-
-                    <div class="form-element">
-                        Objective Kills <br>
-                        <input type="number" id="objective-kills">
-                    </div>
-
-                    <div class="form-element">
-                        Objective Time <br>
-                        <input type="time" id="objective-time">
-                    </div>
-
-                    <div class ="form-element">
-                        Hero Damage Done <br>
-                        <input type="number" id="hero-damage-done">
-                    </div>
-
-                    <div class ="form-element">
-                        Healing Done <br>
-                        <input type="number" id="healing-done">
-                    </div>
-
-                    <div class="form-element">
-                        Deaths <br>
-                        <input type="number" id="deaths">
-                    </div>
-                </div>
-                <!-- right floating div end -->
-
-                <!-- General statistics end -->
-
-
-                <!-- Separate the general statistics from the hero specific ones-->
-                <div class="separator"></div>
-
-                <!-- Hero specific statistics-->
-                <h1>Hero Specific Statistics</h1>
-
-                <div class="form-element">
-                    <select name="heroes">
-                        <option value="null">---</option>
-                        <option value="ana">Ana</option>
-                        <option value="bastion">Bastion</option>
-                        <option value="brigitte">Brigitte</option>
-                        <option value="d_va">D.VA</option>
-                        <option value="doomfist">Doomfist</option>
-                        <option value="genji">Genji</option>
-                        <option value="hanzo">Hanzo</option>
-                        <option value="junkrat">Junkrat</option>
-                        <option value="lucio">Lúcio</option>
-                        <option value="mccree">McCree</option>
-                        <option value="mei">Mei</option>
-                        <option value="mercy">Mercy</option>
-                        <option value="moira">Moira</option>
-                        <option value="orisa">Orisa</option>
-                        <option value="pharah">Pharah</option>
-                        <option value="reaper">Reaper</option>
-                        <option value="reinhardt">Reinhardt</option>
-                        <option value="roadhog">Roadhog</option>
-                        <option value="soldier">Soldier: 76</option>
-                        <option value="sombra">Sombra</option>
-                        <option value="symetra">Symetra</option>
-                        <option value="torbjörn">Torbjörn</option>
-                        <optoin value="tracer">Tracer</option>
-                        <option value="widowmaker">Widowmaker</option>
-                        <option value="winston">Winston</option>
-                        <option value="zarya">Zarya</option>
-                        <option value="zenyatta">Zenyatta</option>
-                    </select>
-                </div>
-
-                <!-- add a new hero-->
-                <div class="button-wrapper">
-                    <button class="blue-button" id="add-another-hero">Add Another Hero</button>
-                </div>
-
-            </form>   
+    
+                </form>  
         </div>
     </div>
-    <!-- ~~ Content ~~ -->
-        
-    
 
-    
-    <!-- Footer -->
-    <footer class="tm-footer">
-        &copy; Copyright Jonathan R. Herrmann 2018
-    </footer>
-    <!-- ~~ Footer ~~ -->
-    
 </body>
+
 </html>
