@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/newMain.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- include script -->
+    <script src="../../javascript/overview.js"></script>
 </head>
 
 <body>
@@ -18,16 +21,16 @@
     <header>
         <div class="content-container navbar-container">
             <ul>
-                <li> <a class="active">Overview</a></li>
-                <li> <a href="settings.html">Settings</a></li>
-                <li> <a >+ Season</a></li>
-                <li> <a href="form.html">+ Match</a></li>
+                <li> <a class="active" onclick="transitionToOverview()" href="#" id="overview">Overview</a></li>
+                <li> <a class="" onclick="transitionToSettings()" href="#" id="settings">Settings</a></li>
+                <li> <a class="" onclick="transitionToSeason()" href="#" id="season">+ Season</a></li>
+                <li> <a class="" onclick="transitionToMatch()" href="#" id="match">+ Match</a></li>
             </ul>
         </div>
     </header>
 
     <!-- Content -->
-    <div class="content-container">
+    <div class="content-container" id="content-container">
 
         <div class="body-element">
             &Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat inventore assumenda ducimus. Nisi sunt eum beatae dolores laborum saepe veniam nulla rem dignissimos ab harum, labore consectetur, facere quibusdam qui.
