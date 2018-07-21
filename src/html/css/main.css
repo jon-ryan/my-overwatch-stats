@@ -7,57 +7,65 @@ remove default styling
     font-family: 'Open Sans', sans-serif;
 }
 
-/* set the background color for the body*/
-body{
-    background-color: rgb(211, 211, 211);
+html{
+    background: url(../../../img/eichenwalde_1_blur_1080p.png) no-repeat center fixed;
+    background-size: cover;
+}
+
+.spacer{
+    height: 0.75cm;
 }
 
 /* Specify the width and the centered orientation of the content*/
 .content-container{
     max-width: 70%;
     margin: 0 auto;
+    font-size: 0.5cm;
 }
 
-
-/* ------- Style the header ------- */
-/* Specify the color and the height of the header*/
-.tm-header{
-    background-color: rgb(46, 46, 46);
-    height: 3cm;
-    border-bottom: 3px solid rgb(249,158,26);
+.navbar-container{
+    border-bottom: 2px solid white;
 }
 
-.tm-logo{
-    padding-top: 0.16cm;
-    display: inline-block;
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-.tm-header::after{
-    content: " ";
-    clear: both;
-    display: block;
-    visibility: none;
-}
-
-
-/* ------- Style the header ------- */
-
-
-/* Define classes to float an object left or right */
-.float-right{
-    float: right;
-}
-.float-left{
+li{
     float: left;
 }
 
-
-/* Define styling for an settings element */
-.setting-element{
-    margin-top:0.396cm;
-    margin-bottom: 0.396cm;
-    font-size: 0.582cm;
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
+
+li a:hover:not(.active){
+    background-color: rgba(225,225,225, 0.3);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.active{
+    background-color: rgba(225,225,225, 0.3);
+}
+
+/* Specify the styling for a body element */
+.body-element{
+    background-color: rgb(247, 247, 247);
+    color: rgb(34, 34, 34);
+    padding: 25px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
 
 /* Style a separator */
 .separator{
@@ -67,60 +75,16 @@ body{
     clear: both;
 }
 
-
-/* Specify the styling for a body element */
-.tm-body-element{
-    background-color: rgb(235, 235, 235);
-    padding: 25px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.tm-body-element::after{
-    content: " ";
-    clear: both;
-    display: block;
-    visibility: none;
-}
-
-
-/* Style the footer */
-.tm-footer{
-    background-color: rgb(235, 235, 235);
-    text-align: center;
-    padding: 20px;
-}
-
-
-.clearfix::after{
-    content: " ";
-    clear: both;
-    display: block;
-    visibility: none;
-}
-
-
-
-/*
-    Styling the divs for input of team score
-*/
-
-.tm-content-generall-match-stats{
+.content-generall-match-stats-left-float{
     float:left;
     overflow: auto;
     width: 45%;
 }
 
-.tm-content-generall-match-stats::after{
-    clear: both;
-    content: " ";
-    display:table;
-    visibility: none;
+.float-left{
+    float: left;
 }
 
-.form-element{
-    margin-bottom: 15px;
-    font-weight: 1000;
-    font-size: 20px;
+.border-right{
+    border-right: 1px solid grey;
 }
