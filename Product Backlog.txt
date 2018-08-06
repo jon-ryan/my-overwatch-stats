@@ -11,6 +11,8 @@
 9. The programm can import a csv-file to import data into the database.
 10. The programm can export a csv-file to export the existing database.
 11. The user inputs the data in a form. Options which aren't filled will be set to null.
+12. The programm supports a seasons chart displaying a chart with the seasons high, seasons end and seasons low
+13. The user can create a new season. This will terminate the record for the current season. The seasons high, end and low will be stored in the database. A record for a new season will be created.
 
 
 

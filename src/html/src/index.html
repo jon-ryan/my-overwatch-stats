@@ -29,10 +29,10 @@
     <header>
         <div class="content-container navbar-container">
             <ul>
-                <li> <a class="active" ng-click="showOverviewContainer()" href="#" id="overview">Overview</a></li>
-                <li> <a class="" ng-click="showSettingsContainer()" href="#" id="settings">Settings</a></li>
-                <li> <a class="" onclick="transitionToSeason()" href="#" id="season">+ Season</a></li>
-                <li> <a class="" onclick="transitionToMatch()" href="#" id="match">+ Match</a></li>
+                <li> <a class="active"  ng-click="showOverviewContainer()"  href="#" id="overview"  >Overview   </a>    </li>
+                <li> <a class=""        ng-click="showSettingsContainer()"  href="#" id="settings"  >Settings   </a>    </li>
+                <li> <a class=""        ng-click="showAddSeason()"          href="#" id="season"    >+ Season   </a>    </li>
+                <li> <a class=""        ng-click="showAddMatch()"           href="#" id="match"     >+ Match    </a>    </li>
             </ul>
         </div>
     </header>
@@ -43,8 +43,20 @@
         <!-- Content Overview -->
         <div id="container-overview" ng-show="showOverview">
             <div class="body-element" id="sr-rating">
-                <h1>SR-Rating</h1>
+                <h3>SR-Rating</h3>
 
+            </div>
+
+            <div class ="body-element">
+                <h3>24-Hour Record</h3>
+            </div>
+
+            <div class ="body-element">
+                <h3>Best Heroes</h3>
+            </div>
+
+            <div class ="body-element">
+                <h3>Seasons Overview</h3>
             </div>
         </div>
 
