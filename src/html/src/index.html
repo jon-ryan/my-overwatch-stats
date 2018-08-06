@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
     <!-- Include the input-element.css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/input-element.css" />
+    <!-- Include the button.css file -->
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/button.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -63,7 +65,7 @@
 
 
         <!-- Content Settings -->
-        <div id="container-settings" ng-show="showSettings">
+        <div    id="container-settings" ng-show="showSettings">
 
                 <div class="body-element">
 
@@ -84,6 +86,117 @@
                     </label>
                     
                 </div>  
+
+        </div>
+
+
+        <!-- Content form -->
+        <div    id="container-form"     ng-show="showForm"      ng-controller="form-controller">
+                <div class="body-element">
+                        <h1>General Match Statistics</h1>
+                    
+                        <form method="post">
+            
+                            <!-- this div is floating on the left side -->
+                            <div class="content-generall-match-stats-left-float">
+                                <!--Input for SR-->
+                                <div class="form-element">
+                                    New SR-Rating <br>
+                                    <input type="number" name="sr-rating" id="sr-rating">
+                                </div>           
+            
+                                <!--Input for Win/Loss-->
+                                <div class="form-element">
+                                    <input type="radio" name="win_loss" value="won"> Victory &ensp;
+                                    <input type="radio" name="win_loss" value="loss"> Defeat
+                                </div>
+            
+                                <!--Input for Matchtime-->
+                                <div class="form-element">
+                                    Match Duration <br>
+                                    <input type="time" name="match-duration" id="match-duration"> 
+                                    <br>
+                                    <br>
+                                    Date of Match <br>
+                                    <input type="date" name="match-date" id="match-date"> &ensp; 
+                                    <br> <br>
+                                    Time of Match <br>
+                                    <input type="time" name="match-time" id="match-time" step="1">
+                                    <br>
+                                </div>
+            
+                                <!--Input for the score of team blue and team red-->
+                                <div class="form-element">
+                                    Score of Team Blue
+                                    <br>
+                                    <input type="number" name="score-blue" id="score-blue"> 
+                                    <br> <br>
+                                    Score of Team Red
+                                    <br>
+                                    <input type="number" name="score-red" id="score-red">
+                                </div>
+                            </div>
+            
+                            <!-- left floating div end-->
+            
+                            <!-- right floating div -->
+                            <div>
+                                <div class="form-element">
+                                    Eliminations <br>
+                                    <input type="number" id="eliminations"> 
+                                </div>
+            
+                                <div class="form-element">
+                                    Objective Kills <br>
+                                    <input type="number" id="objective-kills">
+                                </div>
+            
+                                <div class="form-element">
+                                    Objective Time <br>
+                                    <input type="time" id="objective-time">
+                                </div>
+            
+                                <div class ="form-element">
+                                    Hero Damage Done <br>
+                                    <input type="number" id="hero-damage-done">
+                                </div>
+            
+                                <div class ="form-element">
+                                    Healing Done <br>
+                                    <input type="number" id="healing-done">
+                                </div>
+            
+                                <div class="form-element">
+                                    Deaths <br>
+                                    <input type="number" id="deaths">
+                                </div>
+                            </div>
+                            <!-- right floating div end -->
+            
+                            <!-- General statistics end -->
+            
+            
+                            <!-- Separate the general statistics from the hero specific ones-->
+                            <div class="separator"></div>
+            
+                            <!-- Hero specific statistics-->
+                            <h1>Hero Specific Statistics</h1>
+                            <em>Select a hero</em>
+
+                            <select ng-model="selectedHero" ng-options="x.id for x in heroes | orderBy: 'id'">
+
+                            </select>
+
+                            <br>
+                            <br>
+                            <!-- add a new hero-->
+                            <div class="button-wrapper">
+                                <button class="blue-button" id="add-another-hero">Add Another Hero</button>
+                            </div>
+            
+                        </form>  
+                </div>
+
 
         </div>
 
