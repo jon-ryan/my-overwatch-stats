@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Overwatch Competitive Stats Tracker",
   "keywords": ["overwatch", "competitive", "stats", "statistics", "tracker", "tracking", "stat", "comp"],
-  "homepage": "https://github.com/jon-ryan/my-overwatch-stats"
+  "homepage": "https://github.com/jon-ryan/my-overwatch-stats",
   "main": "src/javascript/index.js",
   "scripts": {
     "test": "electron ."
