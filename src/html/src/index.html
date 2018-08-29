@@ -24,7 +24,7 @@
     
 </head>
 
-<body ng-app="overwatch-stats-app" ng-controller="content-controller">
+<body ng-app="overwatch-stats-app" ng-controller="ContentController">
 
     <div class="spacer"></div>
 
@@ -46,6 +46,15 @@
         <div id="container-overview" ng-show="showOverview">
             <div class="body-element" id="sr-rating">
                 <h3>SR-Rating</h3>
+                <div ng-repeat="x in dbEntries">
+                    {{x.id}} <br>
+                    {{x.sr}} <br>
+                    {{x.matchEnd}} <br>
+                    {{x.scoreBlue}} <br>
+                    <button class="red-button" ng-click="removeItem($index)">Remove</button>
+                    <br>
+                </div>
+
 
             </div>
 
@@ -91,51 +100,45 @@
 
 
         <!-- Content form -->
-        <div    id="container-form"     ng-show="showForm"      ng-controller="form-controller">
+        <div    id="container-form"     ng-show="showForm">
                 <div class="body-element">
-                        <h1>General Match Statistics</h1>
+                        <h3>General Match Statistics</h3>
                     
-                        <form method="post">
+                        <form novalidate method="post">
             
                             <!-- this div is floating on the left side -->
                             <div class="content-generall-match-stats-left-float">
                                 <!--Input for SR-->
                                 <div class="form-element">
                                     New SR-Rating <br>
-                                    <input type="number" name="sr-rating" id="sr-rating">
+                                    <input type="number" name="sr-rating" ng-model="newsr">
                                 </div>           
             
                                 <!--Input for Win/Loss-->
                                 <div class="form-element">
-                                    <input type="radio" name="win_loss" value="won"> Victory &ensp;
-                                    <input type="radio" name="win_loss" value="loss"> Defeat
+                                    <input type="radio" name="win_loss" ng-model="winLoss"    value="1"> Victory &ensp;
+                                    <input type="radio" name="win_loss" ng-model="winLoss"    value="0"> Defeat
                                 </div>
             
                                 <!--Input for Matchtime-->
                                 <div class="form-element">
                                     Match Duration <br>
                                     <input type="time" name="match-duration" id="match-duration"> 
-                                    <br>
-                                    <br>
-                                    Date of Match <br>
-                                    <input type="date" name="match-date" id="match-date"> &ensp; 
-                                    <br> <br>
-                                    Time of Match <br>
-                                    <input type="time" name="match-time" id="match-time" step="1">
-                                    <br>
                                 </div>
             
                                 <!--Input for the score of team blue and team red-->
                                 <div class="form-element">
                                     Score of Team Blue
                                     <br>
-                                    <input type="number" name="score-blue" id="score-blue"> 
+                                    <input type="number" name="score-blue" ng-model="scoreBlue"> 
                                     <br> <br>
                                     Score of Team Red
                                     <br>
-                                    <input type="number" name="score-red" id="score-red">
+                                    <input type="number" name="score-red" ng-model="dbEntry.scoreRed">
                                 </div>
+                                <br>
                             </div>
+                        
             
                             <!-- left floating div end-->
             
@@ -143,7 +146,7 @@
                             <div>
                                 <div class="form-element">
                                     Eliminations <br>
-                                    <input type="number" id="eliminations"> 
+                                    <input type="number" ng-model=""> 
                                 </div>
             
                                 <div class="form-element">
@@ -174,13 +177,15 @@
                             <!-- right floating div end -->
             
                             <!-- General statistics end -->
+
+                            <br>
             
             
                             <!-- Separate the general statistics from the hero specific ones-->
                             <div class="separator"></div>
             
                             <!-- Hero specific statistics-->
-                            <h1>Hero Specific Statistics</h1>
+                            <h3>Hero Specific Statistics</h3>
                             <em>Select a hero</em>
 
                             <select ng-model="selectedHero" ng-options="x.id for x in heroes | orderBy: 'id'">
@@ -193,6 +198,11 @@
                             <div class="button-wrapper">
                                 <button class="blue-button" id="add-another-hero">Add Another Hero</button>
                             </div>
+
+                            <br>
+
+                            <!-- Submit button -->
+                            <input class="blue-button submit" ng-click="update()" type="submit" value="Save">
             
                         </form>  
                 </div>
