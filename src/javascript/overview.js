@@ -72,16 +72,20 @@ app.controller('ContentController', function($scope) {
     $scope.update = function(){
         $scope.id++;
         var wl;
-        if($scope.winLoss = 0){
+        if($scope.winLoss == -1){
             wl = "Defeat";
         }
-        else{
+        else if($scope.winLoss == 1){
             wl = "Victory";
+        }
+        else{
+            wl = "Draw";
         }
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, scoreBlue: $scope.scoreBlue};
         $scope.dbEntries.push(newEntry);
         $scope.newsr = null;
         $scope.scoreBlue = null;
+        $scope.winLoss = null;
     }
 
     $scope.removeItem = function(x){
