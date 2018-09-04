@@ -9,11 +9,11 @@ button{
     text-decoration: none;
     display: inline-block;
     font-size: 0.6cm;
-    padding-left: 0.661cm;
-    padding-right: 0.661cm;
-    padding-top: 0.264cm;
-    padding-bottom: 0.264cm;
-    border-radius: 3px;
+    padding-left: 0.5cm;
+    padding-right: 0.5cm;
+    padding-top: 0.15cm;
+    padding-bottom: 0.15cm;
+    border-radius: 5px;
     font-weight: bolder;
 }
 
@@ -30,6 +30,7 @@ button{
     border-radius: 3px;
     font-weight: bolder;
 }
+
 
 /* Display buttons as block elements */
 .button-wrapper{
@@ -70,5 +71,14 @@ button{
 
 .green-button:hover{
     background-color: rgb(0, 129, 0);
+}
+
+.icon{
+    float: right;
+}
+
+.icon:hover{
+    background-color: rgb(150, 149, 149);
+    border-radius: 1px;
 }
 

@@ -23,7 +23,7 @@ const shell = require('electron').shell
 
 
     // and load the index.html of the app.
-    win.loadFile('src/html/src/index.html');
+    win.loadFile('src/html/index.html');
 
     win.on('ready-to-show', () => {
         win.show();

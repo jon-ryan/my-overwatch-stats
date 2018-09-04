@@ -19,7 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
     <!-- include script for showing different tabs -->
-    <script src="../../javascript/overview.js"></script>
+    <script src="../javascript/overview.js"></script>
 
     
 </head>
@@ -46,14 +46,6 @@
         <div id="container-overview" ng-show="showOverview">
             <div class="body-element" id="sr-rating">
                 <h3>SR-Rating</h3>
-                <div ng-repeat="x in dbEntries">
-                    {{x.id}} <br>
-                    {{x.sr}} <br>
-                    {{x.matchEnd}} <br>
-                    {{x.scoreBlue}} <br>
-                    <button class="red-button" ng-click="removeItem($index)">Remove</button>
-                    <br>
-                </div>
 
 
             </div>
@@ -67,7 +59,34 @@
             </div>
 
             <div class ="body-element">
-                <h3>Seasons Overview</h3>
+                <h3>Season Overview</h3>
+                <div ng-repeat="x in dbEntries">
+                    <div class="overview-container">
+                        <div class="overview-content-container">
+                            {{x.id}} &ensp;
+                            {{x. sr}} &ensp;
+                            {{x.matchEnd}} &ensp;
+
+                            <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete()">
+                            <img class="icon" src="../../img/baseline-edit-24px.svg">
+                        </div>
+
+                        <div class="overview-delete-container" ng-show="showContentDelete">
+                            <div class="float-right">
+                                Delete this entry?
+                            </div>
+                            <br>
+                            <div class="float-right">
+                                <button class="red-button float-right margin-left" ng-click="removeItem()">
+                                Yes
+                                </button>
+                                <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete()">
+                                    No
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -135,7 +154,7 @@
                                     <br> <br>
                                     Score of Team Red
                                     <br>
-                                    <input type="number" name="score-red" ng-model="dbEntry.scoreRed">
+                                    <input type="number" name="score-red" ng-model="scoreRed">
                                 </div>
                                 <br>
                             </div>

@@ -8,7 +8,7 @@ remove default styling
 }
 
 html{
-    background: url(../../../img/eichenwalde_1_blur_1080p.png) no-repeat center fixed;
+    background: url(../../img/eichenwalde_1_blur_1080p.png) no-repeat center fixed;
     background-size: cover;
 }
 
@@ -85,6 +85,26 @@ li a:hover:not(.active){
     float: left;
 }
 
+.float-right{
+    float: right;
+}
+
 .border-right{
     border-right: 1px solid grey;
+}
+
+.margin-left{
+    margin-left: 10px;
+}
+
+
+.overview-delete-container{
+    height: 2cm;
+}
+
+.overview-content-container{
+    height: 1cm;
+    border-bottom: 1px solid grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

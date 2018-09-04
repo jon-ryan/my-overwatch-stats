@@ -7,6 +7,8 @@ app.controller('ContentController', function($scope) {
     $scope.showSettings = false;
     $scope.showForm = false;
 
+    $scope.showContentDelete = false;
+
     $scope.showSettingsContainer = function(){
         // modify the content
         $scope.showOverview = false;
@@ -24,6 +26,7 @@ app.controller('ContentController', function($scope) {
 
 
     }
+
 
     $scope.showOverviewContainer = function(){
         // modify the content
@@ -57,6 +60,10 @@ app.controller('ContentController', function($scope) {
         matchLink.setAttribute("class", "active");
     }
 
+    $scope.toggleShowContentDelete = function(){
+        $scope.showContentDelete = !$scope.showContentDelete;
+    }
+
 
 
 
@@ -78,9 +85,13 @@ app.controller('ContentController', function($scope) {
         else if($scope.winLoss == 1){
             wl = "Victory";
         }
-        else{
+        else if($scope.winLoss == 0){
             wl = "Draw";
         }
+        else{
+            wl = "Unknown";
+        }
+
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, scoreBlue: $scope.scoreBlue};
         $scope.dbEntries.push(newEntry);
         $scope.newsr = null;
