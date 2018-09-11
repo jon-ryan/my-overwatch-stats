@@ -85,6 +85,7 @@ li a:hover:not(.active){
     float: left;
 }
 
+
 .float-right{
     float: right;
 }
@@ -107,4 +108,14 @@ li a:hover:not(.active){
     border-bottom: 1px solid grey;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+
+.form-element{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.clear{
+    clear: both;
 }
