@@ -1,71 +1,81 @@
-
+//
+// initialize var to get reference on the the angular app
 var app = angular.module('overwatch-stats-app', []);
 
-app.controller('ContentController', function($scope) {
-    //
+// define array to store the entries
+dbEntries = [];
+
+
+//
+// controller manages the tabs
+app.controller('TabController', function($scope){
+//
+$scope.showOverview = true;
+$scope.showSettings = false;
+$scope.showForm = false;
+
+// get reference to the nav bar
+var overviewLink = document.getElementById("overview");
+var settingsLink = document.getElementById("settings");
+var matchLink = document.getElementById("match");
+
+
+$scope.showSettingsContainer = function(){
+    // modify the content
+    $scope.showOverview = false;
+    $scope.showSettings = true;
+    $scope.showForm = false;
+
+    overviewLink.setAttribute("class", "");
+    settingsLink.setAttribute("class", "active");
+    matchLink.setAttribute("class", "");
+
+}
+
+
+
+$scope.showOverviewContainer = function(){
+    // modify the content
     $scope.showOverview = true;
     $scope.showSettings = false;
     $scope.showForm = false;
 
+    overviewLink.setAttribute("class", "active");
+    settingsLink.setAttribute("class", "");
+    matchLink.setAttribute("class", "");
+}
+
+$scope.showAddMatch = function(){
+    // modify the content
+    $scope.showOverview = false;
+    $scope.showSettings = false;
+    $scope.showForm = true;
+
+    overviewLink.setAttribute("class", "");
+    settingsLink.setAttribute("class", "");
+    matchLink.setAttribute("class", "active");
+}
+});
+
+//
+// ContentController behavior
+app.controller('ContentController', function($scope) {
+    
     $scope.showContentDelete = false;
-
-    $scope.showSettingsContainer = function(){
-        // modify the content
-        $scope.showOverview = false;
-        $scope.showSettings = true;
-        $scope.showForm = false;
-
-        // modify the nav bar
-        var overviewLink = document.getElementById("overview");
-        var settingsLink = document.getElementById("settings");
-        var matchLink = document.getElementById("match");
-
-        overviewLink.setAttribute("class", "");
-        settingsLink.setAttribute("class", "active");
-        matchLink.setAttribute("class", "");
-
-
-    }
-
-
-    $scope.showOverviewContainer = function(){
-        // modify the content
-        $scope.showOverview = true;
-        $scope.showSettings = false;
-        $scope.showForm = false;
-
-        // modify the nav bar
-        var overviewLink = document.getElementById("overview");
-        var settingsLink = document.getElementById("settings");
-        var matchLink = document.getElementById("match");
-
-        overviewLink.setAttribute("class", "active");
-        settingsLink.setAttribute("class", "");
-        matchLink.setAttribute("class", "");
-    }
-
-    $scope.showAddMatch = function(){
-        // modify the content
-        $scope.showOverview = false;
-        $scope.showSettings = false;
-        $scope.showForm = true;
-
-        // modify the nav bar
-        var overviewLink = document.getElementById("overview");
-        var settingsLink = document.getElementById("settings");
-        var matchLink = document.getElementById("match");
-
-        overviewLink.setAttribute("class", "");
-        settingsLink.setAttribute("class", "");
-        matchLink.setAttribute("class", "active");
-    }
+    $scope.dbArray = dbEntries;
 
     $scope.toggleShowContentDelete = function(){
         $scope.showContentDelete = !$scope.showContentDelete;
     }
 
+    $scope.removeItem = function(x){
+        dbEntries.splice(x, 1);
+    }
+
+});
 
 
+app.controller('FormController', function($scope){
 
     // define the heroes
     $scope.heroes = [{id: 'Ana'}, {id: 'Bastion'}, {id: 'Brigitte'}, {id: 'D.VA'}, {id: 'Doomfist'}, {id: 'Genji'}, {id: 'Hanzo'}, {id: 'Junkrat'},
@@ -73,10 +83,9 @@ app.controller('ContentController', function($scope) {
     {id: 'Roadhog'}, {id: 'Soldier: 76'}, {id: 'Sombra'}, {id: 'Symmetra'}, {id: 'Torbjörn'}, {id: 'Tracer'}, {id: 'Widowmaker'}, {id: 'Winston'}, {id: 'Zarya'},
     {id: 'Wreckingball'}];
 
-    $scope.dbEntries = [];
     $scope.id = 0;
 
-    $scope.update = function(){
+    $scope.addMatch = function(){
         $scope.id++;
         var wl;
         if($scope.winLoss == -1){
@@ -93,14 +102,14 @@ app.controller('ContentController', function($scope) {
         }
 
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, scoreBlue: $scope.scoreBlue};
-        $scope.dbEntries.push(newEntry);
+        dbEntries.push(newEntry);
         $scope.newsr = null;
         $scope.scoreBlue = null;
         $scope.winLoss = null;
     }
+});
 
-    $scope.removeItem = function(x){
-        $scope.dbEntries.splice(x, 1);
-    }
+
+app.controller('SettingsController', function($scope){
 
 });
