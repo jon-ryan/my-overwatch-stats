@@ -67,8 +67,7 @@
                             {{$index+1}} &ensp;
                             {{x.sr}} &ensp;
                             {{x.matchEnd}} &ensp;
-                            {{x.date}} &ensp;
-                            {{x.time}}
+                            {{x.delta}}
                             
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
@@ -81,7 +80,7 @@
                             </div>
                             <br>
                             <div class="float-right">
-                                <button class="red-button float-right margin-left" ng-click="removeItem()">
+                                <button class="red-button float-right margin-left" ng-click="removeItem($index)">
                                     Yes
                                 </button>
                                 <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete($index)">

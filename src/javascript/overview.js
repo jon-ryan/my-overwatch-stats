@@ -92,8 +92,16 @@ app.controller('ContentController', function($scope) {
         $scope.showContentDelete[index] = !$scope.showContentDelete[index];
     }
 
-    $scope.removeItem = function(x){
-        dbEntries.splice(x, 1);
+    $scope.removeItem = function(index){
+        dbEntries.splice(index, 1);
+        $scope.showContentDelete[index] = false;
+        updateDelta(index);
+
+    }
+
+    function updateDelta(index){
+        // update the delta of the entry after deleting one
+        dbEntries[index].delta = dbEntries[index].sr - dbEntries[index-1].sr
     }
 
 });
@@ -266,9 +274,17 @@ app.controller('FormController', function($scope){
             hero4 = "Unknown";
         }
 
+        // calculate the delta
+        if(dbEntries.length > 0){
+            var delta = $scope.newsr - dbEntries[dbEntries.length-1].sr;
+        }
+        else{
+            var delta = 0;
+        }
+
         // create a new object containing all the information needed for an entry
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, matchDuration: $scope.matchDuration,
-        scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side,
+        scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side, delta: delta,
         // heroes
         hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends

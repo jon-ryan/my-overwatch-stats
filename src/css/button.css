@@ -8,11 +8,11 @@ button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 0.6cm;
+    font-size: 0.45cm;
     padding-left: 0.5cm;
     padding-right: 0.5cm;
-    padding-top: 0.15cm;
-    padding-bottom: 0.15cm;
+    padding-top: 0.12cm;
+    padding-bottom: 0.12cm;
     border-radius: 5px;
     font-weight: bolder;
 }
@@ -22,11 +22,11 @@ button{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 0.6cm;
+    font-size: 0.45cm;
     padding-left: 0.5cm;
     padding-right: 0.5cm;
-    padding-top: 0.15cm;
-    padding-bottom: 0.15cm;
+    padding-top: 0.12cm;
+    padding-bottom: 0.12cm;
     border-radius: 5px;
     font-weight: bolder;
 }
