@@ -58,32 +58,33 @@
                 <h3>Best Heroes</h3>
             </div>
 
+            <!-- Season overview -->
             <div class ="body-element">
                 <h3>Season Overview</h3>
                 <div ng-repeat="x in dbArray">
                     <div class="overview-container">
                         <div class="overview-content-container">
-                            {{x.id}} &ensp;
-                            {{x. sr}} &ensp;
+                            {{$index+1}} &ensp;
+                            {{x.sr}} &ensp;
                             {{x.matchEnd}} &ensp;
                             {{x.date}} &ensp;
                             {{x.time}}
                             
 
-                            <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete()">
+                            <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                             <img class="icon" src="../../img/baseline-edit-24px.svg">
                         </div>
 
-                        <div class="overview-delete-container" ng-show="showContentDelete">
+                        <div class="overview-delete-container" ng-show="showContentDelete[$index]">
                             <div class="float-right">
                                 Delete this entry?
                             </div>
                             <br>
                             <div class="float-right">
                                 <button class="red-button float-right margin-left" ng-click="removeItem()">
-                                Yes
+                                    Yes
                                 </button>
-                                <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete()">
+                                <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete($index)">
                                     No
                                 </button>
                             </div>
@@ -91,6 +92,7 @@
                     </div>
                 </div>
             </div>
+            <!-- ~ Season overview end -->
         </div>
 
 

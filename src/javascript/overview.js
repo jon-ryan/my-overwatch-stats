@@ -78,8 +78,18 @@ app.controller('ContentController', function($scope) {
     $scope.showContentDelete = false;
     $scope.dbArray = dbEntries;
 
-    $scope.toggleShowContentDelete = function(){
-        $scope.showContentDelete = !$scope.showContentDelete;
+    // get the entries array
+    var length = dbEntries.length;
+    // create true fals array with according length
+    $scope.showContentDelete = new Array(length);
+    // initialize
+    for(i = 0; i < length; i++){
+        $scope.showContentDelete[i] = false;
+    }
+
+    $scope.toggleShowContentDelete = function(index){
+        //
+        $scope.showContentDelete[index] = !$scope.showContentDelete[index];
     }
 
     $scope.removeItem = function(x){
@@ -97,14 +107,8 @@ app.controller('FormController', function($scope){
     // get reference to the map array
     $scope.maps = maps;
 
-    // setting an id
-    $scope.id = 0;
-
     // function to add a match to the DB
     $scope.addMatch = function(){
-
-        // increase the id
-        $scope.id++;
 
         // var for win/loss
         var wl;
@@ -228,7 +232,7 @@ app.controller('FormController', function($scope){
         }
 
 
-        
+
 
         // get the heroes
         var hero1 = null;
