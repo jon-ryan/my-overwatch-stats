@@ -61,14 +61,22 @@
             <!-- Season overview -->
             <div class ="body-element">
                 <h3>Season Overview</h3>
+                <!-- header of the table -->
+                <div class="light-padding-top">
+                    <span class="table-index">ID</span>
+                    <span class="table-header">Skill Rating</span>
+                    <span class="table-header">Delta</span>
+                    <span class="table-header">Match End</span>
+                </div>
+
+                <!-- start the ng-repeat -->
                 <div ng-repeat="x in dbArray">
                     <div class="overview-container">
                         <div class="overview-content-container">
-                            {{$index+1}} &ensp;
-                            {{x.sr}} &ensp;
-                            {{x.matchEnd}} &ensp;
-                            {{x.delta}}
-                            
+                            <span class="table-index">{{$index+1}}</span>
+                            <span class="table-header">{{x.sr}}</span>
+                            <span class="table-header">{{x.delta}}</span>
+                            <span class="table-header">{{x.matchEnd}}</span>
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                             <img class="icon" src="../../img/baseline-edit-24px.svg">
@@ -90,6 +98,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- ng repeat end -->
             </div>
             <!-- ~ Season overview end -->
         </div>

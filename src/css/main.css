@@ -104,7 +104,7 @@ li a:hover:not(.active){
 }
 
 .overview-content-container{
-    height: 1cm;
+    min-height: 1cm;
     border-bottom: 1px solid grey;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -118,4 +118,21 @@ li a:hover:not(.active){
 
 .clear{
     clear: both;
+}
+
+
+/* season overview styling */
+.table-index{
+    width: 5%;
+    display: inline-block;
+}
+.table-header{
+    width: 20%;
+    border-left: 1px solid grey;
+    padding-left: 5px;
+    display: inline-block;
+}
+
+.light-padding-top{
+    padding-top: 5px;
 }

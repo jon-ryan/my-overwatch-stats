@@ -282,6 +282,11 @@ app.controller('FormController', function($scope){
             var delta = 0;
         }
 
+        // check if sr = null and if so set it to 0
+        if($scope.newsr == null){
+            $scope.newsr = 0;
+        }
+
         // create a new object containing all the information needed for an entry
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, matchDuration: $scope.matchDuration,
         scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side, delta: delta,
