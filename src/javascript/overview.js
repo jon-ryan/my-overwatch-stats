@@ -158,16 +158,57 @@ app.controller('FormController', function($scope){
         if($scope.friend5 != null){
             groupsize++;
         }
-
         // get the date and the current time
         var currentDate;
         var currentTime;
 
+        // specify the map
+        var specMap = null;
+
+        if($scope.map != null){
+            specMap = $scope.map.id;
+        }
+        else{
+            specMap = "Unknown";
+        }
+
+        // get the heroes
+        var hero1 = null;
+        var hero2 = null;
+        var hero3 = null;
+        var hero4 = null;
+
+        
+        if($scope.selectedHero1 != null){
+            hero1 = $scope.selectedHero1.id;
+        }
+        else{
+            hero1 = "Unknown";
+        }
+        if($scope.selectedHero2 != null){
+            hero2 = $scope.selectedHero2.id;
+        }
+        else{
+            hero2 = "Unknown";
+        }
+        if($scope.selectedHero3 != null){
+            hero3 = $scope.selectedHero3.id;
+        }
+        else{
+            hero3 = "Unknown";
+        }
+        if($scope.selectedHero4 != null){
+            hero4 = $scope.selectedHero4.id;
+        }
+        else{
+            hero4 = "Unknown";
+        }
+
         // create a new object containing all the information needed for an entry
         newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, matchDuration: $scope.matchDuration,
-        scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: $scope.map.id, startingSide: side,
+        scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side,
         // heroes
-        hero1: $scope.selectedHero1.id, hero2: $scope.selectedHero2.id, hero3: $scope.selectedHero3.id, hero4: $scope.selectedHero4.id,
+        hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends
         groupSize: groupsize, friend1: $scope.friend1, friend2: $scope.friend2, friend3: $scope.friend3, friend4: $scope.friend4, friend5: $scope.friend5,
         // general match statistics
