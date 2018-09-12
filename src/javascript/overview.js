@@ -158,9 +158,64 @@ app.controller('FormController', function($scope){
         if($scope.friend5 != null){
             groupsize++;
         }
+
+
+
         // get the date and the current time
-        var currentDate;
-        var currentTime;
+        var date = new Date();
+
+        // format for date YYYYMMDD
+        // making the month 2 digits (in case with leading 0)
+        var month = date.getMonth()+1;
+        if(month < 10){
+            month = "0" + month.toString();
+        }
+        else{
+            month = month.toString();
+        }
+
+        // making the date 2 digits (in case with leading 0)
+        var day = date.getDate();
+        if(day < 10){
+            day = "0" + day.toString();
+        }
+        else{
+            day = day.toString();
+        }
+
+        var currentDate = date.getFullYear().toString() + month + day;
+
+        // format HHMMSS
+        // making the hours 2 digits (leading 0)
+        var hours = date.getHours();
+        if(hours < 10){
+            hours = "0" + hours.toString();
+        }
+        else{
+            hours = hours.toString();
+        }
+
+        // making minues 2 digits (leading 0)
+        var minutes = date.getMinutes();
+        if(minutes < 10){
+            minutes = "0" + minutes.toString();
+        }
+        else{
+            minutes = minutes.toString();
+        }
+
+        // making seconds 2 digits (leading 0)
+        var seconds = date.getSeconds();
+        if(seconds < 10){
+            seconds = "0" + seconds.toString();
+        }
+        else{
+            seconds = seconds.toString();
+        }
+        var currentTime = hours + minutes + seconds;
+
+
+
 
         // specify the map
         var specMap = null;
@@ -171,6 +226,9 @@ app.controller('FormController', function($scope){
         else{
             specMap = "Unknown";
         }
+
+
+        
 
         // get the heroes
         var hero1 = null;
