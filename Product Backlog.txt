@@ -13,7 +13,7 @@
 11. The user inputs the data in a form. Options which aren't filled will be set to null.
 12. The programm supports a seasons chart displaying a chart with the seasons high, seasons end and seasons low
 13. The user can create a new season. This will terminate the record for the current season. The seasons high, end and low will be stored in the database. A record for a new season will be created.
-
+14. The user can select which information the user wants to view via a drop down menu in the content section
 
 
 
