@@ -457,17 +457,33 @@ app.controller('FormController', function($scope){
         // turn the id into a string
         idString = dbIndex.toString();
 
+
+        // convert match duration to seconds
+        // if seconds is greater than 59, make it to 59
+        if($scope.matchDurationSeconds > 59){
+            $scope.matchDurationSeconds = 59;
+        }
+        var matchDuration = $scope.matchDurationMinutes * 60 + $scope.matchDurationSeconds;
+
+        // convert the objective time to seconds
+        // if seconds is greater than 59, make it to 59
+        if($scope.objectiveTimeSeconds > 59){
+            $scope.objectiveTimeSeconds = 59;
+        }
+        var objectiveTime = $scope.objectiveTimeMinutes * 60 + $scope.objectiveTimeSeconds;
+
+
         
 
         // create a new object containing all the information needed for an entry
-        newEntry = {_id: idString, sr: $scope.newsr, matchEnd: wl, matchDuration: $scope.matchDuration,
+        newEntry = {_id: idString, sr: $scope.newsr, matchEnd: wl, matchDuration: matchDuration,
         scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side, delta: delta,
         // heroes
         hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends
         groupSize: groupsize, friend1: $scope.friend1, friend2: $scope.friend2, friend3: $scope.friend3, friend4: $scope.friend4, friend5: $scope.friend5,
         // general match statistics
-        eliminations: $scope.eliminations, objectiveKills: $scope.objectiveKills, objectiveTime: $scope.objectiveTime,
+        eliminations: $scope.eliminations, objectiveKills: $scope.objectiveKills, objectiveTime: objectiveTime,
         heroDamageDone: $scope.heroDamageDone, healingDone: $scope.healingDone, deaths: $scope.deaths,
         // date and time
         date: dateIdentifier};
@@ -496,10 +512,12 @@ app.controller('FormController', function($scope){
         $scope.scoreBlue = null;
         $scope.scoreRed = null;
         $scope.winLoss = null;
-        $scope.matchDuration = null;
+        $scope.matchDurationMinutes = null;
+        $scope.matchDurationSeconds = null;
         $scope.eliminations = null;
         $scope.objectiveKills = null;
-        $scope.objectiveTime = null;
+        $scope.objectiveTimeMinutes = null;
+        $scope.objectiveTimeSeconds = null;
         $scope.heroDamageDone = null;
         $scope.healingDone = null;
         $scope.deaths = null;

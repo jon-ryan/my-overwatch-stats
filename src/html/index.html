@@ -92,6 +92,7 @@
                             <span class="table-header">{{x.sr}}</span>
                             <span class="table-header">{{x.delta}}</span>
                             <span class="table-header">{{x.matchEnd}}</span>
+                            <span class="table-header">{{x.matchDuration}}</span>
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                             <img class="icon" src="../../img/baseline-edit-24px.svg">
@@ -174,7 +175,9 @@
                                 <!--Input for Matchtime-->
                                 <div class="form-element">
                                     Match Duration <br>
-                                    <input type="time" name="match-duration" ng-model="matchDuration"> 
+                                    <input type="number" ng-model="matchDurationMinutes" placeholder="Minutes">
+                                    <br>
+                                    <input type="number" ng-model="matchDurationSeconds" placeholder="Seconds (max: 59)">
                                 </div>
 
             
@@ -222,7 +225,9 @@
             
                                 <div class="form-element">
                                     Objective Time <br>
-                                    <input type="time" ng-model="objectiveTime">
+                                    <input type="number" ng-model="objectiveTimeMinutes" placeholder="Minutes">
+                                    <br>
+                                    <input type="number" ng-model="objectiveTimeSeconds" placeholder="Seconds (max: 59)">
                                 </div>
             
                                 <div class="form-element">
