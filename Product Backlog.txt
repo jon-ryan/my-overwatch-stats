@@ -2,17 +2,15 @@
 1. The user can select in the settings if the game should open maximized or not.
 2. The programm supports a night mode.
 3. The user can select in the settings which data he wants to collect. Only these options will be displayed when entering the data.
-4. The programm automatically tracks the date and the time for each entry.
 5. The SR-Rating is displayed in a chart.
 6. There is a trendline for the SR-Rating.
 6. The programm displays a 24 hour record showing the SR-Delta and the win/loss stats.
 7. The programm supports a hero ranking which shows which hero the user plays best.
-8. The data is stored in a local database.
 9. The programm can import a csv-file to import data into the database.
 10. The programm can export a csv-file to export the existing database.
-11. The user inputs the data in a form. Options which aren't filled will be set to null.
 12. The programm supports a seasons chart displaying a chart with the seasons high, seasons end and seasons low
 13. The user can create a new season. This will terminate the record for the current season. The seasons high, end and low will be stored in the database. A record for a new season will be created.
+14. The user can edit each entry.
 
 
 
@@ -20,3 +18,6 @@
 
 
 // DONE
+4. The programm automatically tracks the date and the time for each entry.
+8. The data is stored in a local database.
+11. The user inputs the data in a form.

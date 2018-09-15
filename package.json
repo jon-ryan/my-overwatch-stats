@@ -2,8 +2,17 @@
   "name": "my-overwatch-stats",
   "version": "1.0.0",
   "description": "Overwatch Competitive Stats Tracker",
-  "keywords": ["overwatch", "competitive", "stats", "statistics", "tracker", "tracking", "stat", "comp"],
-  "homepage": "https://github.com/jon-ryan/my-overwatch-stats",
+  "keywords": [
+    "overwatch",
+    "competitive",
+    "stats",
+    "statistics",
+    "tracker",
+    "tracking",
+    "stat",
+    "comp"
+  ],
+  "homepage": "https://github.com/hex7cd/my-overwatch-stats#readme",
   "main": "src/javascript/index.js",
   "scripts": {
     "test": "electron ."
@@ -22,8 +31,8 @@
     }
   ],
   "license": "ISC",
-  "homepage": "https://github.com/hex7cd/my-overwatch-stats#readme",
   "devDependencies": {
-    "electron": "latest"
+    "electron": "latest",
+    "pouchdb-browser": "^7.0.0"
   }
 }
