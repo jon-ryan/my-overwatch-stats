@@ -2,21 +2,60 @@
 // initialize var to get reference on the the angular app
 var app = angular.module('overwatch-stats-app', []);
 
+// initialize 
+var PouchDB = require('pouchdb-browser');
+var db = new PouchDB('ow_database');
+
+
+
 // define array to store the entries
 dbEntries = [];
+var dbIndex = 0;
+
+function setupDatabase(){
+
+    // fill the array with the entries
+    db.allDocs({include_docs: true}).then(function(result){
+        //
+        for(i = 0; i < result.rows.length; i++){
+            dbEntries.push(result.rows[i].doc);
+        }
+    }).catch(function (err){
+        console.log(err);
+    })
+
+    console.log(dbEntries);
+
+    // the highest db index will be retrieved in the "updateView" function
+
+    setTimeout(function(){
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
+    }, 500);
+
+
+}
+
+
+window.onload = setupDatabase;
+
+
+
+
+
 
 // define the heroes
-heroes = [{id: 'Ana', value: "Ana"}, {id: 'Bastion'}, {id: 'Brigitte'}, {id: 'D.VA'}, {id: 'Doomfist'}, {id: 'Genji'}, {id: 'Hanzo'}, {id: 'Junkrat'},
-    {id: 'Lúcio'}, {id: 'McCree'}, {id: 'Mei'}, {id: 'Mercy'}, {id: 'Moira'}, {id:"Orisa"}, {id:"Pharah"}, {id: "Reaper"}, {id:"Reinhardt"}, {id:"Zenyatta"},
-    {id: 'Roadhog'}, {id: 'Soldier: 76'}, {id: 'Sombra'}, {id: 'Symmetra'}, {id: 'Torbjörn'}, {id: 'Tracer'}, {id: 'Widowmaker'}, {id: 'Winston'}, {id: 'Zarya'},
-    {id: 'Wreckingball'}];
+heroes = [{name: 'Ana'}, {name: 'Bastion'}, {name: 'Brigitte'}, {name: 'D.VA'}, {name: 'Doomfist'}, {name: 'Genji'}, {name: 'Hanzo'}, {name: 'Junkrat'},
+    {name: 'Lúcio'}, {name: 'McCree'}, {name: 'Mei'}, {name: 'Mercy'}, {name: 'Moira'}, {name:"Orisa"}, {name:"Pharah"}, {name: "Reaper"}, {name:"Reinhardt"}, {name:"Zenyatta"},
+    {name: 'Roadhog'}, {name: 'Soldier: 76'}, {name: 'Sombra'}, {name: 'Symmetra'}, {name: 'Torbjörn'}, {name: 'Tracer'}, {name: 'Wnameowmaker'}, {name: 'Winston'}, {name: 'Zarya'},
+    {name: 'Wreckingball'}
+    ];
 
 
 // define the maps
-maps = [{id: 'Hanamura', value: "Hanamura"}, {id: 'Horizon Lunar Colony'}, {id: 'Temple of Anubis'}, {id: 'Volskaya Industries'}, {id: 'Dorado'},
-        {id: 'Junkertown'}, {id: 'Rialto'}, {id: 'Route 66'}, {id: 'Watchpoint: Gibralta'}, {id: 'Blizzard World'},
-        {id: 'Eichenwalde'}, {id: 'Hollywood'}, {id: 'King\'s Row'}, {id: 'Numbani'}, {id: 'Ilios'}, {id: 'Lijiang Tower'},
-        {id: 'Nepal'}, {id: 'Oasis'}
+maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of Anubis'}, {name: 'Volskaya Industries'}, {name: 'Dorado'},
+        {name: 'Junkertown'}, {name: 'Rialto'}, {name: 'Route 66'}, {name: 'Watchpoint: Gibralta'}, {name: 'Blizzard World'},
+        {name: 'Eichenwalde'}, {name: 'Hollywood'}, {name: 'King\'s Row'}, {name: 'Numbani'}, {name: 'Ilios'}, {name: 'Lijiang Tower'},
+        {name: 'Nepal'}, {name: 'Oasis'}
     ];
 
 
@@ -27,6 +66,7 @@ app.controller('TabController', function($scope){
 $scope.showOverview = true;
 $scope.showSettings = false;
 $scope.showForm = false;
+
 
 // get reference to the nav bar
 var overviewLink = document.getElementById("overview");
@@ -45,7 +85,6 @@ $scope.showSettingsContainer = function(){
     matchLink.setAttribute("class", "");
 
 }
-
 
 
 $scope.showOverviewContainer = function(){
@@ -68,24 +107,38 @@ $scope.showAddMatch = function(){
     overviewLink.setAttribute("class", "");
     settingsLink.setAttribute("class", "");
     matchLink.setAttribute("class", "active");
-}
+    }
+
+
 });
 
 //
 // ContentController behavior
 app.controller('ContentController', function($scope) {
-    
-    $scope.showContentDelete = false;
+    // get reference to dbEntries
     $scope.dbArray = dbEntries;
 
-    // get the entries array
+    $scope.showLoading = true;
+
+
+    // get length of db array
     var length = dbEntries.length;
-    // create true fals array with according length
+
+    // create true false array with according length
     $scope.showContentDelete = new Array(length);
     // initialize
     for(i = 0; i < length; i++){
         $scope.showContentDelete[i] = false;
     }
+
+    // test
+    $scope.showDB = function(){
+        console.log("DB Entries");
+        console.log(dbEntries);
+        console.log("DB Index (internal)");
+        console.log(dbIndex);
+    }
+
 
     $scope.toggleShowContentDelete = function(index){
         //
@@ -93,16 +146,125 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.removeItem = function(index){
+        // store the element which is to be removed
+        var deletedElement = dbEntries[index];
+
+        // remove the element from the array
         dbEntries.splice(index, 1);
+        // close the contentDelete dialog
         $scope.showContentDelete[index] = false;
+        
+        // remove the entry from the database
+        // get the id of the element
+        var varIndex = deletedElement._id;
+        db.get(varIndex.toString()).then(function(doc) {
+            return db.remove(doc);
+          }).then(function (result) {
+            // handle result
+          }).catch(function (err) {
+            console.log(err);
+          });
+
+        // update the delta
         updateDelta(index);
 
     }
 
     function updateDelta(index){
+        // update delta in array
         // update the delta of the entry after deleting one
-        dbEntries[index].delta = dbEntries[index].sr - dbEntries[index-1].sr
+
+        // there are 4 cases
+        // 1. the element is the last one in the array. after deleting it, the array is empty
+        // 2. the element is the first in the array. after deleting it, all other elements will have index-1
+        // 3. the element is somewhere in the array, but not first or last.
+        // 4. the element is last in the array. the current index will be invalid for the array.
+
+        // handle case 1: the element was the last one in the array
+        if(dbEntries.length == 0){
+            // update the dbIndex when the db is empty
+            dbIndex = 0;
+            return;
+        }
+
+        // handle case 2: the element is the first in the array
+        else if(index == 0 && dbEntries.length != 0){
+            // the element has been removed in the previous function. The only delta to be updated is from element[index] -> set to 0
+            dbEntries[index].delta = 0;
+
+            // get the id from the element and manipulate the database
+            var tempID = dbEntries[index]._id;
+
+            // get the element from the database
+            db.get(tempID.toString()).then(function(doc) {
+                // manipulate the delta
+                doc.delta = 0;
+                // write back to database
+                return db.put(doc);
+              }).then(function(response) {
+                // handle response
+              }).catch(function (err) {
+                console.log(err);
+              });
+        }
+
+        // handle case 3: the element is somewhere in the array. The index is greater than 0 but smaller than the length of the array
+        else if(index > 0 && index < dbEntries.length){
+            // the element has been removed in the previous function.
+            // the delta to be updated is the one at position [index].
+            // update by newDelta = [index].sr - [index-1].sr
+
+            // update the array
+            dbEntries[index].delta = dbEntries[index].sr - dbEntries[index-1].sr
+
+            // update the database
+            // get the id of the element at position [index]
+            var tempID = dbEntries[index]._id;
+
+            // load the element at position [index]
+            // and write the new delta
+            db.get(tempID.toString()).then(function(doc) {
+                // manipulate the delta
+                doc.delta = dbEntries[index].delta;
+                // write back to database
+                return db.put(doc);
+              }).then(function(response) {
+                // handle response
+              }).catch(function (err) {
+                console.log(err);
+              });
+        }
+
+        // handle case 4: the element was the last in the array. the index is equal to the array length
+        else if(index == dbEntries.length){
+            // nothing left to do.
+        }
+
+        // if this is reached, undefined behavior occured
+        else{
+            console.log("undefined behavior reached while trying to remove an entry from the database");
+        }
+        
     }
+
+    $scope.updateView = function(){
+        // initialize the "showLoading" variable to false
+        $scope.showLoading = false;
+        
+        // get the highes index of the db
+        // if the array is 0, the index is 0
+        if(dbEntries.length == 0){
+            dbIndex = 0;
+        }
+        // else its the id of the last element
+        else{
+            dbIndex = dbEntries[dbEntries.length-1]._id;
+        }
+        
+        // rerender the view
+        $scope.$apply();
+    }
+    
 
 });
 
@@ -114,6 +276,7 @@ app.controller('FormController', function($scope){
 
     // get reference to the map array
     $scope.maps = maps;
+
 
     // function to add a match to the DB
     $scope.addMatch = function(){
@@ -142,7 +305,7 @@ app.controller('FormController', function($scope){
         if($scope.startingside == 1){
             side = "Attack";
         }
-        else if($scope.startingside == 1){
+        else if($scope.startingside == -1){
             side = "Defend";
         }
         else if($scope.startingside == 0){
@@ -207,7 +370,7 @@ app.controller('FormController', function($scope){
             hours = hours.toString();
         }
 
-        // making minues 2 digits (leading 0)
+        // making minutes two digits (leading 0)
         var minutes = date.getMinutes();
         if(minutes < 10){
             minutes = "0" + minutes.toString();
@@ -226,6 +389,8 @@ app.controller('FormController', function($scope){
         }
         var currentTime = hours + minutes + seconds;
 
+        var dateIdentifier = currentDate + "_" + currentTime;
+
 
 
 
@@ -233,7 +398,7 @@ app.controller('FormController', function($scope){
         var specMap = null;
 
         if($scope.map != null){
-            specMap = $scope.map.id;
+            specMap = $scope.map.name;
         }
         else{
             specMap = "Unknown";
@@ -250,25 +415,25 @@ app.controller('FormController', function($scope){
 
         
         if($scope.selectedHero1 != null){
-            hero1 = $scope.selectedHero1.id;
+            hero1 = $scope.selectedHero1.name;
         }
         else{
             hero1 = "Unknown";
         }
         if($scope.selectedHero2 != null){
-            hero2 = $scope.selectedHero2.id;
+            hero2 = $scope.selectedHero2.name;
         }
         else{
             hero2 = "Unknown";
         }
         if($scope.selectedHero3 != null){
-            hero3 = $scope.selectedHero3.id;
+            hero3 = $scope.selectedHero3.name;
         }
         else{
             hero3 = "Unknown";
         }
         if($scope.selectedHero4 != null){
-            hero4 = $scope.selectedHero4.id;
+            hero4 = $scope.selectedHero4.name;
         }
         else{
             hero4 = "Unknown";
@@ -287,32 +452,72 @@ app.controller('FormController', function($scope){
             $scope.newsr = 0;
         }
 
+        // increment id
+        dbIndex++;
+        // turn the id into a string
+        idString = dbIndex.toString();
+
+
+        // convert match duration to seconds
+        // if seconds is greater than 59, make it to 59
+        if($scope.matchDurationSeconds > 59){
+            $scope.matchDurationSeconds = 59;
+        }
+        var matchDuration = $scope.matchDurationMinutes * 60 + $scope.matchDurationSeconds;
+
+        // convert the objective time to seconds
+        // if seconds is greater than 59, make it to 59
+        if($scope.objectiveTimeSeconds > 59){
+            $scope.objectiveTimeSeconds = 59;
+        }
+        var objectiveTime = $scope.objectiveTimeMinutes * 60 + $scope.objectiveTimeSeconds;
+
+
+        
+
         // create a new object containing all the information needed for an entry
-        newEntry = {id: $scope.id, sr: $scope.newsr, matchEnd: wl, matchDuration: $scope.matchDuration,
+        newEntry = {_id: idString, sr: $scope.newsr, matchEnd: wl, matchDuration: matchDuration,
         scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side, delta: delta,
         // heroes
         hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends
         groupSize: groupsize, friend1: $scope.friend1, friend2: $scope.friend2, friend3: $scope.friend3, friend4: $scope.friend4, friend5: $scope.friend5,
         // general match statistics
-        eliminations: $scope.eliminations, objectiveKills: $scope.objectiveKills, objectiveTime: $scope.objectiveTime,
+        eliminations: $scope.eliminations, objectiveKills: $scope.objectiveKills, objectiveTime: objectiveTime,
         heroDamageDone: $scope.heroDamageDone, healingDone: $scope.healingDone, deaths: $scope.deaths,
         // date and time
-        date: currentDate, time: currentTime};
+        date: dateIdentifier};
 
 
         // add the entry to the array
-        dbEntries.push(newEntry);
+        //dbEntries.push(newEntry);
+
+        db.put(newEntry).then(function (response) {
+            // handle response
+          }).catch(function (err) {
+            console.log(err);
+        });
+
+        
+        db.get(idString).then(function (doc) {
+            dbEntries.push(doc);    // handle doc
+          }).catch(function (err) {
+            console.log(err);
+          });
+
+
 
         // set the values in the form to null
         $scope.newsr = null;
         $scope.scoreBlue = null;
         $scope.scoreRed = null;
         $scope.winLoss = null;
-        $scope.matchDuration = null;
+        $scope.matchDurationMinutes = null;
+        $scope.matchDurationSeconds = null;
         $scope.eliminations = null;
         $scope.objectiveKills = null;
-        $scope.objectiveTime = null;
+        $scope.objectiveTimeMinutes = null;
+        $scope.objectiveTimeSeconds = null;
         $scope.heroDamageDone = null;
         $scope.healingDone = null;
         $scope.deaths = null;
@@ -328,6 +533,8 @@ app.controller('FormController', function($scope){
         $scope.friend4 = null;
         $scope.friend5 = null;
 
+        // disable save button for one second
+
     }
 });
 
@@ -335,3 +542,5 @@ app.controller('FormController', function($scope){
 app.controller('SettingsController', function($scope){
 
 });
+
+

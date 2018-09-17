@@ -4,9 +4,9 @@
 
 
 const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
-const shell = require('electron').shell
+
+
+
 
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
@@ -20,6 +20,9 @@ const shell = require('electron').shell
     win = new BrowserWindow({width: 1500, height: 1000, minWidth: 700, minHeight: 400});
 
     win.setMenu(null);
+
+
+
 
 
     // and load the index.html of the app.

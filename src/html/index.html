@@ -40,13 +40,20 @@
     </header>
 
     <!-- Content -->
-    <div class="content-container" ng-controller="ContentController">
+    <div class="content-container" id="controllerBody" ng-controller="ContentController">
 
         <!-- Content Overview -->
         <div id="container-overview" ng-show="showOverview">
+
+            <div class="body-element">
+                <h3>Debug</h3>
+                <!-- test -->
+                <button ng-click="showDB()">Show DB</button>
+
+            </div>
+
             <div class="body-element" id="sr-rating">
                 <h3>SR-Rating</h3>
-
 
             </div>
 
@@ -56,7 +63,9 @@
 
             <div class ="body-element">
                 <h3>Best Heroes</h3>
+
             </div>
+
 
             <!-- Season overview -->
             <div class ="body-element">
@@ -69,14 +78,21 @@
                     <span class="table-header">Match End</span>
                 </div>
 
-                <!-- start the ng-repeat -->
+
+                <!-- loading -->
+                <div ng-show="showLoading">
+                    Loading...
+                </div>
+
+
                 <div ng-repeat="x in dbArray">
                     <div class="overview-container">
                         <div class="overview-content-container">
-                            <span class="table-index">{{$index+1}}</span>
+                            <span class="table-index">{{x._id}}</span>
                             <span class="table-header">{{x.sr}}</span>
                             <span class="table-header">{{x.delta}}</span>
                             <span class="table-header">{{x.matchEnd}}</span>
+                            <span class="table-header">{{x.matchDuration}}</span>
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                             <img class="icon" src="../../img/baseline-edit-24px.svg">
@@ -97,6 +113,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
                 <!-- ng repeat end -->
             </div>
@@ -157,7 +175,9 @@
                                 <!--Input for Matchtime-->
                                 <div class="form-element">
                                     Match Duration <br>
-                                    <input type="time" name="match-duration" ng-model="matchDuration"> 
+                                    <input type="number" ng-model="matchDurationMinutes" placeholder="Minutes">
+                                    <br>
+                                    <input type="number" ng-model="matchDurationSeconds" placeholder="Seconds (max: 59)">
                                 </div>
 
             
@@ -175,7 +195,7 @@
 
                                 <div class="form-element">
                                     Map: 
-                                    <select ng-model="map" ng-options="x.id for x in maps | orderBy: 'id'"></select>
+                                    <select ng-model="map" ng-options="x.name for x in maps | orderBy: 'name'"></select>
                                 </div>
 
                                 <div class="form-element">
@@ -205,7 +225,9 @@
             
                                 <div class="form-element">
                                     Objective Time <br>
-                                    <input type="time" ng-model="objectiveTime">
+                                    <input type="number" ng-model="objectiveTimeMinutes" placeholder="Minutes">
+                                    <br>
+                                    <input type="number" ng-model="objectiveTimeSeconds" placeholder="Seconds (max: 59)">
                                 </div>
             
                                 <div class="form-element">
@@ -268,19 +290,19 @@
                                 
                                 <div class="form-element">
                                     Hero 1: 
-                                    <select ng-model="selectedHero1" ng-options="x.id for x in heroes | orderBy: 'id'"></select>
+                                    <select ng-model="selectedHero1" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 2:
-                                    <select ng-model="selectedHero2" ng-options="x.id for x in heroes | orderBy: 'id'"></select>
+                                    <select ng-model="selectedHero2" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 3:
-                                    <select ng-model="selectedHero3" ng-options="x.id for x in heroes | orderBy: 'id'"></select>
+                                    <select ng-model="selectedHero3" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 4:
-                                    <select ng-model="selectedHero4" ng-options="x.id for x in heroes | orderBy: 'id'"></select>
+                                    <select ng-model="selectedHero4" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                             </div>
 
