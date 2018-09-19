@@ -4,33 +4,492 @@ var app = angular.module('overwatch-stats-app', []);
 
 // initialize 
 var PouchDB = require('pouchdb-browser');
-var db = new PouchDB('ow_database');
+var matchDB = new PouchDB('match_database');
+var heroDB = new PouchDB('hero_database');
+var mapDB = new PouchDB('map_database');
+
 
 
 
 // define array to store the entries
-dbEntries = [];
+var dbEntries = [];
+var heroes = [];
 var dbIndex = 0;
+var mapDbIndex = 0;
+var heroDBIndex = 0;
+var heroDBSize = 0;
 
-function setupDatabase(){
+async function setupDatabase() {
+
+
+
+    // setup the matchDB array
 
     // fill the array with the entries
-    db.allDocs({include_docs: true}).then(function(result){
-        //
+    matchDB.allDocs({include_docs: true}).then(function(result){
+        // fill array with for loop
         for(i = 0; i < result.rows.length; i++){
             dbEntries.push(result.rows[i].doc);
         }
+    }).catch(function(err){
+        console.log("Error whie filling the matchDBArray: " + err);
+    }).then(function (){
+        // get the highes index of the db
+        // if the array is empty, the index is 0
+        if(dbEntries.length == 0){
+            dbIndex = 0;
+        }
+        // else its the id of the last element
+        else{
+            dbIndex = dbEntries[dbEntries.length-1]._id;
+        }
+        console.log("Length of dbEntries array: " + dbIndex.toString());
+    }).catch(function(err){
+        console.log("Error while getting the length of the dbEntries array: " + err);
+    }).then(function (){
+        // update the view
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
     }).catch(function (err){
+        // log error
+        console.log("Error while updating the view: " + err);
+    });
+
+
+
+
+    // setup the the heroDB
+    // set up the heroes array
+    heroDB.allDocs({include_docs: true}).then(function(result){
+        // fill the hero array
+        for(i = 0; i < result.rows.length; i++){
+            heroes.push(result.rows[i].doc);
+        }
+    }).catch(function (err){
+        console.log(err);
+    }).then(function(){
+        // get the highes index of the heroDB
+        // if the array is empty, the index = 0
+        if(heroes.length == 0){
+            heroDBSize = 0;
+            heroDBIndex = 0;
+        }
+        // else its the id of the last element
+        else{
+            heroDBIndex = heroes[heroes.length-1]._id;
+            heroDBSize = heroes.length;
+        }
+        console.log("Hero DB size: " + heroDBSize);
+        console.log("Hero DB index: " + heroDBIndex);
+
+        // return the herdbSize
+        return heroDBSize;
+    }).then(function (herodbSize){
+        // if the hero db is empty, create a new one
+    if(herodbSize == 0){
+
+        // create object (Ana)
+        var tempHero = {_id: heroDBIndex.toString(), name: 'Ana'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Ana'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+        console.log("index top: " + heroDBIndex);
+
+        // create object (Bastion)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Bastion'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Bastion'});
+            console.log("Bastion in DB");
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        console.log("Index after bastion" + heroDBIndex);
+
+        // create object (Brigitte)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Brigitte'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Brigitte'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (D.VA)
+        tempHero = {_id: heroDBIndex.toString(), name: 'D.VA'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'D.VA'});
+            console.log("DVA in DB");
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (Doomfist)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Doomfist'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Doomfist'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        console.log("Index after doomfist: " + heroDBIndex);
+
+        // create object (Genji)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Genji'};
+        // push to database
+        heroes.push({_id: heroDBIndex.toString(), name: 'Genji'});
+        heroDB.put(tempHero).then(function(response){
+            // response
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (Hanzo)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Hanzo'};
+        // push to database
+        heroes.push({_id: heroDBIndex.toString(), name: 'Hanzo'});
+        heroDB.put(tempHero).then(function(response){
+            // response
+            console.log("Hanzo in DB");
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Junkrat)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Junkrat'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Junkrat'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (Lúcio)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Lúcio'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Lúcio'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (McCree)
+        tempHero = {_id: heroDBIndex.toString(), name: 'McCree'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'McCree'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Mei)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Mei'};
+        // push to database
+        heroes.push({_id: heroDBIndex.toString(), name: 'Mei'});
+        heroDB.put(tempHero).then(function(response){
+            // response
+            console.log("Mei in DB");
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Mercy)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Mercy'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Mercy'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Moira)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Moira'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Moira'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (Orisa)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Orisa'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Orisa'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Pharah)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Pharah'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Pharah'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object (Reaper)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Reaper'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Reaper'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Reinhardt)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Reinhardt'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Reinhardt'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object Zenyatta
+        tempHero = {_id: heroDBIndex.toString(), name: 'Zenyatta'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Zenyatta'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Roadhog)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Roadhog'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Roadhog'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Soldier 76)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Soldier: 76'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Soldier: 76'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object Sombra
+        tempHero = {_id: heroDBIndex.toString(), name: 'Sombra'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Sombra'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+        // create object Symmetra
+        tempHero = {_id: heroDBIndex.toString(), name: 'Symmetra'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Symmetra'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Torbjörn)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Torbjörn'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Torbjörn'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Tracer)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Tracer'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Tracer'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Widowmaker)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Widowmaker'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Widowmaker'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object Winston
+        tempHero = {_id: heroDBIndex.toString(), name: 'Winston'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Winston'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Zarya)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Zarya'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Zarya'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+
+
+        // create object (Wreckingball)
+        tempHero = {_id: heroDBIndex.toString(), name: 'Wreckingball'};
+        // push to database
+        heroDB.put(tempHero).then(function(response){
+            // response
+            heroes.push({_id: heroDBIndex.toString(), name: 'Wreckingball'});
+        }).catch(function (err){
+            console.log(err);
+        })
+
+        // increment hero db index
+        heroDBIndex++;
+        console.log("index bottom: " + heroDBIndex);
+    } // incase the hero db wasn't set up yet, the db is now fully setup.
+
+    }).then(function(){
+        // update the view
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
+    }).catch(function(err){
         console.log(err);
     })
 
-    console.log(dbEntries);
 
-    // the highest db index will be retrieved in the "updateView" function
 
-    setTimeout(function(){
-        angular.element(document.getElementById('controllerBody')).scope().updateView();
-    }, 500);
+
+// ##########################################################################
 
 
 }
@@ -42,13 +501,13 @@ window.onload = setupDatabase;
 
 
 
-
+/*
 // define the heroes
 heroes = [{name: 'Ana'}, {name: 'Bastion'}, {name: 'Brigitte'}, {name: 'D.VA'}, {name: 'Doomfist'}, {name: 'Genji'}, {name: 'Hanzo'}, {name: 'Junkrat'},
     {name: 'Lúcio'}, {name: 'McCree'}, {name: 'Mei'}, {name: 'Mercy'}, {name: 'Moira'}, {name:"Orisa"}, {name:"Pharah"}, {name: "Reaper"}, {name:"Reinhardt"}, {name:"Zenyatta"},
     {name: 'Roadhog'}, {name: 'Soldier: 76'}, {name: 'Sombra'}, {name: 'Symmetra'}, {name: 'Torbjörn'}, {name: 'Tracer'}, {name: 'Wnameowmaker'}, {name: 'Winston'}, {name: 'Zarya'},
     {name: 'Wreckingball'}
-    ];
+];*/
 
 
 // define the maps
@@ -56,8 +515,11 @@ maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of An
         {name: 'Junkertown'}, {name: 'Rialto'}, {name: 'Route 66'}, {name: 'Watchpoint: Gibralta'}, {name: 'Blizzard World'},
         {name: 'Eichenwalde'}, {name: 'Hollywood'}, {name: 'King\'s Row'}, {name: 'Numbani'}, {name: 'Ilios'}, {name: 'Lijiang Tower'},
         {name: 'Nepal'}, {name: 'Oasis'}
-    ];
+];
 
+// -----------------------------------------------------
+// Tab Controller
+// -----------------------------------------------------
 
 //
 // controller manages the tabs
@@ -112,6 +574,14 @@ $scope.showAddMatch = function(){
 
 });
 
+
+
+// -----------------------------------------------------
+// Content Controller
+// -----------------------------------------------------
+
+
+
 //
 // ContentController behavior
 app.controller('ContentController', function($scope) {
@@ -137,6 +607,12 @@ app.controller('ContentController', function($scope) {
         console.log(dbEntries);
         console.log("DB Index (internal)");
         console.log(dbIndex);
+
+        heroDB.allDocs({include_docs: true}).then(function(docs){
+            console.log(docs.rows);
+        }).catch(function(err){
+            console.log(err);
+        })
     }
 
 
@@ -157,8 +633,8 @@ app.controller('ContentController', function($scope) {
         // remove the entry from the database
         // get the id of the element
         var varIndex = deletedElement._id;
-        db.get(varIndex.toString()).then(function(doc) {
-            return db.remove(doc);
+        matchDB.get(varIndex.toString()).then(function(doc) {
+            return matchDB.remove(doc);
           }).then(function (result) {
             // handle result
           }).catch(function (err) {
@@ -196,11 +672,11 @@ app.controller('ContentController', function($scope) {
             var tempID = dbEntries[index]._id;
 
             // get the element from the database
-            db.get(tempID.toString()).then(function(doc) {
+            matchDB.get(tempID.toString()).then(function(doc) {
                 // manipulate the delta
                 doc.delta = 0;
                 // write back to database
-                return db.put(doc);
+                return matchDB.put(doc);
               }).then(function(response) {
                 // handle response
               }).catch(function (err) {
@@ -223,11 +699,11 @@ app.controller('ContentController', function($scope) {
 
             // load the element at position [index]
             // and write the new delta
-            db.get(tempID.toString()).then(function(doc) {
+            matchDB.get(tempID.toString()).then(function(doc) {
                 // manipulate the delta
                 doc.delta = dbEntries[index].delta;
                 // write back to database
-                return db.put(doc);
+                return matchDB.put(doc);
               }).then(function(response) {
                 // handle response
               }).catch(function (err) {
@@ -251,16 +727,6 @@ app.controller('ContentController', function($scope) {
         // initialize the "showLoading" variable to false
         $scope.showLoading = false;
         
-        // get the highes index of the db
-        // if the array is 0, the index is 0
-        if(dbEntries.length == 0){
-            dbIndex = 0;
-        }
-        // else its the id of the last element
-        else{
-            dbIndex = dbEntries[dbEntries.length-1]._id;
-        }
-        
         // rerender the view
         $scope.$apply();
     }
@@ -268,6 +734,10 @@ app.controller('ContentController', function($scope) {
 
 });
 
+
+// -----------------------------------------------------
+// Form Controller
+// -----------------------------------------------------
 
 app.controller('FormController', function($scope){
 
@@ -492,14 +962,14 @@ app.controller('FormController', function($scope){
         // add the entry to the array
         //dbEntries.push(newEntry);
 
-        db.put(newEntry).then(function (response) {
+        matchDB.put(newEntry).then(function (response) {
             // handle response
           }).catch(function (err) {
             console.log(err);
         });
 
         
-        db.get(idString).then(function (doc) {
+        matchDB.get(idString).then(function (doc) {
             dbEntries.push(doc);    // handle doc
           }).catch(function (err) {
             console.log(err);
@@ -539,7 +1009,75 @@ app.controller('FormController', function($scope){
 });
 
 
+// -----------------------------------------------------
+// Settings Controller
+// -----------------------------------------------------
+
 app.controller('SettingsController', function($scope){
+
+    $scope.heroDBSettingsController = heroes;
+
+    // get length of db array
+    var length = heroes.length;
+
+    $scope.showHeroDropDown = false;
+
+    // create true false array with according length
+    $scope.showContentDelete = new Array(length)
+    
+    // initialize
+    for(i = 0; i < length; i++){
+        $scope.showContentDelete[i] = false;
+    }
+
+    // toggle show content delete
+    $scope.toggleShowContentDelete = function(index){
+        //
+        $scope.showContentDelete[index] = !$scope.showContentDelete[index];
+    }
+
+    $scope.toggleHeroDropDown = function(){
+        var element = document.getElementById('heroDropDown');
+
+        if($scope.showHeroDropDown == false){
+            $scope.showHeroDropDown = true;
+            element.setAttribute('src', '../../img/baseline-keyboard_arrow_up-24px.svg')
+        }else{
+            $scope.showHeroDropDown = false;
+            element.setAttribute('src', '../../img/baseline-keyboard_arrow_down-24px.svg')
+
+
+        }
+    }
+
+    $scope.removeItem = function(index){
+        // store the element which is to be removed
+        var deletedElement = heroes[index];
+
+        // remove the element from the array
+        heroes.splice(index, 1);
+        // close the contentDelete dialog
+        $scope.showContentDelete[index] = false;
+        
+        // remove the entry from the database
+        // get the id of the element
+        var varIndex = deletedElement._id;
+        heroDB.get(varIndex.toString()).then(function(doc) {
+            return heroDB.remove(doc);
+          }).then(function (result) {
+            // handle result
+          }).catch(function (err) {
+            console.log(err);
+          });
+    }
+
+
+    $scope.updateView = function(){
+        $scope.heroDBSettingsController = heroes;
+        $scope.$apply();
+    }
+
+    
 
 });
 

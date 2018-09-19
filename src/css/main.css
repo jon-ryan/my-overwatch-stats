@@ -136,3 +136,10 @@ li a:hover:not(.active){
 .light-padding-top{
     padding-top: 5px;
 }
+
+.table-header-wide{
+    width: 30;
+
+    padding-left: 5px;
+    display: inline-block;
+}

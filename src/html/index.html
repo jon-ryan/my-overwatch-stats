@@ -92,7 +92,6 @@
                             <span class="table-header">{{x.sr}}</span>
                             <span class="table-header">{{x.delta}}</span>
                             <span class="table-header">{{x.matchEnd}}</span>
-                            <span class="table-header">{{x.matchDuration}}</span>
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                             <img class="icon" src="../../img/baseline-edit-24px.svg">
@@ -145,6 +144,53 @@
                     </label>
                     
                 </div>  
+
+                <!-- heroes section -->
+                <div class="body-element">
+                    <h3>Heroes</h3>
+                    Use this section to add new heroes Blizzard has introduced to the game or to delete heroes from the list, which Blizzard chose to remove from the game.
+                    <br>
+                    <br>
+                    <b>Introduce a new hero:</b> 
+                    <br>
+                    <input type="text" placeholder="Name of Hero" ng-model="newHero">
+                    <br>
+                    <br>
+
+                    <div class="float-right">
+                        <img class="icon" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="heroDropDown" ng-click="toggleHeroDropDown()">
+                    </div>
+                    Overview of all heroes:
+                    
+                    <!-- ng repeat start -->
+                    <div class="clear" ng-repeat="x in heroDBSettingsController | orderBy: 'name'"  ng-show="showHeroDropDown">
+                        <div class="overview-container">
+                            <div class="overview-content-container">
+                                <span class="table-header-wide">{{x.name}}</span>
+    
+                                <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
+                            </div>
+    
+                            <!-- delete dialogue -->
+                            <div class="overview-delete-container" ng-show="showContentDelete[$index]">
+                                <div class="float-right">
+                                    Delete this hero?
+                                </div>
+                                <br>
+                                <div class="float-right">
+                                    <button class="red-button float-right margin-left" ng-click="removeItem($index)">
+                                        Yes
+                                    </button>
+                                    <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete($index)">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <!-- ng repeat end -->
+                </div>
 
         </div>
 
