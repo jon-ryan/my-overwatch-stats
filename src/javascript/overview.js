@@ -14,8 +14,10 @@ var mapDB = new PouchDB('map_database');
 // define array to store the entries
 var dbEntries = [];
 var heroes = [];
+var maps = [];
 var dbIndex = 0;
-var mapDbIndex = 0;
+var mapDBIndex = 0;
+var mapDBSize = 0;
 var heroDBIndex = 10;
 var heroDBSize = 0;
 
@@ -482,6 +484,268 @@ async function setupDatabase() {
     })
 
 
+    // setup the the mapDB
+    // set up the maps array
+    mapDB.allDocs({include_docs: true}).then(function(result){
+        // fill the hero array
+        for(i = 0; i < result.rows.length; i++){
+            maps.push(result.rows[i].doc);
+        }
+    }).catch(function (err){
+        console.log(err);
+    }).then(function(){
+        // get the highes index of the heroDB
+        // if the array is empty, the index = 0
+        if(maps.length == 0){
+            mapDBSize = 0;
+            mapDBIndex = 10;
+        }
+        // else its the id of the last element
+        else{
+            mapDBIndex = maps[maps.length-1]._id;
+            mapDBSize = maps.length;
+        }
+        console.log("map DB size: " + mapDBSize);
+        console.log("map DB index: " + mapDBIndex);
+
+        // return the herdbSize
+        return mapDBSize;
+    }).then(function(mapdbSize){
+        if(mapdbSize == 0){
+
+            // create object (Hanamura)
+            var tempMap = {_id: mapDBIndex.toString(), name: 'Hanamura'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Hanamura'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Horizon Lunar Colony)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Horizon Lunar Colony'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Horizon Lunar Colony'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Temple of Anubis)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Temple of Anubis'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Temple of Anubis'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+
+            // create object (Volskaya Industries)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Volskaya Industries'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Volskaya Industries'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Dorado)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Dorado'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Dorado'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Junkertown)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Junkertown'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Junkertown'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+
+            // create object (Rialto)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Rialto'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Rialto'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Route 66)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Route 66'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Route 66'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Watchpoint: Gibralta)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Watchpoint: Gibralta'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Watchpoint: Gibralta'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Blizzard World)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Blizzard World'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Blizzard World'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Eichenwalde)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Eichenwalde'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Eichenwalde'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Hollywood)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Hollywood'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Hollywood'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (King's Row)
+            tempMap = {_id: mapDBIndex.toString(), name: 'King\'s Row'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'King\'s Row'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Numbani)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Numbani'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Numbani'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Ilios)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Ilios'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Ilios'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+
+            // create object (Lijiang Tower)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Lijiang Tower'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Lijiang Tower'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+
+            // create object (Nepal)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Nepal'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Nepal'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+            
+            // create object (Oasis)
+            tempMap = {_id: mapDBIndex.toString(), name: 'Oasis'};
+            // push to database
+            mapDB.put(tempMap).then(function(response){
+                // response
+                maps.push({_id: mapDBIndex.toString(), name: 'Oasis'});
+            }).catch(function (err){
+                console.log(err);
+            }) 
+            // increment mapDBIndex
+            mapDBIndex++;
+        }
+        
+    }).then(function(){
+        angular.element(document.getElementById('container-settings')).scope().updateView();
+    }).catch(function(err){
+        console.log(err);
+    });
+    
+/*
+// define the maps
+maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of Anubis'}, {name: 'Volskaya Industries'}, {name: 'Dorado'},
+        {name: 'Junkertown'}, {name: 'Rialto'}, {name: 'Route 66'}, {name: 'Watchpoint: Gibralta'}, {name: 'Blizzard World'},
+        {name: 'Eichenwalde'}, {name: 'Hollywood'}, {name: 'King\'s Row'}, {name: 'Numbani'}, {name: 'Ilios'}, {name: 'Lijiang Tower'},
+        {name: 'Nepal'}, {name: 'Oasis'}
+];*/
 
 
 // ##########################################################################
@@ -504,13 +768,6 @@ heroes = [{name: 'Ana'}, {name: 'Bastion'}, {name: 'Brigitte'}, {name: 'D.VA'}, 
     {name: 'Wreckingball'}
 ];*/
 
-
-// define the maps
-maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of Anubis'}, {name: 'Volskaya Industries'}, {name: 'Dorado'},
-        {name: 'Junkertown'}, {name: 'Rialto'}, {name: 'Route 66'}, {name: 'Watchpoint: Gibralta'}, {name: 'Blizzard World'},
-        {name: 'Eichenwalde'}, {name: 'Hollywood'}, {name: 'King\'s Row'}, {name: 'Numbani'}, {name: 'Ilios'}, {name: 'Lijiang Tower'},
-        {name: 'Nepal'}, {name: 'Oasis'}
-];
 
 // -----------------------------------------------------
 // Tab Controller
@@ -603,7 +860,18 @@ app.controller('ContentController', function($scope) {
         console.log("DB Index (internal)");
         console.log(dbIndex);
 
+        console.log("Map array");
+        console.log(maps);
+        
+        mapDB.allDocs({include_docs: true}).then(function(doc){
+            console.log("MapDB rows");
+            console.log(doc.rows);
+        }).catch(function(err){
+            console.log(err);
+        })
+
         heroDB.allDocs({include_docs: true}).then(function(docs){
+            console.log("HeroDB rows");
             console.log(docs.rows);
         }).catch(function(err){
             console.log(err);
@@ -1012,23 +1280,39 @@ app.controller('SettingsController', function($scope){
 
     $scope.heroDBSettingsController = heroes;
 
-    // get length of db array
-    var length = heroes.length;
+    $scope.mapDBSettingsController = maps;
+
+    // get length of heroes array
+    var heroesLength = heroes.length;
+    // get length of maps array
+    var mapLength = maps.length;
 
     $scope.showHeroDropDown = false;
+    $scope.showMapDropDown = false;
 
     // create true false array with according length
-    $scope.showContentDelete = new Array(length)
+    $scope.showContentDeleteHeroes = new Array(heroesLength);
+    $scope.showContentDeleteMap = new Array(mapLength);
     
     // initialize
-    for(i = 0; i < length; i++){
-        $scope.showContentDelete[i] = false;
+    for(i = 0; i < heroesLength; i++){
+        $scope.showContentDeleteHeroes[i] = false;
+    }
+
+    for(i = 0; i < mapLength; i++){
+        $scope.showContentDeleteMap[i] = false;
     }
 
     // toggle show content delete
-    $scope.toggleShowContentDelete = function(index){
+    $scope.toggleShowContentDeleteHeroes = function(index){
         //
-        $scope.showContentDelete[index] = !$scope.showContentDelete[index];
+        $scope.showContentDeleteHeroes[index] = !$scope.showContentDeleteHeroes[index];
+    }
+
+    // toggle show content delete 
+    $scope.toggleShowContentDeleteMap = function(index){
+        //
+        $scope.showContentDeleteMap[index] = !$scope.showContentDeleteHeroes[index];
     }
 
     $scope.toggleHeroDropDown = function(){
@@ -1045,20 +1329,62 @@ app.controller('SettingsController', function($scope){
         }
     }
 
-    $scope.removeItem = function(index){
-        // store the element which is to be removed
-        var deletedElement = heroes[index];
+    $scope.toggleMapDropDown = function(){
+        var element = document.getElementById('mapDropDown');
+
+        if($scope.showMapDropDown == false){
+            $scope.showMapDropDown = true;
+            element.setAttribute('src', '../../img/baseline-keyboard_arrow_up-24px.svg')
+        }else{
+            $scope.showMapDropDown = false;
+            element.setAttribute('src', '../../img/baseline-keyboard_arrow_down-24px.svg')
+
+
+        }
+    }
+
+    $scope.removeHero = function(index, x){
+        // x is the element to be deleted
 
         // remove the element from the array
-        heroes.splice(index, 1);
+        var arrayIndex = heroes.indexOf(x);
+        if(arrayIndex !== -1){
+            heroes.splice(arrayIndex, 1);
+        }
         // close the contentDelete dialog
-        $scope.showContentDelete[index] = false;
+        $scope.showContentDeleteHeroes[index] = false;
         
         // remove the entry from the database
         // get the id of the element
-        var varIndex = deletedElement._id;
+        var varIndex = x._id;
+
         heroDB.get(varIndex.toString()).then(function(doc) {
             return heroDB.remove(doc);
+          }).then(function (result) {
+            // handle result
+          }).catch(function (err) {
+            console.log(err);
+          });
+    }
+
+    // remove map
+    $scope.removeMap = function(index, x){
+        // x is the element to be deleted
+
+        // remove the element from the array
+        var arrayIndex = maps.indexOf(x);
+        if(arrayIndex !== -1){
+            maps.splice(arrayIndex, 1);
+        }
+        // close the contentDelete dialog
+        $scope.showContentDeleteMap[index] = false;
+        
+        // remove the entry from the database
+        // get the id of the element
+        var varIndex = x._id;
+
+        mapDB.get(varIndex.toString()).then(function(doc) {
+            return mapDB.remove(doc);
           }).then(function (result) {
             // handle result
           }).catch(function (err) {
@@ -1069,6 +1395,7 @@ app.controller('SettingsController', function($scope){
 
     $scope.updateView = function(){
         $scope.heroDBSettingsController = heroes;
+        $scope.mapDBSettingsController = maps;
         $scope.$apply();
     }
 
@@ -1092,6 +1419,29 @@ app.controller('SettingsController', function($scope){
 
         // clear the input field
         $scope.newHero = null;
+    }
+
+    // add map
+    $scope.addMap = function (){
+        // add a new hero
+        // increment index
+        mapDBIndex++;
+        
+        // setup new object
+        newMapElement = {_id: mapDBIndex.toString(), name: $scope.newMap}
+
+        // add the hero to the data base
+        mapDB.put(newMapElement).then(function (response) {
+            // handle response
+          }).catch(function (err) {
+            console.log(err);
+        });
+
+        // add it to the array
+        maps.push(newMapElement);
+
+        // clear the input field
+        $scope.newMap = null;
     }
 
     

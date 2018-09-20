@@ -169,20 +169,20 @@
                             <div class="overview-content-container">
                                 <span class="table-header-wide">{{x.name}}</span>
     
-                                <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
+                                <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDeleteHeroes($index)">
                             </div>
     
                             <!-- delete dialogue -->
-                            <div class="overview-delete-container" ng-show="showContentDelete[$index]">
+                            <div class="overview-delete-container" ng-show="showContentDeleteHeroes[$index]">
                                 <div class="float-right">
                                     Delete this hero?
                                 </div>
                                 <br>
                                 <div class="float-right">
-                                    <button class="red-button float-right margin-left" ng-click="removeItem($index)">
+                                    <button class="red-button float-right margin-left" ng-click="removeHero($index, x)">
                                         Yes
                                     </button>
-                                    <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete($index)">
+                                    <button class="blue-button float-right margin-left" ng-click="toggleShowContentDeleteHeroes($index)">
                                         No
                                     </button>
                                 </div>
@@ -192,6 +192,55 @@
                     </div>
                     <!-- ng repeat end -->
                 </div>
+
+                <!-- maps section -->
+                <div class="body-element">
+                    <h3>Maps</h3>
+                    Use this section to add new maps Blizzard has introduced to the game or to delete maps from the list, which Blizzard chose to remove from the game.
+                    <br>
+                    <br>
+                    <b>Add new Map:</b> 
+                    <br>
+                    <input type="text" placeholder="Name of Map" ng-model="newMap">
+                    <br>
+                    <button class="blue-button light-margin-top" ng-click="addMap()">Add Map</button>
+                    <br>
+
+                    <div class="float-right">
+                        <img class="icon" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="mapDropDown" ng-click="toggleMapDropDown()">
+                    </div>
+                    Overview of all maps:
+                    
+                    <!-- ng repeat start -->
+                    <div class="clear" ng-repeat="x in mapDBSettingsController | orderBy: 'name'"  ng-show="showMapDropDown">
+                        <div class="overview-container">
+                            <div class="overview-content-container">
+                                <span class="table-header-wide">{{x.name}}</span>
+    
+                                <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDeleteMap($index)">
+                            </div>
+    
+                            <!-- delete dialogue -->
+                            <div class="overview-delete-container" ng-show="showContentDeleteMap[$index]">
+                                <div class="float-right">
+                                    Delete this map?
+                                </div>
+                                <br>
+                                <div class="float-right">
+                                    <button class="red-button float-right margin-left" ng-click="removeMap($index, x)">
+                                        Yes
+                                    </button>
+                                    <button class="blue-button float-right margin-left" ng-click="toggleShowContentDeleteMap($index)">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <!-- ng repeat end -->
+                </div>
+
 
         </div>
 
