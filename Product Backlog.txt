@@ -21,3 +21,4 @@
 4. The programm automatically tracks the date and the time for each entry.
 8. The data is stored in a local database.
 11. The user inputs the data in a form.
+16. The user can add and delete heroes from the list/database

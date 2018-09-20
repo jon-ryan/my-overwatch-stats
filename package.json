@@ -32,7 +32,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "electron": "latest",
+    "electron": "^3.0.0",
     "pouchdb-browser": "^7.0.0"
   }
 }

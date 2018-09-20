@@ -56,12 +56,12 @@ button{
 
 /* Style the button red*/
 .red-button{
-    background-color: rgb(236, 0, 0);
+    background-color: rgb(249,158,26);
     color: rgb(235,235,235);
 }
 /* Corresponding hover color */
 .red-button:hover{
-    background-color: rgb(161, 0, 0);
+    background-color: rgb(211, 136, 25);
 }
 
 .green-button{

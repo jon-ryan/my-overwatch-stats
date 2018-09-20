@@ -137,6 +137,10 @@ li a:hover:not(.active){
     padding-top: 5px;
 }
 
+.light-margin-top{
+    margin-top: 5px;
+}
+
 .table-header-wide{
     width: 30;
 

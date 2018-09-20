@@ -16,7 +16,7 @@ var dbEntries = [];
 var heroes = [];
 var dbIndex = 0;
 var mapDbIndex = 0;
-var heroDBIndex = 0;
+var heroDBIndex = 10;
 var heroDBSize = 0;
 
 async function setupDatabase() {
@@ -71,7 +71,7 @@ async function setupDatabase() {
         // if the array is empty, the index = 0
         if(heroes.length == 0){
             heroDBSize = 0;
-            heroDBIndex = 0;
+            heroDBIndex = 10;
         }
         // else its the id of the last element
         else{
@@ -99,7 +99,6 @@ async function setupDatabase() {
 
         // increment hero db index
         heroDBIndex++;
-        console.log("index top: " + heroDBIndex);
 
         // create object (Bastion)
         tempHero = {_id: heroDBIndex.toString(), name: 'Bastion'};
@@ -114,8 +113,6 @@ async function setupDatabase() {
 
         // increment hero db index
         heroDBIndex++;
-
-        console.log("Index after bastion" + heroDBIndex);
 
         // create object (Brigitte)
         tempHero = {_id: heroDBIndex.toString(), name: 'Brigitte'};
@@ -157,7 +154,6 @@ async function setupDatabase() {
         // increment hero db index
         heroDBIndex++;
 
-        console.log("Index after doomfist: " + heroDBIndex);
 
         // create object (Genji)
         tempHero = {_id: heroDBIndex.toString(), name: 'Genji'};
@@ -476,7 +472,6 @@ async function setupDatabase() {
 
         // increment hero db index
         heroDBIndex++;
-        console.log("index bottom: " + heroDBIndex);
     } // incase the hero db wasn't set up yet, the db is now fully setup.
 
     }).then(function(){
@@ -1075,6 +1070,28 @@ app.controller('SettingsController', function($scope){
     $scope.updateView = function(){
         $scope.heroDBSettingsController = heroes;
         $scope.$apply();
+    }
+
+    $scope.addHero = function (){
+        // add a new hero
+        // increment index
+        heroDBIndex++;
+        
+        // setup new object
+        newHeroElement = {_id: heroDBIndex.toString(), name: $scope.newHero}
+
+        // add the hero to the data base
+        heroDB.put(newHeroElement).then(function (response) {
+            // handle response
+          }).catch(function (err) {
+            console.log(err);
+        });
+
+        // add it to the array
+        heroes.push(newHeroElement);
+
+        // clear the input field
+        $scope.newHero = null;
     }
 
     
