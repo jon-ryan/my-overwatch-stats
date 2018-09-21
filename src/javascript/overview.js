@@ -9,6 +9,10 @@ var heroDB = new PouchDB('hero_database');
 var mapDB = new PouchDB('map_database');
 
 
+// charts
+var Chart = require('chart.js');
+
+
 
 
 // define array to store the entries
@@ -739,13 +743,6 @@ async function setupDatabase() {
         console.log(err);
     });
     
-/*
-// define the maps
-maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of Anubis'}, {name: 'Volskaya Industries'}, {name: 'Dorado'},
-        {name: 'Junkertown'}, {name: 'Rialto'}, {name: 'Route 66'}, {name: 'Watchpoint: Gibralta'}, {name: 'Blizzard World'},
-        {name: 'Eichenwalde'}, {name: 'Hollywood'}, {name: 'King\'s Row'}, {name: 'Numbani'}, {name: 'Ilios'}, {name: 'Lijiang Tower'},
-        {name: 'Nepal'}, {name: 'Oasis'}
-];*/
 
 
 // ##########################################################################
@@ -757,16 +754,6 @@ maps = [{name: 'Hanamura'}, {name: 'Horizon Lunar Colony'}, {name: 'Temple of An
 window.onload = setupDatabase;
 
 
-
-
-
-/*
-// define the heroes
-heroes = [{name: 'Ana'}, {name: 'Bastion'}, {name: 'Brigitte'}, {name: 'D.VA'}, {name: 'Doomfist'}, {name: 'Genji'}, {name: 'Hanzo'}, {name: 'Junkrat'},
-    {name: 'Lúcio'}, {name: 'McCree'}, {name: 'Mei'}, {name: 'Mercy'}, {name: 'Moira'}, {name:"Orisa"}, {name:"Pharah"}, {name: "Reaper"}, {name:"Reinhardt"}, {name:"Zenyatta"},
-    {name: 'Roadhog'}, {name: 'Soldier: 76'}, {name: 'Sombra'}, {name: 'Symmetra'}, {name: 'Torbjörn'}, {name: 'Tracer'}, {name: 'Wnameowmaker'}, {name: 'Winston'}, {name: 'Zarya'},
-    {name: 'Wreckingball'}
-];*/
 
 
 // -----------------------------------------------------
@@ -842,6 +829,15 @@ app.controller('ContentController', function($scope) {
 
     $scope.showLoading = true;
 
+    // setup new chart for SR-Rating
+    var srRatingCanvas = document.getElementById('srrating-canvas').getContext('2d');
+
+    var srRatingChartData = [];
+
+    
+
+
+
 
     // get length of db array
     var length = dbEntries.length;
@@ -852,6 +848,38 @@ app.controller('ContentController', function($scope) {
     for(i = 0; i < length; i++){
         $scope.showContentDelete[i] = false;
     }
+
+
+
+    // -----------
+    // charts
+    //  ----------
+    // chart for srrating
+    console.log(srRatingChartData);
+    var srRatingChart = new Chart(srRatingCanvas, {
+        // The type of chart we want to create
+        type: 'line',
+    
+        // The data for our dataset
+        data: {
+            labels: ["1", "2", "3", "4"],
+            datasets: [{
+                label: "Skill Rating",
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: srRatingChartData,
+            }]
+        },
+    
+        // Configuration options go here
+        options: {}
+    });
+    console.log(srRatingChartData);
+
+
+    // -----------
+    // charts END
+    //  ----------
 
     // test
     $scope.showDB = function(){
@@ -906,6 +934,7 @@ app.controller('ContentController', function($scope) {
 
         // update the delta
         updateDelta(index);
+        updateView();
 
     }
 
@@ -1236,6 +1265,10 @@ app.controller('FormController', function($scope){
             dbEntries.push(doc);    // handle doc
           }).catch(function (err) {
             console.log(err);
+          }).then(function(){
+            angular.element(document.getElementById('controllerBody')).scope().updateView();
+          }).catch(function(err){
+              console.log(err);
           });
 
 
