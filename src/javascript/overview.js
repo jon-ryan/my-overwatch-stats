@@ -43,13 +43,13 @@ async function setupDatabase() {
         // get the highes index of the db
         // if the array is empty, the index is 0
         if(dbEntries.length == 0){
-            dbIndex = 0;
+            dbIndex = 10;
         }
         // else its the id of the last element
         else{
             dbIndex = dbEntries[dbEntries.length-1]._id;
         }
-        console.log("Length of dbEntries array: " + dbIndex.toString());
+        console.log("dbIndex: " + dbIndex.toString());
     }).catch(function(err){
         console.log("Error while getting the length of the dbEntries array: " + err);
     }).then(function (){
@@ -482,6 +482,7 @@ async function setupDatabase() {
 
     }).then(function(){
         // update the view
+        angular.element(document.getElementById('controllerBody')).scope().$apply();
         angular.element(document.getElementById('controllerBody')).scope().updateView();
     }).catch(function(err){
         console.log(err);
@@ -827,17 +828,14 @@ app.controller('ContentController', function($scope) {
     // get reference to dbEntries
     $scope.dbArray = dbEntries;
 
-    $scope.showLoading = true;
 
     // setup new chart for SR-Rating
     var srRatingCanvas = document.getElementById('srrating-canvas').getContext('2d');
 
     var srRatingChartData = [];
+    var srRatingChartLabel = [];
 
     
-
-
-
 
     // get length of db array
     var length = dbEntries.length;
@@ -855,26 +853,27 @@ app.controller('ContentController', function($scope) {
     // charts
     //  ----------
     // chart for srrating
-    console.log(srRatingChartData);
     var srRatingChart = new Chart(srRatingCanvas, {
         // The type of chart we want to create
         type: 'line',
     
         // The data for our dataset
         data: {
-            labels: ["1", "2", "3", "4"],
+            labels: [""],
             datasets: [{
                 label: "Skill Rating",
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: srRatingChartData,
+                backgroundColor: 'rgb(33,143,254)',
+                borderColor: 'rgb(26, 120, 216)',
+                data: [],
             }]
         },
     
         // Configuration options go here
-        options: {}
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
     });
-    console.log(srRatingChartData);
 
 
     // -----------
@@ -883,27 +882,7 @@ app.controller('ContentController', function($scope) {
 
     // test
     $scope.showDB = function(){
-        console.log("DB Entries");
-        console.log(dbEntries);
-        console.log("DB Index (internal)");
-        console.log(dbIndex);
 
-        console.log("Map array");
-        console.log(maps);
-        
-        mapDB.allDocs({include_docs: true}).then(function(doc){
-            console.log("MapDB rows");
-            console.log(doc.rows);
-        }).catch(function(err){
-            console.log(err);
-        })
-
-        heroDB.allDocs({include_docs: true}).then(function(docs){
-            console.log("HeroDB rows");
-            console.log(docs.rows);
-        }).catch(function(err){
-            console.log(err);
-        })
     }
 
 
@@ -934,7 +913,7 @@ app.controller('ContentController', function($scope) {
 
         // update the delta
         updateDelta(index);
-        updateView();
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
 
     }
 
@@ -1016,11 +995,35 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.updateView = function(){
-        // initialize the "showLoading" variable to false
-        $scope.showLoading = false;
         
-        // rerender the view
-        $scope.$apply();
+        // update the charts
+
+        // update the srRating chart
+        // get the needed data from dbEntries
+        srRatingChartData = new Array();
+        srRatingChartLabel = new Array();
+        // fill the arrays
+        for(i = 0; i < dbEntries.length; i++){
+            srRatingChartData.push(dbEntries[i].sr);
+            srRatingChartLabel.push("Match " + (i+1).toString());
+        }
+        srRatingChart.data.labels = srRatingChartLabel;
+        srRatingChart.data.datasets[0].data = srRatingChartData;
+        srRatingChart.update({
+            duration: 800,
+            easing: 'easeOutBounce'
+        });/*
+        srRatingChart.render({
+            duration: 800,
+            lazy: false,
+            easing: 'easeOutBounce'
+        });*/
+        
+
+
+
+
+
     }
     
 
@@ -1151,7 +1154,7 @@ app.controller('FormController', function($scope){
         }
         var currentTime = hours + minutes + seconds;
 
-        var dateIdentifier = currentDate + "_" + currentTime;
+        var dateIdentifier = parseInt(currentDate + currentTime, 10);
 
 
 
