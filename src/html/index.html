@@ -35,7 +35,7 @@
             <ul>
                 <li> <a class="active"  ng-click="showOverviewContainer()"  href="#" id="overview"  >Overview   </a>    </li>
                 <li> <a class=""        ng-click="showSettingsContainer()"  href="#" id="settings"  >Settings   </a>    </li>
-                <li> <a class=""        ng-click="showAddSeason()"          href="#" id="season"    >+ Season   </a>    </li>
+                <li> <a class=""        ng-click="showSeasons()"            href="#" id="season"    >Seasons   </a>    </li>
                 <li> <a class=""        ng-click="showAddMatch()"           href="#" id="match"     >+ Match    </a>    </li>
             </ul>
         </div>
@@ -92,14 +92,6 @@
             </div>
 
             <div class="body-element">
-                <h3>Games Played by Map</h3>
-            </div>
-
-            <div class="body-element">
-                <h3>Games Played by Hero</h3>
-            </div>
-
-            <div class="body-element">
                 <h3>Time of Day Breakdown</h3>
             </div>
 
@@ -129,7 +121,7 @@
                 <div ng-repeat="x in dbArray">
                     <div class="overview-container">
                         <div class="overview-content-container">
-                            <span class="table-index">{{x._id-10}}</span>
+                            <span class="table-index">{{x._id-100}}</span>
                             <span class="table-header">{{x.sr}}</span>
                             <span class="table-header">{{x.delta}}</span>
                             <span class="table-header">{{x.matchEnd}}</span>
@@ -285,6 +277,69 @@
 
         </div>
 
+        <!-- content seasons -->
+        <div    id="container-season"     ng-show="showSeason" ng-controller="SeasonController">
+            <div class="body-element">
+                <h3>Seasons</h3>
+                In this section you can manage the seasons of Overwatch. <br>
+                By adding a season, the current season high, current season low and current SR will be archived and the history of
+                the ongoing season will be deleted. You can give the season a name and it will then be displayed down below.
+                <br>
+                <br>
+
+                <!-- add a season -->
+                Give the current season a name: <br>
+                <input type="text" ng-model="seasonName" placeholder="Name your Season">
+                <br>
+                <button class="blue-button light-margin-top" ng-click="addSeason()">Add Season</button>
+                <br>
+                <br>
+                <h3>Seasons overview</h3>
+                <!-- header of the table -->
+                <div class="light-padding-top">
+                    <span class="table-index">ID</span>
+                    <span class="table-header">Name</span>
+                    <span class="table-header">Season High</span>
+                    <span class="table-header">Season Low</span>
+                    <span class="table-header-wide">Season Finished</span>
+                </div>
+
+                <div ng-repeat="x in seasonArray">
+                        <div class="overview-container">
+                            <div class="overview-content-container">
+                                <span class="table-index">{{x._id-100}}</span>
+                                <span class="table-header">{{x.name}}</span>
+                                <span class="table-header">{{x.seasonHigh}}</span>
+                                <span class="table-header">{{x.seasonLow}}</span>
+                                <span class="table-header">{{x.seasonEnd}}</span>
+    
+                                <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
+                            </div>
+    
+                            <div class="overview-delete-container" ng-show="showContentDelete[$index]">
+                                <div class="float-right">
+                                    Delete this entry?
+                                </div>
+                                <br>
+                                <div class="float-right">
+                                    <button class="red-button float-right margin-left" ng-click="removeItem($index)">
+                                        Yes
+                                    </button>
+                                    <button class="blue-button float-right margin-left" ng-click="toggleShowContentDelete($index)">
+                                        No
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+    
+                        
+                    </div>
+
+
+
+            </div>
+
+        </div>
 
         <!-- Content form -->
         <div    id="container-form"     ng-show="showForm" ng-controller="FormController">

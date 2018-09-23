@@ -7,6 +7,7 @@ var PouchDB = require('pouchdb-browser');
 var matchDB = new PouchDB('match_database');
 var heroDB = new PouchDB('hero_database');
 var mapDB = new PouchDB('map_database');
+var seasonDB = new PouchDB('season_database');
 
 
 // charts
@@ -19,11 +20,13 @@ var Chart = require('chart.js');
 var dbEntries = [];
 var heroes = [];
 var maps = [];
-var dbIndex = 0;
-var mapDBIndex = 0;
+var dbIndex = 100;
+var mapDBIndex = 100;
 var mapDBSize = 0;
-var heroDBIndex = 10;
+var heroDBIndex = 100;
 var heroDBSize = 0;
+var dbSeason = [];
+var dbSeasonIndex = 100;
 
 async function setupDatabase() {
 
@@ -43,13 +46,12 @@ async function setupDatabase() {
         // get the highes index of the db
         // if the array is empty, the index is 0
         if(dbEntries.length == 0){
-            dbIndex = 10;
+            dbIndex = 100;
         }
         // else its the id of the last element
         else{
             dbIndex = dbEntries[dbEntries.length-1]._id;
         }
-        console.log("dbIndex: " + dbIndex.toString());
     }).catch(function(err){
         console.log("Error while getting the length of the dbEntries array: " + err);
     }).then(function (){
@@ -59,6 +61,28 @@ async function setupDatabase() {
         // log error
         console.log("Error while updating the view: " + err);
     });
+
+    
+    // fill the seasons array
+    seasonDB.allDocs({include_docs: true}).then(function(result){
+        // fill the array with for loop
+        for(i = 0; i < result.rows.length; i++){
+            dbSeason.push(result.rows[i].doc)
+        }
+    }).then(function(){
+        // get the highes index of season db
+        if(dbSeason.length == 0){
+            dbSeasonIndex = 100;
+        }
+        else{
+            dbSeasonIndex = dbSeason[dbSeason.length-1]._id;
+        }
+
+    }).then(function(){
+        angular.element(document.getElementById('container-season')).scope().updateView();
+    }).catch(function(err){
+        console.log(err);
+    })
 
 
 
@@ -77,15 +101,13 @@ async function setupDatabase() {
         // if the array is empty, the index = 0
         if(heroes.length == 0){
             heroDBSize = 0;
-            heroDBIndex = 10;
+            heroDBIndex = 100;
         }
         // else its the id of the last element
         else{
             heroDBIndex = heroes[heroes.length-1]._id;
             heroDBSize = heroes.length;
         }
-        console.log("Hero DB size: " + heroDBSize);
-        console.log("Hero DB index: " + heroDBIndex);
 
         // return the herdbSize
         return heroDBSize;
@@ -112,7 +134,6 @@ async function setupDatabase() {
         heroDB.put(tempHero).then(function(response){
             // response
             heroes.push({_id: heroDBIndex.toString(), name: 'Bastion'});
-            console.log("Bastion in DB");
         }).catch(function (err){
             console.log(err);
         })
@@ -139,7 +160,6 @@ async function setupDatabase() {
         heroDB.put(tempHero).then(function(response){
             // response
             heroes.push({_id: heroDBIndex.toString(), name: 'D.VA'});
-            console.log("DVA in DB");
         }).catch(function (err){
             console.log(err);
         })
@@ -180,7 +200,6 @@ async function setupDatabase() {
         heroes.push({_id: heroDBIndex.toString(), name: 'Hanzo'});
         heroDB.put(tempHero).then(function(response){
             // response
-            console.log("Hanzo in DB");
         }).catch(function (err){
             console.log(err);
         })
@@ -503,15 +522,13 @@ async function setupDatabase() {
         // if the array is empty, the index = 0
         if(maps.length == 0){
             mapDBSize = 0;
-            mapDBIndex = 10;
+            mapDBIndex = 100;
         }
         // else its the id of the last element
         else{
             mapDBIndex = maps[maps.length-1]._id;
             mapDBSize = maps.length;
         }
-        console.log("map DB size: " + mapDBSize);
-        console.log("map DB index: " + mapDBIndex);
 
         // return the herdbSize
         return mapDBSize;
@@ -768,11 +785,13 @@ app.controller('TabController', function($scope){
 $scope.showOverview = true;
 $scope.showSettings = false;
 $scope.showForm = false;
+$scope.showSeason = false;
 
 
 // get reference to the nav bar
 var overviewLink = document.getElementById("overview");
 var settingsLink = document.getElementById("settings");
+var seasonLink = document.getElementById("season");
 var matchLink = document.getElementById("match");
 
 
@@ -780,10 +799,12 @@ $scope.showSettingsContainer = function(){
     // modify the content
     $scope.showOverview = false;
     $scope.showSettings = true;
+    $scope.showSeason = false;
     $scope.showForm = false;
 
     overviewLink.setAttribute("class", "");
     settingsLink.setAttribute("class", "active");
+    seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "");
 
 }
@@ -793,10 +814,12 @@ $scope.showOverviewContainer = function(){
     // modify the content
     $scope.showOverview = true;
     $scope.showSettings = false;
+    $scope.showSeason = false;
     $scope.showForm = false;
 
     overviewLink.setAttribute("class", "active");
     settingsLink.setAttribute("class", "");
+    seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "");
 }
 
@@ -804,11 +827,26 @@ $scope.showAddMatch = function(){
     // modify the content
     $scope.showOverview = false;
     $scope.showSettings = false;
+    $scope.showSeason = false;
     $scope.showForm = true;
 
     overviewLink.setAttribute("class", "");
     settingsLink.setAttribute("class", "");
+    seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "active");
+    }
+
+    $scope.showSeasons = function(){
+         // modify the content
+        $scope.showOverview = false;
+        $scope.showSettings = false;
+        $scope.showSeason = true;
+        $scope.showForm = false;
+
+        overviewLink.setAttribute("class", "");
+        settingsLink.setAttribute("class", "");
+        seasonLink.setAttribute("class", "active");
+        matchLink.setAttribute("class", "");
     }
 
 
@@ -1012,13 +1050,9 @@ app.controller('ContentController', function($scope) {
         srRatingChart.update({
             duration: 800,
             easing: 'easeOutBounce'
-        });/*
-        srRatingChart.render({
-            duration: 800,
-            lazy: false,
-            easing: 'easeOutBounce'
-        });*/
+        });
         
+        $scope.dbArray = dbEntries;
 
 
 
@@ -1484,4 +1518,134 @@ app.controller('SettingsController', function($scope){
 
 });
 
+
+// -----------------------------------------------------
+// Season Controller
+// -----------------------------------------------------
+
+app.controller('SeasonController', function($scope){
+
+    $scope.seasonArray = dbSeason;
+
+    // get length of db array
+    var length = dbSeason.length;
+    // create true false array with according length
+    $scope.showContentDelete = new Array(length);
+    // initialize
+    for(i = 0; i < length; i++){
+        $scope.showContentDelete[i] = false;
+    }
+    
+
+    $scope.toggleShowContentDelete = function(index){
+        //
+        $scope.showContentDelete[index] = !$scope.showContentDelete[index];
+    }
+
+    $scope.removeItem = function(index){
+        // store the element which is to be removed
+        var deletedElement = dbSeason[index];
+
+        // remove the element from the array
+        dbSeason.splice(index, 1);
+        // close the contentDelete dialog
+        $scope.showContentDelete[index] = false;
+        
+        // remove the entry from the database
+        // get the id of the element
+        var varIndex = deletedElement._id;
+        seasonDB.get(varIndex.toString()).then(function(doc) {
+            return seasonDB.remove(doc);
+          }).then(function (result) {
+            // handle result
+          }).catch(function (err) {
+            console.log(err);
+          });
+
+
+        angular.element(document.getElementById('container-season')).scope().updateView();
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
+
+    }
+
+    $scope.addSeason = function(){
+        // first get the season high, low and current
+        // iterate through array and get high and low
+        var high = 0;
+        var low = 10000000;
+        for(i = 0; i < dbEntries.length; i++){
+            // determine the high
+            if(dbEntries[i].sr > high){
+                high = dbEntries[i].sr;
+            }
+            // determine the low
+            if(dbEntries[i].sr < low){
+                low = dbEntries[i].sr;
+            }
+        }
+
+        var current = dbEntries[dbEntries.length-1].sr;
+
+        // clear the matchDB and the dbEntries array
+        
+        dbEntries = [];
+        // destroy and create a new db
+        destroyMatchDB();
+
+        
+
+
+
+        // create a new object in seasonDB
+        dbSeasonIndex++;
+
+        var seasonEntry = {
+            _id: dbSeasonIndex.toString(),
+            name: $scope.seasonName,
+            seasonHigh: high,
+            seasonLow: low,
+            seasonEnd: current
+        }
+
+        seasonDB.put(seasonEntry).then(function(response){
+        }).then(function(){
+            // update the views
+            angular.element(document.getElementById('controllerBody')).scope().updateView();
+        }).catch(function(err){
+            console.log(err);
+        })
+
+        // push it into the array
+        dbSeason.push(seasonEntry);
+
+        // set the $scope values to null
+        $scope.seasonName = null;
+
+        angular.element(document.getElementById('controllerBody')).scope().updateView(); 
+
+    }
+
+
+
+
+    $scope.updateView = function(){
+        seasonArray = dbSeason;
+    }
+    
+
+})
+
+
+// destroy match db
+function destroyMatchDB(){
+    console.log(matchDB);
+    matchDB.destroy().then(function (response) {
+        // success
+      }).then(function(){
+        // create a new mach db
+        matchDB = new PouchDB('match_database');
+      }).catch(function (err) {
+        console.log(err);
+      });
+}
 
