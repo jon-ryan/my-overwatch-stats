@@ -65,7 +65,34 @@
 
             <div class="body-element">
                 <h3>Main Statistics</h3>
+                
 
+                <div class="winloss-chart-container content-float-right">
+                    <canvas id="winloss-canvas"></canvas>
+                </div>
+
+                <div class="light-padding-right">
+                        <div>
+                            Games Played: <span class="float-right inline-block">{{gamesplayed}}</span>
+                        </div>
+                        <div>
+                            Wins: <span class="float-right inline-block">{{wins}}</span>
+                        </div>
+                        <div>
+                            Losses: <span class="float-right inline-block">{{losses}}</span>
+                        </div>
+                        <div>
+                            Draws: <span class="float-right inline-block">{{draws}}</span>
+                        </div>
+                        <div>
+                            Unkown Win/Loss:<span class="float-right inline-block">{{unknownWinLoss}}</span>
+                        </div>
+                        <div>
+                            Avg. Delta: <span class="float-right inline-block">{{avgdelta}}</span>
+                        </div>
+                        
+                        
+                    </div>
                 <!-- stats left, pie chart "win/loss" float right -->
             </div>
 

@@ -1,3 +1,7 @@
 .srrating-chart-container{
     height: 6cm;
 }
+
+.winloss-chart-container{
+    width: 50%;
+}

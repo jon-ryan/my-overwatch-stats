@@ -4,10 +4,20 @@ var app = angular.module('overwatch-stats-app', []);
 
 // initialize 
 var PouchDB = require('pouchdb-browser');
+PouchDB.plugin(require('pouchdb-find'));
 var matchDB = new PouchDB('match_database');
 var heroDB = new PouchDB('hero_database');
 var mapDB = new PouchDB('map_database');
 var seasonDB = new PouchDB('season_database');
+
+/*
+// create database index
+matchDB.createIndex({
+    index: {fields: ['_id', 'sr', 'matchEnd', 'matchDuration', 'scoreBlue', 'scoreRed', 'map', 'startingSide',
+                    'hero1', 'hero2', 'hero3', 'hero4', 'groupSize', 'friend1', 'friend2', 'friend3', 'friend4', 'friend5',
+                    'eliminations', 'objectiveKills', 'objectiveTime', 'heroDamageDone', 'healingDone', 'deaths', 'date']}
+}); */
+
 
 
 // charts
@@ -866,14 +876,22 @@ app.controller('ContentController', function($scope) {
     // get reference to dbEntries
     $scope.dbArray = dbEntries;
 
+    $scope.gamesplayed = 0;
+    $scope.wins = 0;
+    $scope.losses = 0;
+    $scope.draws = 0;
+    $scope.avgdelta = 0;
+    $scope.unknownWinLoss = 0;
+
 
     // setup new chart for SR-Rating
     var srRatingCanvas = document.getElementById('srrating-canvas').getContext('2d');
+    var winlossCanvas = document.getElementById('winloss-canvas');
 
     var srRatingChartData = [];
     var srRatingChartLabel = [];
 
-    
+    var winlossChartData = [];
 
     // get length of db array
     var length = dbEntries.length;
@@ -912,6 +930,23 @@ app.controller('ContentController', function($scope) {
             maintainAspectRatio: false
         }
     });
+
+    var winlossChart = new Chart(winlossCanvas, {
+        type: 'doughnut',
+        data: {
+            labels: ["Win", "Loss", "Draw", "Unknown"],
+            datasets: [{
+                data: [],
+                backgroundColor: ['rgb(33,143,254)', 'rgb(249,158,26)', 'rgb(235,235,235)', 'rgb(150,150,150)']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    
 
 
     // -----------
@@ -1051,6 +1086,40 @@ app.controller('ContentController', function($scope) {
             duration: 800,
             easing: 'easeOutBounce'
         });
+
+        // get games played
+        $scope.gamesplayed = dbEntries.length;
+
+        // reset wins, losses and draws
+        $scope.wins = $scope.losses = $scope.draws = $scope.unknownWinLoss = $scope.avgdelta = 0;
+        // get wins
+        // get losses
+        // get draws
+        for(i = 0; i < dbEntries.length; i++){
+            if(dbEntries[i].matchEnd == "Victory"){
+                $scope.wins++;
+            }
+            else if(dbEntries[i].matchEnd == "Draw"){
+                $scope.draws++;
+            }
+            else if(dbEntries[i].matchEnd == "Defeat"){
+                $scope.losses++;
+            }
+            else if(dbEntries[i].matchEnd == "Unknown"){
+                $scope.unknownWinLoss++;
+            }
+            $scope.avgdelta = $scope.avgdelta + dbEntries[i].delta;
+        }
+
+        $scope.avgdelta = $scope.avgdelta / dbEntries.length;
+
+        winlossChart.data.datasets[0].data = [$scope.wins, $scope.losses, $scope.draws, $scope.unknownWinLoss];
+        winlossChart.update({
+            duration: 800,
+            easing: 'easeOutBounce'
+        })
+
+
         
         $scope.dbArray = dbEntries;
 

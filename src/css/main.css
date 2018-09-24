@@ -137,6 +137,10 @@ li a:hover:not(.active){
     padding-top: 5px;
 }
 
+.light-padding-right{
+    padding-right: 5px;
+}
+
 .light-margin-top{
     margin-top: 5px;
 }
@@ -145,5 +149,21 @@ li a:hover:not(.active){
     width: 30;
 
     padding-left: 5px;
+    display: inline-block;
+}
+
+.content-float-left{
+    float:left;
+    overflow: auto;
+    width: 50%;
+}
+
+.content-float-right{
+    float:right;
+    overflow: auto;
+    width: 2cm;
+}
+
+.inline-block{
     display: inline-block;
 }
