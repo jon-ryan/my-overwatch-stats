@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html id="html">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Overwatch Statistics</title>
 
     <!-- Include the main.css file -->
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
+    <link id="maincss" rel="stylesheet" type="text/css" media="screen" href="../css/main.css" />
     <!-- Include the input-element.css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/input-element.css" />
     <!-- Include the button.css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/button.css" />
     <!-- Include the charts.css file -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/charts.css" />
+
+    <!-- Include the light-body-elements.css file -->
+    <link id="body-element-style" rel="stylesheet" type="text/css" media="screen" href="../css/light-body-elements.css"/>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -72,19 +75,19 @@
                 </div>
 
                 <div class="light-padding-right">
-                        <div>
+                        <div >
                             Games Played: <span class="float-right inline-block">{{gamesplayed}}</span>
                         </div>
-                        <div>
+                        <div >
                             Wins: <span class="float-right inline-block">{{wins}}</span>
                         </div>
-                        <div>
+                        <div >
                             Losses: <span class="float-right inline-block">{{losses}}</span>
                         </div>
-                        <div>
+                        <div >
                             Draws: <span class="float-right inline-block">{{draws}}</span>
                         </div>
-                        <div>
+                        <div >
                             Unkown Win/Loss:<span class="float-right inline-block">{{unknownWinLoss}}</span>
                         </div>
                         <div>
@@ -186,20 +189,11 @@
         <div    id="container-settings" ng-show="showSettings" ng-controller="SettingsController">
 
                 <div class="body-element">
-
-                    <!-- Custom checkbox / checkbox for maximize on start up-->
-                    <label class="checkbox-container">
-                        Maximize on Start-Up
-                        <input type="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                    
-                    <div class="separator"></div>
                     
                     <!-- Custom checkbox / checkbox for maximize on start up-->
-                    <label class="checkbox-container">
+                    <label class="checkbox-container" ng-click="toggleNightmode()">
                         Nightmode
-                        <input type="checkbox">
+                        <input type="checkbox" ng-model="nightmode">
                         <span class="checkmark"></span>
                     </label>
                     

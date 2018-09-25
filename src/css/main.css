@@ -56,7 +56,7 @@ li a:hover:not(.active){
     background-color: rgba(225,225,225, 0.3);
 }
 
-/* Specify the styling for a body element */
+/* Specify the styling for a body element *//*
 .body-element{
     background-color: rgb(247, 247, 247);
     color: rgb(34, 34, 34);
@@ -64,7 +64,7 @@ li a:hover:not(.active){
     margin-top: 30px;
     margin-bottom: 10px;
     border-radius: 5px;
-}
+}*/
 
 
 /* Style a separator */
@@ -118,6 +118,10 @@ li a:hover:not(.active){
 
 .clear{
     clear: both;
+}
+
+.bottom-border{
+    border-bottom: 1px solid grey;
 }
 
 

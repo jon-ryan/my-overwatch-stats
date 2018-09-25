@@ -9,14 +9,12 @@ var matchDB = new PouchDB('match_database');
 var heroDB = new PouchDB('hero_database');
 var mapDB = new PouchDB('map_database');
 var seasonDB = new PouchDB('season_database');
+const Store = require('electron-store');
+const store = new Store();
 
-/*
-// create database index
-matchDB.createIndex({
-    index: {fields: ['_id', 'sr', 'matchEnd', 'matchDuration', 'scoreBlue', 'scoreRed', 'map', 'startingSide',
-                    'hero1', 'hero2', 'hero3', 'hero4', 'groupSize', 'friend1', 'friend2', 'friend3', 'friend4', 'friend5',
-                    'eliminations', 'objectiveKills', 'objectiveTime', 'heroDamageDone', 'healingDone', 'deaths', 'date']}
-}); */
+store.name = 'settings';
+
+
 
 
 
@@ -38,9 +36,20 @@ var heroDBSize = 0;
 var dbSeason = [];
 var dbSeasonIndex = 100;
 
+var globalNightmode = false;
+
+// get reference to body-element-css
+var bodyElementCss = document.getElementById('body-element-style');
+// get reference to html element
+var html = document.getElementById('html');
+
 async function setupDatabase() {
 
 
+    // get the value for nightmode
+    globalNightmode = store.get('nightmode');
+    // update the settings
+    angular.element(document.getElementById('container-settings')).scope().updateNightmode();
 
     // setup the matchDB array
 
@@ -1111,7 +1120,7 @@ app.controller('ContentController', function($scope) {
             $scope.avgdelta = $scope.avgdelta + dbEntries[i].delta;
         }
 
-        $scope.avgdelta = $scope.avgdelta / dbEntries.length;
+        $scope.avgdelta = ($scope.avgdelta / dbEntries.length).toFixed(2);
 
         winlossChart.data.datasets[0].data = [$scope.wins, $scope.losses, $scope.draws, $scope.unknownWinLoss];
         winlossChart.update({
@@ -1421,6 +1430,8 @@ app.controller('SettingsController', function($scope){
 
     $scope.mapDBSettingsController = maps;
 
+    $scope.nightmode = false;
+
     // get length of heroes array
     var heroesLength = heroes.length;
     // get length of maps array
@@ -1583,6 +1594,47 @@ app.controller('SettingsController', function($scope){
         $scope.newMap = null;
     }
 
+    $scope.toggleNightmode = function(){
+        // this function is called from index.html
+        if($scope.nightmode == true){
+            turnNightmodeOn();
+            globalNightmode = $scope.nightmode;
+            // store new value
+            store.set('nightmode', globalNightmode);
+        }
+        else{
+            turnNightmodeOff();
+            globalNightmode = $scope.nightmode;
+            // store new value
+            store.set('nightmode', globalNightmode);
+        }
+    }
+
+    function turnNightmodeOff(){
+        bodyElementCss.setAttribute('href', '../css/light-body-elements.css');
+        html.setAttribute('style', 'background: url(../../img/eichenwalde_1_blur_1080p.png) no-repeat center fixed; background-size: cover;');
+        
+    }
+
+    function turnNightmodeOn(){
+        bodyElementCss.setAttribute('href', '../css/dark-body-elements.css');
+        html.setAttribute('style', 'background: url(../../img/dorado_1_blur_1080p.png) no-repeat center fixed; background-size: cover;');
+    }
+
+    $scope.updateNightmode = function(){
+        if(globalNightmode == true){
+            $scope.nightmode = true;
+            // change css
+            bodyElementCss.setAttribute('href', '../css/dark-body-elements.css');
+            html.setAttribute('style', 'background: url(../../img/dorado_1_blur_1080p.png) no-repeat center fixed; background-size: cover;');
+        }
+        else{
+            $scope.nightmode = false;
+            // change css
+            bodyElementCss.setAttribute('href', '../css/light-body-elements.css');
+            html.setAttribute('style', 'background: url(../../img/eichenwalde_1_blur_1080p.png) no-repeat center fixed; background-size: cover;');
+        }
+    }
     
 
 });
