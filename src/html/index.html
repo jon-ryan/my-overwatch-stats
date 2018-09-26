@@ -99,22 +99,17 @@
                 <!-- stats left, pie chart "win/loss" float right -->
             </div>
 
-
-            <div class ="body-element">
-                <h3>24-Hour History</h3>
-            </div>
-
             <div class ="body-element">
                 <h3>Best Heroes</h3>
 
             </div>
 
             <div class="body-element">
-                <h3>Map Breakdown</h3>
+                <h3>Hero Breakdown</h3>
             </div>
 
             <div class="body-element">
-                <h3>Hero Breakdown</h3>
+                <h3>Map Breakdown</h3>
             </div>
 
             <div class="body-element">
@@ -123,10 +118,6 @@
 
             <div class="body-element">
                 <h3>Time of Day Breakdown</h3>
-            </div>
-
-            <div class="body-element">
-                <h3>Day of Week Breakdown</h3>
             </div>
 
             <div class="body-element">
@@ -209,6 +200,9 @@
                     <br>
                     <input type="text" placeholder="Name of Hero" ng-model="newHero">
                     <br>
+                    <div ng-show="showAddHeroError">
+                        Error: Hero already exists.
+                    </div>
                     <button class="blue-button light-margin-top" ng-click="addHero()">Add Hero</button>
                     <br>
 
@@ -216,12 +210,21 @@
                         <img class="icon" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="heroDropDown" ng-click="toggleHeroDropDown()">
                     </div>
                     Overview of all heroes:
+
+                    <!-- header of the table -->
+                <div class="light-padding-top" ng-show="showHeroDropDown">
+                    <span class="table-header-wide">Name</span>
+                    <span class="table-header-wide">Games Played</span>
+                    <span class="table-header-wide">Wins</span>
+                </div>
                     
                     <!-- ng repeat start -->
                     <div class="clear" ng-repeat="x in heroDBSettingsController | orderBy: 'name'"  ng-show="showHeroDropDown">
                         <div class="overview-container">
                             <div class="overview-content-container">
                                 <span class="table-header-wide">{{x.name}}</span>
+                                <span class="table-header-wide">{{x.gamesPlayed}}</span>
+                                <span class="table-header-wide">{{x.wins}}</span>
     
                                 <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDeleteHeroes($index)">
                             </div>

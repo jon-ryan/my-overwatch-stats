@@ -37,7 +37,6 @@
     "pouchdb-browser": "^7.0.0"
   },
   "dependencies": {
-    "electron-store": "^2.0.0",
-    "pouchdb-find": "^7.0.0"
+    "electron-store": "^2.0.0"
   }
 }

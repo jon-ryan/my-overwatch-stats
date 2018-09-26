@@ -4,7 +4,6 @@ var app = angular.module('overwatch-stats-app', []);
 
 // initialize 
 var PouchDB = require('pouchdb-browser');
-PouchDB.plugin(require('pouchdb-find'));
 var matchDB = new PouchDB('match_database');
 var heroDB = new PouchDB('hero_database');
 var mapDB = new PouchDB('map_database');
@@ -31,7 +30,6 @@ var maps = [];
 var dbIndex = 100;
 var mapDBIndex = 100;
 var mapDBSize = 0;
-var heroDBIndex = 100;
 var heroDBSize = 0;
 var dbSeason = [];
 var dbSeasonIndex = 100;
@@ -120,11 +118,9 @@ async function setupDatabase() {
         // if the array is empty, the index = 0
         if(heroes.length == 0){
             heroDBSize = 0;
-            heroDBIndex = 100;
         }
         // else its the id of the last element
         else{
-            heroDBIndex = heroes[heroes.length-1]._id;
             heroDBSize = heroes.length;
         }
 
@@ -135,387 +131,304 @@ async function setupDatabase() {
     if(herodbSize == 0){
 
         // create object (Ana)
-        var tempHero = {_id: heroDBIndex.toString(), name: 'Ana'};
+        var tempHero = {_id: 'Ana', name: 'Ana', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Ana'});
+            heroes.push({_id: 'Ana', name: 'Ana', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Bastion)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Bastion'};
+        tempHero = {_id: 'Bastion', name: 'Bastion', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Bastion'});
+            heroes.push({_id: 'Bastion', name: 'Bastion', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Brigitte)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Brigitte'};
+        tempHero = {_id: 'Brigitte', name: 'Brigitte', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Brigitte'});
+            heroes.push({_id: 'Brigitte', name: 'Brigitte', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (D.VA)
-        tempHero = {_id: heroDBIndex.toString(), name: 'D.VA'};
+        tempHero = {_id: 'D.VA', name: 'D.VA', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'D.VA'});
+            heroes.push({_id: 'D.VA', name: 'D.VA', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Doomfist)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Doomfist'};
+        tempHero = {_id: 'Doomfist', name: 'Doomfist', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Doomfist'});
+            heroes.push({_id: 'Doomfist', name: 'Doomfist', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Genji)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Genji'};
+        tempHero = {_id: 'Genji', name: 'Genji', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
-        heroes.push({_id: heroDBIndex.toString(), name: 'Genji'});
+        heroes.push({_id: 'Genji', name: 'Genji', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         heroDB.put(tempHero).then(function(response){
             // response
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Hanzo)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Hanzo'};
+        tempHero = {_id: 'Hanzo', name: 'Hanzo', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
-        heroes.push({_id: heroDBIndex.toString(), name: 'Hanzo'});
+        heroes.push({_id: 'Hanzo', name: 'Hanzo', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         heroDB.put(tempHero).then(function(response){
             // response
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Junkrat)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Junkrat'};
+        tempHero = {_id: 'Junkrat', name: 'Junkrat', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Junkrat'});
+            heroes.push({_id: 'Junkrat', name: 'Junkrat', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Lúcio)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Lúcio'};
+        tempHero = {_id: 'Lúcio', name: 'Lúcio', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Lúcio'});
+            heroes.push({_id: 'Lúcio', name: 'Lúcio', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (McCree)
-        tempHero = {_id: heroDBIndex.toString(), name: 'McCree'};
+        tempHero = {_id: 'McCree', name: 'McCree', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'McCree'});
+            heroes.push({_id: 'McCree', name: 'McCree', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Mei)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Mei'};
+        tempHero = {_id: 'Mei', name: 'Mei', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
-        heroes.push({_id: heroDBIndex.toString(), name: 'Mei'});
+        heroes.push({_id: 'Mei', name: 'Mei', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         heroDB.put(tempHero).then(function(response){
             // response
-            console.log("Mei in DB");
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Mercy)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Mercy'};
+        tempHero = {_id: 'Mercy', name: 'Mercy', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Mercy'});
+            heroes.push({_id: 'Mercy', name: 'Mercy', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Moira)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Moira'};
+        tempHero = {_id: 'Moira', name: 'Moira', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Moira'});
+            heroes.push({_id: 'Moira', name: 'Moira', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Orisa)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Orisa'};
+        tempHero = {_id: 'Orisa', name: 'Orisa', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Orisa'});
+            heroes.push({_id: 'Orisa', name: 'Orisa', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Pharah)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Pharah'};
+        tempHero = {_id: 'Pharah', name: 'Pharah', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Pharah'});
+            heroes.push({_id: 'Pharah', name: 'Pharah', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
         // create object (Reaper)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Reaper'};
+        tempHero = {_id: 'Reaper', name: 'Reaper', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Reaper'});
+            heroes.push({_id: 'Reaper', name: 'Reaper', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Reinhardt)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Reinhardt'};
+        tempHero = {_id: 'Reinhardt', name: 'Reinhardt', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Reinhardt'});
+            heroes.push({_id: 'Reinhardt', name: 'Reinhardt', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object Zenyatta
-        tempHero = {_id: heroDBIndex.toString(), name: 'Zenyatta'};
+        tempHero = {_id: 'Zenyatta', name: 'Zenyatta', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Zenyatta'});
+            heroes.push({_id: 'Zenyatta', name: 'Zenyatta', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Roadhog)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Roadhog'};
+        tempHero = {_id: 'Roadhog', name: 'Roadhog', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Roadhog'});
+            heroes.push({_id: 'Roadhog', name: 'Roadhog', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Soldier 76)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Soldier: 76'};
+        tempHero = {_id: 'Soldier: 76', name: 'Soldier: 76', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Soldier: 76'});
+            heroes.push({_id: 'Soldier: 76', name: 'Soldier: 76', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object Sombra
-        tempHero = {_id: heroDBIndex.toString(), name: 'Sombra'};
+        tempHero = {_id: 'Sombra', name: 'Sombra', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Sombra'});
+            heroes.push({_id: 'Sombra', name: 'Sombra', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
         // create object Symmetra
-        tempHero = {_id: heroDBIndex.toString(), name: 'Symmetra'};
+        tempHero = {_id: 'Symmetra', name: 'Symmetra', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Symmetra'});
+            heroes.push({_id: 'Symmetra', name: 'Symmetra', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Torbjörn)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Torbjörn'};
+        tempHero = {_id: 'Torbjörn', name: 'Torbjörn', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Torbjörn'});
+            heroes.push({_id: 'Torbjörn', name: 'Torbjörn', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
-
 
         // create object (Tracer)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Tracer'};
+        tempHero = {_id: 'Tracer', name: 'Tracer', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Tracer'});
+            heroes.push({_id: 'Tracer', name: 'Tracer', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Widowmaker)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Widowmaker'};
+        tempHero = {_id: 'Widowmaker', name: 'Widowmaker', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Widowmaker'});
+            heroes.push({_id: 'Widowmaker', name: 'Widowmaker', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object Winston
-        tempHero = {_id: heroDBIndex.toString(), name: 'Winston'};
+        tempHero = {_id: 'Winston', name: 'Winston', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Winston'});
+            heroes.push({_id: 'Winston', name: 'Winston', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Zarya)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Zarya'};
+        tempHero = {_id: 'Zarya', name: 'Zarya', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Zarya'});
+            heroes.push({_id: 'Zarya', name: 'Zarya', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
-
-        // increment hero db index
-        heroDBIndex++;
 
 
         // create object (Wreckingball)
-        tempHero = {_id: heroDBIndex.toString(), name: 'Wreckingball'};
+        tempHero = {_id: 'Wreckingball', name: 'Wreckingball', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0};
         // push to database
         heroDB.put(tempHero).then(function(response){
             // response
-            heroes.push({_id: heroDBIndex.toString(), name: 'Wreckingball'});
+            heroes.push({_id: 'Wreckingball', name: 'Wreckingball', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0});
         }).catch(function (err){
             console.log(err);
         })
 
-        // increment hero db index
-        heroDBIndex++;
     } // incase the hero db wasn't set up yet, the db is now fully setup.
 
     }).then(function(){
@@ -984,8 +897,15 @@ app.controller('ContentController', function($scope) {
         
         // remove the entry from the database
         // get the id of the element
-        var varIndex = deletedElement._id;
-        matchDB.get(varIndex.toString()).then(function(doc) {
+        var matchID = deletedElement._id;
+        var matchHero1 = deletedElement.hero1;
+        var matchHero2 = deletedElement.hero2;
+        var matchHero3 = deletedElement.hero3;
+        var matchHero4 = deletedElement.hero4;
+        var matchWinLoss = deletedElement.matchEnd;
+
+        // remove the entry from the match db
+        matchDB.get(matchID.toString()).then(function(doc) {
             return matchDB.remove(doc);
           }).then(function (result) {
             // handle result
@@ -993,9 +913,217 @@ app.controller('ContentController', function($scope) {
             console.log(err);
           });
 
+        // update the heroDB
+        if(matchHero1 != "Unknown"){
+            heroDB.get(matchHero1).then(function(doc){
+                console.log("MatchWinLoss");
+                console.log(matchWinLoss);
+                // update the docs
+                if(matchWinLoss == "Victory"){
+                    doc.wins--;
+                }
+                else if(matchWinLoss == "Defeat"){
+                    doc.losses--;
+                }
+                else if(matchWinLoss == "Draw"){
+                    doc.draws--;
+                }
+                else{
+                    doc.unknownWinLoss--;
+                }
+
+                doc.gamesPlayed--;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == matchHero1){
+                        if(matchWinLoss == "Victory"){
+                            heroes[i].wins--;
+                        }
+                        else if(matchWinLoss == "Defeat"){
+                            heroes[i].losses--;
+                        }
+                        else if(matchWinLoss == "Draw"){
+                            heroes[i].draws--;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss--;
+                        }
+                        heroes[i].gamesPlayed--;
+                    }
+                }
+
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while updating hero on delete");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while deleting hero");
+                console.log(err);
+            })
+        }
+        if(matchHero2 != "Unknown"){
+            heroDB.get(matchHero2).then(function(doc){
+                // update the docs
+                if(matchWinLoss == "Victory"){
+                    doc.wins--;
+                }
+                else if(matchWinLoss == "Defeat"){
+                    doc.losses--;
+                }
+                else if(matchWinLoss == "Draw"){
+                    doc.draws--;
+                }
+                else{
+                    doc.unknownWinLoss--;
+                }
+
+                doc.gamesPlayed--;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == matchHero2){
+                        if(matchWinLoss == "Victory"){
+                            heroes[i].wins--;
+                        }
+                        else if(matchWinLoss == "Defeat"){
+                            heroes[i].losses--;
+                        }
+                        else if(matchWinLoss == "Draw"){
+                            heroes[i].draws--;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss--;
+                        }
+                        heroes[i].gamesPlayed--;
+                    }
+                }
+
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while updating hero on delete");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while deleting hero");
+                console.log(err);
+            })
+        }
+        if(matchHero3 != "Unknown"){
+            heroDB.get(matchHero3).then(function(doc){
+                // update the docs
+                if(matchWinLoss == "Victory"){
+                    doc.wins--;
+                }
+                else if(matchWinLoss == "Defeat"){
+                    doc.losses--;
+                }
+                else if(matchWinLoss == "Draw"){
+                    doc.draws--;
+                }
+                else{
+                    doc.unknownWinLoss--;
+                }
+
+                doc.gamesPlayed--;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == matchHero3){
+                        if(matchWinLoss == "Victory"){
+                            heroes[i].wins--;
+                        }
+                        else if(matchWinLoss == "Defeat"){
+                            heroes[i].losses--;
+                        }
+                        else if(matchWinLoss == "Draw"){
+                            heroes[i].draws--;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss--;
+                        }
+                        heroes[i].gamesPlayed--;
+                    }
+                }
+
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while updating hero on delete");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while deleting hero");
+                console.log(err);
+            })
+        }
+        if(matchHero4 != "Unknown"){
+            heroDB.get(matchHero4).then(function(doc){
+                // update the docs
+                if(matchWinLoss == "Victory"){
+                    doc.wins--;
+                }
+                else if(matchWinLoss == "Defeat"){
+                    doc.losses--;
+                }
+                else if(matchWinLoss == "Draw"){
+                    doc.draws--;
+                }
+                else{
+                    doc.unknownWinLoss--;
+                }
+
+                doc.gamesPlayed--;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == matchHero4){
+                        if(matchWinLoss == "Victory"){
+                            heroes[i].wins--;
+                        }
+                        else if(matchWinLoss == "Defeat"){
+                            heroes[i].losses--;
+                        }
+                        else if(matchWinLoss == "Draw"){
+                            heroes[i].draws--;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss--;
+                        }
+                        heroes[i].gamesPlayed--;
+                    }
+                }
+
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while updating hero on delete");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while deleting hero");
+                console.log(err);
+            })
+        }
+
+
+
         // update the delta
         updateDelta(index);
         angular.element(document.getElementById('controllerBody')).scope().updateView();
+        // update the settings
+        angular.element(document.getElementById('container-settings')).scope().updateView();
 
     }
 
@@ -1131,10 +1259,6 @@ app.controller('ContentController', function($scope) {
 
         
         $scope.dbArray = dbEntries;
-
-
-
-
 
     }
     
@@ -1290,27 +1414,245 @@ app.controller('FormController', function($scope){
         var hero3 = null;
         var hero4 = null;
 
+        // check if a hero is selected twice or more times
+        if($scope.selectedHero1 == $scope.selectedHero2 || $scope.selectedHero1 == $scope.selectedHero3 || $scope.selectedHero1 == $scope.selectedHero4 ||
+            $scope.selectedHero2 == $scope.selectedHero3 || $scope.selectedHero2 == $scope.selectedHero4 ||
+            $scope.selectedHero3 == $scope.selectedHero4){
+                // hero was specified in slot 1, rest are duplicates
+                if($scope.selectedHero1 == $scope.selectedHero2){
+                    $scope.selectedHero2 = null;
+                }
+                if($scope.selectedHero1 == $scope.selectedHero3){
+                    $scope.selectedHero3 = null;
+                }
+                if($scope.selectedHero1 == $scope.selectedHero4){
+                    $scope.selectedHero4 = null;
+                }
+
+                // hero was specified in slot 2, rest are duplicates
+                if($scope.selectedHero2 == $scope.selectedHero3){
+                    $scope.selectedHero3 = null;
+                }
+                if($scope.selectedHero2 == $scope.selectedHero4){
+                    $scope.selectedHero4 = null;
+                }
+
+                // hero was specified in slot 3, rest are duplicates
+                if($scope.selectedHero3 == $scope.selectedHero4){
+                    $scope.selectedHero4 = null;
+                }
+            }
+
+
         
         if($scope.selectedHero1 != null){
             hero1 = $scope.selectedHero1.name;
+            // update the hero db
+            heroDB.get(hero1).then(function(doc){
+                // get win/loss/draw and increment value
+                if(wl == "Victory"){
+                    doc.wins++;
+                }
+                else if(wl == "Defeat"){
+                    doc.losses++;
+                }
+                else if(wl == "Draw"){
+                    doc.draws++;
+                }
+                else{
+                    doc.unknownWinLoss++;
+                }
+                doc.gamesPlayed++;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == hero1){
+                        if(wl == "Victory"){
+                            heroes[i].wins++;
+                        }
+                        else if(wl == "Defeat"){
+                            heroes[i].losses++;
+                        }
+                        else if(wl == "Draw"){
+                            heroes[i].draws++;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss++;
+                        }
+                        heroes[i].gamesPlayed++;
+                    }
+                }
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while puting hero 1");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while updating hero 1");
+                console.log(err);
+            })
         }
         else{
             hero1 = "Unknown";
         }
         if($scope.selectedHero2 != null){
             hero2 = $scope.selectedHero2.name;
+            // update the hero db
+            heroDB.get(hero2).then(function(doc){
+                // get win/loss/draw and increment value
+                if(wl == "Victory"){
+                    doc.wins++;
+                }
+                else if(wl == "Defeat"){
+                    doc.losses++;
+                }
+                else if(wl == "Draw"){
+                    doc.draws++;
+                }
+                else{
+                    doc.unknownWinLoss++;
+                }
+                doc.gamesPlayed++;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == hero2){
+                        if(wl == "Victory"){
+                            heroes[i].wins++;
+                        }
+                        else if(wl == "Defeat"){
+                            heroes[i].losses++;
+                        }
+                        else if(wl == "Draw"){
+                            heroes[i].draws++;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss++;
+                        }
+                        heroes[i].gamesPlayed++;
+                    }
+                }
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while puting hero 2");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while updating hero 2");
+                console.log(err);
+            })
         }
         else{
             hero2 = "Unknown";
         }
         if($scope.selectedHero3 != null){
             hero3 = $scope.selectedHero3.name;
+            // update the hero db
+            heroDB.get(hero3).then(function(doc){
+                // get win/loss/draw and increment value
+                if(wl == "Victory"){
+                    doc.wins++;
+                }
+                else if(wl == "Defeat"){
+                    doc.losses++;
+                }
+                else if(wl == "Draw"){
+                    doc.draws++;
+                }
+                else{
+                    doc.unknownWinLoss++;
+                }
+                doc.gamesPlayed++;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == hero3){
+                        if(wl == "Victory"){
+                            heroes[i].wins++;
+                        }
+                        else if(wl == "Defeat"){
+                            heroes[i].losses++;
+                        }
+                        else if(wl == "Draw"){
+                            heroes[i].draws++;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss++;
+                        }
+                        heroes[i].gamesPlayed++;
+                    }
+                }
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while puting hero 3");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while updating hero 3");
+                console.log(err);
+            })
         }
         else{
             hero3 = "Unknown";
         }
         if($scope.selectedHero4 != null){
             hero4 = $scope.selectedHero4.name;
+            // update the hero db
+            heroDB.get(hero4).then(function(doc){
+                // get win/loss/draw and increment value
+                if(wl == "Victory"){
+                    doc.wins++;
+                }
+                else if(wl == "Defeat"){
+                    doc.losses++;
+                }
+                else if(wl == "Draw"){
+                    doc.draws++;
+                }
+                else{
+                    doc.unknownWinLoss++;
+                }
+                doc.gamesPlayed++;
+
+                // update the array
+                for(i = 0; i < heroes.length; i++){
+                    if(heroes[i].name == hero4){
+                        if(wl == "Victory"){
+                            heroes[i].wins++;
+                        }
+                        else if(wl == "Defeat"){
+                            heroes[i].losses++;
+                        }
+                        else if(wl == "Draw"){
+                            heroes[i].draws++;
+                        }
+                        else{
+                            heroes[i].unknownWinLoss++;
+                        }
+                        heroes[i].gamesPlayed++;
+                    }
+                }
+                return doc;
+            }).then(function(doc){
+                heroDB.put(doc).then(function(res){
+
+                }).catch(function(err){
+                    console.log("Error while puting hero 4");
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log("Error while updating hero 4");
+                console.log(err);
+            })
         }
         else{
             hero4 = "Unknown";
@@ -1414,7 +1756,8 @@ app.controller('FormController', function($scope){
         $scope.friend4 = null;
         $scope.friend5 = null;
 
-        // disable save button for one second
+        // update the settings
+        angular.element(document.getElementById('container-settings')).scope().updateView();
 
     }
 });
@@ -1431,6 +1774,8 @@ app.controller('SettingsController', function($scope){
     $scope.mapDBSettingsController = maps;
 
     $scope.nightmode = false;
+
+    $scope.showAddHeroError = false;
 
     // get length of heroes array
     var heroesLength = heroes.length;
@@ -1546,16 +1891,22 @@ app.controller('SettingsController', function($scope){
     $scope.updateView = function(){
         $scope.heroDBSettingsController = heroes;
         $scope.mapDBSettingsController = maps;
-        $scope.$apply();
     }
 
     $scope.addHero = function (){
         // add a new hero
-        // increment index
-        heroDBIndex++;
-        
+
+        // check if it already exists
+        for(i = 0; i < heroes.length; i++){
+            if(heroes[i].name == $scope.newHero){
+                $scope.newHero = null;
+                $scope.showAddHeroError = true;
+                return;
+            }
+        }
+
         // setup new object
-        newHeroElement = {_id: heroDBIndex.toString(), name: $scope.newHero}
+        newHeroElement = {_id: $scope.newHero, name: $scope.newHero, gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0}
 
         // add the hero to the data base
         heroDB.put(newHeroElement).then(function (response) {
@@ -1569,6 +1920,7 @@ app.controller('SettingsController', function($scope){
 
         // clear the input field
         $scope.newHero = null;
+        $scope.showAddHeroError = false;
     }
 
     // add map
@@ -1592,6 +1944,7 @@ app.controller('SettingsController', function($scope){
 
         // clear the input field
         $scope.newMap = null;
+        
     }
 
     $scope.toggleNightmode = function(){
