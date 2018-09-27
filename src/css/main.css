@@ -149,6 +149,10 @@ li a:hover:not(.active){
     margin-top: 5px;
 }
 
+.small-spacer{
+    height: 5px;
+}
+
 .table-header-wide{
     width: 30%;
 

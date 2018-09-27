@@ -99,13 +99,40 @@
                 <!-- stats left, pie chart "win/loss" float right -->
             </div>
 
-            <div class ="body-element">
-                <h3>Best Heroes</h3>
-
-            </div>
-
             <div class="body-element">
                 <h3>Hero Breakdown</h3>
+                <!-- arrow for opening or collapsing -->
+                    <div class="float-right">
+                        <img class="icon light-padding-top" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="img-heroBreakdown" ng-click="toggleShowHeroBreakdown()">
+                    </div>
+                    <div class="light-padding-top">
+                        Toggle HeroBreakdown:
+                    </div>
+
+                    <!-- small spacer -->
+                    <div class="small-spacer">
+
+                    </div>
+
+                <!-- show herobreakdown -->
+                <div ng-show="showHeroBreakdown">
+                    <!-- header of the table -->
+                    <div class="light-padding-top">
+                        <span class="table-header-wide table-header-style" ng-click="setHeroBreakdownNameActive()" id="heroBreakdownName"><b>Name</b></span>
+                        <span class="table-header-wide table-header-style-active" ng-click="setHeroBreakdownUsageActive()" id="heroBreakdownUsage"><b>Usage</b></span>
+                        <span class="table-header-wide table-header-style" ng-click="setHeroBreakdownWinrateActive()" id="heroBreakdownWinrate"><b>Winrate</b></span>
+                    </div>
+    
+                    <div ng-repeat="x in heroBreakdownArray | orderBy: heroBreakdownProperty : heroBreakdownReverse" id="herobreakdownID">
+                            <div class="overview-content-container">
+                                <span class="table-header-wide">{{x.name}}</span>
+                                <span class="table-header-wide">{{x.usage}}</span>
+                                <span class="table-header-wide">{{x.winrate}}</span>
+                            </div>
+                    </div>
+                </div>
+                
+
             </div>
 
             <div class="body-element">
@@ -131,11 +158,11 @@
                 <h3>Season Overview</h3>
                 <!-- header of the table -->
                 <div class="light-padding-top">
-                    <span class="table-index">ID</span>
-                    <span class="table-header">Skill Rating</span>
-                    <span class="table-header">Delta</span>
-                    <span class="table-header">Win/Loss</span>
-                    <span class="table-header">Date/Time</span>
+                    <span class="table-index"><b>ID</b></span>
+                    <span class="table-header"><b>Skill Rating</b></span>
+                    <span class="table-header"><b>Delta</b></span>
+                    <span class="table-header"><b>Win/Loss</b></span>
+                    <span class="table-header"><b>Date/Time</b></span>
                 </div>
 
 
@@ -180,9 +207,12 @@
         <div    id="container-settings" ng-show="showSettings" ng-controller="SettingsController">
 
                 <div class="body-element">
+                    <h3>General</h3>
+                    <!-- spacer -->
+                    <div class="small-spacer"></div>
                     
                     <!-- Custom checkbox / checkbox for maximize on start up-->
-                    <label class="checkbox-container" ng-click="toggleNightmode()">
+                    <label class="checkbox-container light" ng-click="toggleNightmode()">
                         Nightmode
                         <input type="checkbox" ng-model="nightmode">
                         <span class="checkmark"></span>

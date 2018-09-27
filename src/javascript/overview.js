@@ -689,6 +689,8 @@ async function setupDatabase() {
         
     }).then(function(){
         angular.element(document.getElementById('container-settings')).scope().updateView();
+        angular.element(document.getElementById('controllerBody')).scope().$apply();
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
     }).catch(function(err){
         console.log(err);
     });
@@ -798,12 +800,18 @@ app.controller('ContentController', function($scope) {
     // get reference to dbEntries
     $scope.dbArray = dbEntries;
 
+    $scope.heroBreakdownArray = [];
+
     $scope.gamesplayed = 0;
     $scope.wins = 0;
     $scope.losses = 0;
     $scope.draws = 0;
     $scope.avgdelta = 0;
     $scope.unknownWinLoss = 0;
+
+    $scope.showHeroBreakdown = true;
+    $scope.heroBreakdownProperty = "usage";
+    $scope.heroBreakdownReverse = true;
 
 
     // setup new chart for SR-Rating
@@ -812,8 +820,6 @@ app.controller('ContentController', function($scope) {
 
     var srRatingChartData = [];
     var srRatingChartLabel = [];
-
-    var winlossChartData = [];
 
     // get length of db array
     var length = dbEntries.length;
@@ -880,10 +886,61 @@ app.controller('ContentController', function($scope) {
 
     }
 
+    $scope.toggleShowHeroBreakdown = function(){
+        $scope.showHeroBreakdown = !$scope.showHeroBreakdown;
+    }
+
 
     $scope.toggleShowContentDelete = function(index){
         //
         $scope.showContentDelete[index] = !$scope.showContentDelete[index];
+    }
+
+    $scope.setHeroBreakdownNameActive = function(){
+        var name = document.getElementById('heroBreakdownName');
+        var usage = document.getElementById('heroBreakdownUsage');
+        var winrate = document.getElementById('heroBreakdownWinrate');
+
+
+        name.setAttribute("class", "table-header-wide table-header-style-active");
+        usage.setAttribute("class", "table-header-wide table-header-style");
+        winrate.setAttribute("class", "table-header-wide table-header-style");
+
+        $scope.heroBreakdownProperty = "name";
+        $scope.heroBreakdownReverse = false;
+
+    }
+
+    $scope.setHeroBreakdownUsageActive = function(){
+        var name = document.getElementById('heroBreakdownName');
+        var usage = document.getElementById('heroBreakdownUsage');
+        var winrate = document.getElementById('heroBreakdownWinrate');
+
+
+        name.setAttribute("class", "table-header-wide table-header-style");
+        usage.setAttribute("class", "table-header-wide table-header-style-active");
+        winrate.setAttribute("class", "table-header-wide table-header-style");
+
+        $scope.heroBreakdownProperty = "usage";
+        $scope.heroBreakdownReverse = true;
+
+    }
+
+    $scope.setHeroBreakdownWinrateActive = function(){
+        var name = document.getElementById('heroBreakdownName');
+        var usage = document.getElementById('heroBreakdownUsage');
+        var winrate = document.getElementById('heroBreakdownWinrate');
+
+
+        name.setAttribute("class", "table-header-wide table-header-style");
+        usage.setAttribute("class", "table-header-wide table-header-style");
+        winrate.setAttribute("class", "table-header-wide table-header-style-active");
+
+        $scope.heroBreakdownProperty = "winrate";
+        $scope.heroBreakdownReverse = true;
+
+
+
     }
 
     $scope.removeItem = function(index){
@@ -916,8 +973,6 @@ app.controller('ContentController', function($scope) {
         // update the heroDB
         if(matchHero1 != "Unknown"){
             heroDB.get(matchHero1).then(function(doc){
-                console.log("MatchWinLoss");
-                console.log(matchWinLoss);
                 // update the docs
                 if(matchWinLoss == "Victory"){
                     doc.wins--;
@@ -1205,6 +1260,8 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.updateView = function(){
+
+        $scope.heroBreakdownArray = [];
         
         // update the charts
 
@@ -1256,6 +1313,31 @@ app.controller('ContentController', function($scope) {
             easing: 'easeOutBounce'
         })
 
+
+        // update the heroBreakdownArray
+        //
+        var tempUsage = 0;
+        var tempWinrate = 0;
+
+        for(i = 0; i < heroes.length; i++){
+            // get the name, the usage and the winrate
+            tempUsage = (heroes[i].gamesPlayed / $scope.gamesplayed).toFixed(2);
+            if(tempUsage == 0){
+                tempUsage = 0; // get rid of unneded decimal digits
+            }
+            if(heroes[i].gamesPlayed != 0){
+                tempWinrate = (heroes[i].wins / heroes[i].gamesPlayed).toFixed(2);
+                if(tempWinrate == 0){
+                    tempWinrate = 0; // get rid of unneeded decimal digits
+                }
+            }
+            else{
+                tempWinrate = 0;
+            }
+            
+            // push to array
+            $scope.heroBreakdownArray.push({name: heroes[i].name, usage: tempUsage, winrate: tempWinrate});
+        }
 
         
         $scope.dbArray = dbEntries;
