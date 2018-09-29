@@ -809,7 +809,7 @@ app.controller('ContentController', function($scope) {
     $scope.avgdelta = 0;
     $scope.unknownWinLoss = 0;
 
-    $scope.showHeroBreakdown = true;
+    $scope.showHeroBreakdown = false;
     $scope.heroBreakdownProperty = "usage";
     $scope.heroBreakdownReverse = true;
 
