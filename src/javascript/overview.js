@@ -809,9 +809,11 @@ app.controller('ContentController', function($scope) {
     $scope.avgdelta = 0;
     $scope.unknownWinLoss = 0;
 
+    // var for hero breakdown table
     $scope.showHeroBreakdown = false;
     $scope.heroBreakdownProperty = "usage";
     $scope.heroBreakdownReverse = true;
+    var heroBreakdownArrow = document.getElementById('img-heroBreakdown');
 
 
     // setup new chart for SR-Rating
@@ -887,7 +889,14 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.toggleShowHeroBreakdown = function(){
-        $scope.showHeroBreakdown = !$scope.showHeroBreakdown;
+        if($scope.showHeroBreakdown == true){
+            $scope.showHeroBreakdown = false;
+            heroBreakdownArrow.setAttribute('src', "../../img/baseline-keyboard_arrow_down-24px.svg")
+        }
+        else{
+            $scope.showHeroBreakdown = true;
+            heroBreakdownArrow.setAttribute('src', "../../img/baseline-keyboard_arrow_up-24px.svg")
+        }
     }
 
 
@@ -976,6 +985,7 @@ app.controller('ContentController', function($scope) {
                 // update the docs
                 if(matchWinLoss == "Victory"){
                     doc.wins--;
+                    console.log("Removed win from db");
                 }
                 else if(matchWinLoss == "Defeat"){
                     doc.losses--;
@@ -991,9 +1001,10 @@ app.controller('ContentController', function($scope) {
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == matchHero1){
+                    if(heroes[i]._id == matchHero1){
                         if(matchWinLoss == "Victory"){
                             heroes[i].wins--;
+                            
                         }
                         else if(matchWinLoss == "Defeat"){
                             heroes[i].losses--;
@@ -1005,6 +1016,7 @@ app.controller('ContentController', function($scope) {
                             heroes[i].unknownWinLoss--;
                         }
                         heroes[i].gamesPlayed--;
+
                     }
                 }
 
@@ -1016,6 +1028,9 @@ app.controller('ContentController', function($scope) {
                     console.log("Error while updating hero on delete");
                     console.log(err);
                 })
+
+                // update the view
+                $scope.updateHeroBreakdown();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1041,7 +1056,7 @@ app.controller('ContentController', function($scope) {
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == matchHero2){
+                    if(heroes[i]._id == matchHero2){
                         if(matchWinLoss == "Victory"){
                             heroes[i].wins--;
                         }
@@ -1066,6 +1081,9 @@ app.controller('ContentController', function($scope) {
                     console.log("Error while updating hero on delete");
                     console.log(err);
                 })
+
+                // update the view
+                $scope.updateHeroBreakdown();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1091,7 +1109,7 @@ app.controller('ContentController', function($scope) {
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == matchHero3){
+                    if(heroes[i]._id == matchHero3){
                         if(matchWinLoss == "Victory"){
                             heroes[i].wins--;
                         }
@@ -1116,6 +1134,9 @@ app.controller('ContentController', function($scope) {
                     console.log("Error while updating hero on delete");
                     console.log(err);
                 })
+
+                // update the view
+                $scope.updateHeroBreakdown();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1141,7 +1162,7 @@ app.controller('ContentController', function($scope) {
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == matchHero4){
+                    if(heroes[i]._id == matchHero4){
                         if(matchWinLoss == "Victory"){
                             heroes[i].wins--;
                         }
@@ -1166,6 +1187,9 @@ app.controller('ContentController', function($scope) {
                     console.log("Error while updating hero on delete");
                     console.log(err);
                 })
+
+                // update the view
+                $scope.updateHeroBreakdown();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1176,7 +1200,8 @@ app.controller('ContentController', function($scope) {
 
         // update the delta
         updateDelta(index);
-        angular.element(document.getElementById('controllerBody')).scope().updateView();
+        // update the view
+        $scope.updateView();
         // update the settings
         angular.element(document.getElementById('container-settings')).scope().updateView();
 
@@ -1260,8 +1285,6 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.updateView = function(){
-
-        $scope.heroBreakdownArray = [];
         
         // update the charts
 
@@ -1314,19 +1337,34 @@ app.controller('ContentController', function($scope) {
         })
 
 
+
+
         // update the heroBreakdownArray
         //
+        // reset the heroBreakdownArray
+        $scope.heroBreakdownArray = [];
+
         var tempUsage = 0;
         var tempWinrate = 0;
 
-        for(i = 0; i < heroes.length; i++){
+
+
+        for(var index in heroes){
+
             // get the name, the usage and the winrate
-            tempUsage = (heroes[i].gamesPlayed / $scope.gamesplayed).toFixed(2);
-            if(tempUsage == 0){
-                tempUsage = 0; // get rid of unneded decimal digits
+            if(heroes[index].gamesPlayed != 0){
+                tempUsage = (heroes[index].gamesPlayed / $scope.gamesplayed).toFixed(2);
+                if(tempUsage == 0){
+                    tempUsage = 0; // get rid of unneded decimal digits
+                }
             }
-            if(heroes[i].gamesPlayed != 0){
-                tempWinrate = (heroes[i].wins / heroes[i].gamesPlayed).toFixed(2);
+            else{
+                tempUsage = 0;
+            }
+
+
+            if(heroes[index].gamesPlayed != 0){
+                tempWinrate = (heroes[index].wins / heroes[index].gamesPlayed).toFixed(2);
                 if(tempWinrate == 0){
                     tempWinrate = 0; // get rid of unneeded decimal digits
                 }
@@ -1336,12 +1374,53 @@ app.controller('ContentController', function($scope) {
             }
             
             // push to array
-            $scope.heroBreakdownArray.push({name: heroes[i].name, usage: tempUsage, winrate: tempWinrate});
+            $scope.heroBreakdownArray.push({name: heroes[index].name, usage: tempUsage, winrate: tempWinrate});
         }
 
         
         $scope.dbArray = dbEntries;
 
+    }
+
+
+    $scope.updateHeroBreakdown = function(){
+        // update the heroBreakdownArray
+        //
+        // reset the heroBreakdownArray
+        $scope.heroBreakdownArray = [];
+
+        var tempUsage = 0;
+        var tempWinrate = 0;
+
+
+
+        for(var index in heroes){
+
+            // get the name, the usage and the winrate
+            if(heroes[index].gamesPlayed != 0){
+                tempUsage = (heroes[index].gamesPlayed / $scope.gamesplayed).toFixed(2);
+                if(tempUsage == 0){
+                    tempUsage = 0; // get rid of unneded decimal digits
+                }
+            }
+            else{
+                tempUsage = 0;
+            }
+
+
+            if(heroes[index].gamesPlayed != 0){
+                tempWinrate = (heroes[index].wins / heroes[index].gamesPlayed).toFixed(2);
+                if(tempWinrate == 0){
+                    tempWinrate = 0; // get rid of unneeded decimal digits
+                }
+            }
+            else{
+                tempWinrate = 0;
+            }
+            
+            // push to array
+            $scope.heroBreakdownArray.push({name: heroes[index].name, usage: tempUsage, winrate: tempWinrate});
+        }
     }
     
 
@@ -1496,39 +1575,59 @@ app.controller('FormController', function($scope){
         var hero3 = null;
         var hero4 = null;
 
+
         // check if a hero is selected twice or more times
-        if($scope.selectedHero1 == $scope.selectedHero2 || $scope.selectedHero1 == $scope.selectedHero3 || $scope.selectedHero1 == $scope.selectedHero4 ||
-            $scope.selectedHero2 == $scope.selectedHero3 || $scope.selectedHero2 == $scope.selectedHero4 ||
-            $scope.selectedHero3 == $scope.selectedHero4){
-                // hero was specified in slot 1, rest are duplicates
-                if($scope.selectedHero1 == $scope.selectedHero2){
-                    $scope.selectedHero2 = null;
-                }
-                if($scope.selectedHero1 == $scope.selectedHero3){
-                    $scope.selectedHero3 = null;
-                }
-                if($scope.selectedHero1 == $scope.selectedHero4){
-                    $scope.selectedHero4 = null;
-                }
 
-                // hero was specified in slot 2, rest are duplicates
-                if($scope.selectedHero2 == $scope.selectedHero3){
-                    $scope.selectedHero3 = null;
-                }
-                if($scope.selectedHero2 == $scope.selectedHero4){
-                    $scope.selectedHero4 = null;
-                }
+        // hero was specified in slot 1, rest are duplicates
+        if($scope.selectedHero1 != null && $scope.selectedHero2 != null){
+            if($scope.selectedHero1._id == $scope.selectedHero2._id){
 
-                // hero was specified in slot 3, rest are duplicates
-                if($scope.selectedHero3 == $scope.selectedHero4){
-                    $scope.selectedHero4 = null;
-                }
+                $scope.selectedHero2 = null;
+            }  
+        }
+
+        if($scope.selectedHero1 != null && $scope.selectedHero3 != null){
+            if($scope.selectedHero1._id == $scope.selectedHero3._id){
+                $scope.selectedHero3 = null;
             }
+        }
+        
+        if($scope.selectedHero1 != null && $scope.selectedHero4 != null){
+            if($scope.selectedHero1._id == $scope.selectedHero4._id){
+                $scope.selectedHero4 = null;
+            }
+        }
+        
+        
+        
+        // hero was specified in slot 2, rest are duplicates
+        if($scope.selectedHero2 != null && $scope.selectedHero3 != null){
+            if($scope.selectedHero2._id == $scope.selectedHero3._id){
+                $scope.selectedHero3 = null;
+            }    
+        }
+
+        if($scope.selectedHero2 != null && $scope.selectedHero4 != null){
+            if($scope.selectedHero2._id == $scope.selectedHero4._id){
+                $scope.selectedHero4 = null;
+            } 
+        }
+        
+        
+        
+        // hero was specified in slot 3, rest are duplicates
+        if($scope.selectedHero3 != null && $scope.selectedHero4 != null){
+            if($scope.selectedHero3._id == $scope.selectedHero4._id){
+                $scope.selectedHero4 = null;
+            } 
+        }
+        
+
 
 
         
         if($scope.selectedHero1 != null){
-            hero1 = $scope.selectedHero1.name;
+            hero1 = $scope.selectedHero1._id;
             // update the hero db
             heroDB.get(hero1).then(function(doc){
                 // get win/loss/draw and increment value
@@ -1548,7 +1647,7 @@ app.controller('FormController', function($scope){
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == hero1){
+                    if(heroes[i]._id == hero1){
                         if(wl == "Victory"){
                             heroes[i].wins++;
                         }
@@ -1565,8 +1664,8 @@ app.controller('FormController', function($scope){
                     }
                 }
                 return doc;
-            }).then(function(doc){
-                heroDB.put(doc).then(function(res){
+            }).then(function(h1){
+                heroDB.put(h1).then(function(res){
 
                 }).catch(function(err){
                     console.log("Error while puting hero 1");
@@ -1581,7 +1680,7 @@ app.controller('FormController', function($scope){
             hero1 = "Unknown";
         }
         if($scope.selectedHero2 != null){
-            hero2 = $scope.selectedHero2.name;
+            hero2 = $scope.selectedHero2._id;
             // update the hero db
             heroDB.get(hero2).then(function(doc){
                 // get win/loss/draw and increment value
@@ -1601,7 +1700,7 @@ app.controller('FormController', function($scope){
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == hero2){
+                    if(heroes[i]._id == hero2){
                         if(wl == "Victory"){
                             heroes[i].wins++;
                         }
@@ -1618,8 +1717,8 @@ app.controller('FormController', function($scope){
                     }
                 }
                 return doc;
-            }).then(function(doc){
-                heroDB.put(doc).then(function(res){
+            }).then(function(h2){
+                heroDB.put(h2).then(function(res){
 
                 }).catch(function(err){
                     console.log("Error while puting hero 2");
@@ -1634,7 +1733,7 @@ app.controller('FormController', function($scope){
             hero2 = "Unknown";
         }
         if($scope.selectedHero3 != null){
-            hero3 = $scope.selectedHero3.name;
+            hero3 = $scope.selectedHero3._id;
             // update the hero db
             heroDB.get(hero3).then(function(doc){
                 // get win/loss/draw and increment value
@@ -1654,7 +1753,7 @@ app.controller('FormController', function($scope){
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == hero3){
+                    if(heroes[i]._id == hero3){
                         if(wl == "Victory"){
                             heroes[i].wins++;
                         }
@@ -1671,8 +1770,8 @@ app.controller('FormController', function($scope){
                     }
                 }
                 return doc;
-            }).then(function(doc){
-                heroDB.put(doc).then(function(res){
+            }).then(function(h3){
+                heroDB.put(h3).then(function(res){
 
                 }).catch(function(err){
                     console.log("Error while puting hero 3");
@@ -1687,7 +1786,7 @@ app.controller('FormController', function($scope){
             hero3 = "Unknown";
         }
         if($scope.selectedHero4 != null){
-            hero4 = $scope.selectedHero4.name;
+            hero4 = $scope.selectedHero4._id;
             // update the hero db
             heroDB.get(hero4).then(function(doc){
                 // get win/loss/draw and increment value
@@ -1707,7 +1806,7 @@ app.controller('FormController', function($scope){
 
                 // update the array
                 for(i = 0; i < heroes.length; i++){
-                    if(heroes[i].name == hero4){
+                    if(heroes[i]._id == hero4){
                         if(wl == "Victory"){
                             heroes[i].wins++;
                         }
@@ -1724,8 +1823,8 @@ app.controller('FormController', function($scope){
                     }
                 }
                 return doc;
-            }).then(function(doc){
-                heroDB.put(doc).then(function(res){
+            }).then(function(h4){
+                heroDB.put(h4).then(function(res){
 
                 }).catch(function(err){
                     console.log("Error while puting hero 4");
@@ -1739,6 +1838,7 @@ app.controller('FormController', function($scope){
         else{
             hero4 = "Unknown";
         }
+
 
         // calculate the delta
         if(dbEntries.length > 0){
@@ -2140,7 +2240,15 @@ app.controller('SeasonController', function($scope){
             }
         }
 
-        var current = dbEntries[dbEntries.length-1].sr;
+        var current;
+
+        if(dbEntries.length != 0){
+            current = dbEntries[dbEntries.length-1].sr;
+        }
+        else{
+            current = 0;
+        }
+        
 
         // clear the matchDB and the dbEntries array
         
@@ -2148,6 +2256,9 @@ app.controller('SeasonController', function($scope){
         // destroy and create a new db
         destroyMatchDB();
 
+
+        // reset heroDB and mapDB
+        resetHeroDB();
         
 
 
@@ -2194,7 +2305,6 @@ app.controller('SeasonController', function($scope){
 
 // destroy match db
 function destroyMatchDB(){
-    console.log(matchDB);
     matchDB.destroy().then(function (response) {
         // success
       }).then(function(){
@@ -2203,5 +2313,59 @@ function destroyMatchDB(){
       }).catch(function (err) {
         console.log(err);
       });
+}
+
+
+function resetHeroDB(){
+    // reset the heroes array
+    heroes = [];
+
+    // reset the heroDB
+    heroDB.allDocs({include_docs: true}).then(function(result){
+        // get all entries
+        // and iterate through them and rest them to their default value
+        var tempId;
+
+        for(i = 0; i < result.rows.length; i++){
+            // get the id of the current entry
+            tempId = result.rows[i].doc._id;
+
+            // get the dataset from the database
+            heroDB.get(tempId).then(function(hero){
+                // reset the values of the hero
+                hero.gamesPlayed = 0;
+                hero.wins = 0;
+                hero.losses = 0;
+                hero.draws = 0;
+                hero.unknownWinLoss = 0;
+
+                // return hero
+                return hero;
+
+            }).then(function(hero){
+                // put the hero back in
+                heroDB.put(hero).then(function(result){
+                    // anser from db
+                }).catch(function(err){
+                    console.log(err);
+                })
+
+                return hero;
+            }).then(function(hero){
+                // put it back in the array
+                heroes.push(hero);
+            }).catch(function(err){
+                console.log(err);
+            })
+  
+        }
+    }).then(function(){
+        // update settings
+        angular.element(document.getElementById('container-settings')).scope().updateView();
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
+        //angular.element(document.getElementById('controllerBody')).scope().$apply();
+    }).catch(function (err){
+        console.log(err);
+    })
 }
 

@@ -126,8 +126,8 @@
                     <div ng-repeat="x in heroBreakdownArray | orderBy: heroBreakdownProperty : heroBreakdownReverse" id="herobreakdownID">
                             <div class="overview-content-container">
                                 <span class="table-header-wide">{{x.name}}</span>
-                                <span class="table-header-wide">{{x.usage}}</span>
-                                <span class="table-header-wide">{{x.winrate}}</span>
+                                <span class="table-header-wide">{{x.usage *100}}%</span>
+                                <span class="table-header-wide">{{x.winrate *100}}%</span>
                             </div>
                     </div>
                 </div>
@@ -140,15 +140,11 @@
             </div>
 
             <div class="body-element">
-                <h3>Starting Side Breakdown</h3>
-            </div>
-
-            <div class="body-element">
                 <h3>Time of Day Breakdown</h3>
             </div>
 
             <div class="body-element">
-                <h3>Friend Tracker</h3>
+                <h3>Groupsize Breakdown</h3>
             </div>
 
 
