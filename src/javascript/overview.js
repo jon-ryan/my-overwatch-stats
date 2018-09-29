@@ -1030,7 +1030,7 @@ app.controller('ContentController', function($scope) {
                 })
 
                 // update the view
-                $scope.updateHeroBreakdown();
+                $scope.updateView();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1083,7 +1083,7 @@ app.controller('ContentController', function($scope) {
                 })
 
                 // update the view
-                $scope.updateHeroBreakdown();
+                $scope.updateView();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1136,7 +1136,7 @@ app.controller('ContentController', function($scope) {
                 })
 
                 // update the view
-                $scope.updateHeroBreakdown();
+                $scope.updateView();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1189,7 +1189,7 @@ app.controller('ContentController', function($scope) {
                 })
 
                 // update the view
-                $scope.updateHeroBreakdown();
+                $scope.updateView();
             }).catch(function(err){
                 console.log("Error while deleting hero");
                 console.log(err);
@@ -1459,44 +1459,6 @@ app.controller('FormController', function($scope){
         else{
             wl = "Unknown";
         }
-
-
-        var side;
-
-        // get the startingside
-        if($scope.startingside == 1){
-            side = "Attack";
-        }
-        else if($scope.startingside == -1){
-            side = "Defend";
-        }
-        else if($scope.startingside == 0){
-            side = "Control";
-        }
-        else{
-            side = "Unknown";
-        }
-
-        // get the group size
-        var groupsize = 0;
-
-        if($scope.friend1 != null){
-            groupsize++;
-        }
-        if($scope.friend2 != null){
-            groupsize++;
-        }
-        if($scope.friend3 != null){
-            groupsize++;
-        }
-        if($scope.friend4 != null){
-            groupsize++;
-        }
-        if($scope.friend5 != null){
-            groupsize++;
-        }
-
-
 
         // get the date and the current time
         var date = new Date();
@@ -1853,39 +1815,29 @@ app.controller('FormController', function($scope){
             $scope.newsr = 0;
         }
 
+
+        // groupsize
+        var group = 0;
+        if($scope.groupsize == null){
+            group = 0;
+        }
+        else{
+            group = $scope.groupsize;
+        }
+
         // increment id
         dbIndex++;
         // turn the id into a string
         idString = dbIndex.toString();
 
 
-        // convert match duration to seconds
-        // if seconds is greater than 59, make it to 59
-        if($scope.matchDurationSeconds > 59){
-            $scope.matchDurationSeconds = 59;
-        }
-        var matchDuration = $scope.matchDurationMinutes * 60 + $scope.matchDurationSeconds;
-
-        // convert the objective time to seconds
-        // if seconds is greater than 59, make it to 59
-        if($scope.objectiveTimeSeconds > 59){
-            $scope.objectiveTimeSeconds = 59;
-        }
-        var objectiveTime = $scope.objectiveTimeMinutes * 60 + $scope.objectiveTimeSeconds;
-
-
-        
-
         // create a new object containing all the information needed for an entry
-        newEntry = {_id: idString, sr: $scope.newsr, matchEnd: wl, matchDuration: matchDuration,
-        scoreBlue: $scope.scoreBlue, scoreRed: $scope.scoreRed, map: specMap, startingSide: side, delta: delta,
+        newEntry = {_id: idString, sr: $scope.newsr, matchEnd: wl,
+         map: specMap, delta: delta,
         // heroes
         hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends
-        groupSize: groupsize, friend1: $scope.friend1, friend2: $scope.friend2, friend3: $scope.friend3, friend4: $scope.friend4, friend5: $scope.friend5,
-        // general match statistics
-        eliminations: $scope.eliminations, objectiveKills: $scope.objectiveKills, objectiveTime: objectiveTime,
-        heroDamageDone: $scope.heroDamageDone, healingDone: $scope.healingDone, deaths: $scope.deaths,
+        groupSize: group,
         // date and time
         date: dateIdentifier};
 
@@ -1914,29 +1866,13 @@ app.controller('FormController', function($scope){
 
         // set the values in the form to null
         $scope.newsr = null;
-        $scope.scoreBlue = null;
-        $scope.scoreRed = null;
         $scope.winLoss = null;
-        $scope.matchDurationMinutes = null;
-        $scope.matchDurationSeconds = null;
-        $scope.eliminations = null;
-        $scope.objectiveKills = null;
-        $scope.objectiveTimeMinutes = null;
-        $scope.objectiveTimeSeconds = null;
-        $scope.heroDamageDone = null;
-        $scope.healingDone = null;
-        $scope.deaths = null;
-        $scope.startingside = null;
         $scope.map = null;
         $scope.selectedHero1 = null;
         $scope.selectedHero2 = null;
         $scope.selectedHero3 = null;
         $scope.selectedHero4 = null;
-        $scope.friend1 = null;
-        $scope.friend2 = null;
-        $scope.friend3 = null;
-        $scope.friend4 = null;
-        $scope.friend5 = null;
+        $scope.groupsize = null;
 
         // update the settings
         angular.element(document.getElementById('container-settings')).scope().updateView();

@@ -413,118 +413,29 @@
                                     <input type="radio" name="win_loss" ng-model="winLoss"  value="0"> Draw   
                                 </div>
 
-
-                                <!--Input for Matchtime-->
-                                <div class="form-element">
-                                    Match Duration <br>
-                                    <input type="number" ng-model="matchDurationMinutes" placeholder="Minutes">
-                                    <br>
-                                    <input type="number" ng-model="matchDurationSeconds" placeholder="Seconds (max: 59)">
-                                </div>
-
-            
-                                <!--Input for the score of team blue and team red-->
-                                <div class="form-element">
-                                    Score of Team Blue
-                                    <br>
-                                    <input type="number" name="score-blue" ng-model="scoreBlue"> 
-                                    <br>
-                                    Score of Team Red
-                                    <br>
-                                    <input type="number" name="score-red" ng-model="scoreRed">
-                                </div>
-
-
                                 <div class="form-element">
                                     Map: 
                                     <select ng-model="map" ng-options="x.name for x in maps | orderBy: 'name'"></select>
                                 </div>
 
+                                <!-- input for groupsize -->
                                 <div class="form-element">
-                                    Starting Side: <br>
-                                    <input type="radio" name="startingside" ng-model="startingside"  value="1"> Attack    &ensp;
-                                    <input type="radio" name="startingside" ng-model="startingside"  value="-1"> Defend     &ensp;
-                                    <input type="radio" name="startingside" ng-model="startingside"  value="0"> Control 
+                                    <h3>Groupsize:</h3>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="1"> 1 (Single Queue) <br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="2"> 2 (One Friend)<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="3"> 3 (Two Friends)<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="4"> 4 (Three Friends)<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="5"> 5 (Four Friends)<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="6"> 6 (Five Friends)<br>
+
                                 </div>
+
 
                                 <br>
                             </div>
                         
             
                             <!-- left floating div end-->
-            
-                            <!-- right floating div -->
-                            <div>
-                                <div class="form-element">
-                                    Eliminations <br>
-                                    <input type="number" ng-model="eliminations"> 
-                                </div>
-            
-                                <div class="form-element">
-                                    Objective Kills <br>
-                                    <input type="number" ng-model="objectiveKills">
-                                </div>
-            
-                                <div class="form-element">
-                                    Objective Time <br>
-                                    <input type="number" ng-model="objectiveTimeMinutes" placeholder="Minutes">
-                                    <br>
-                                    <input type="number" ng-model="objectiveTimeSeconds" placeholder="Seconds (max: 59)">
-                                </div>
-            
-                                <div class="form-element">
-                                    Hero Damage Done <br>
-                                    <input type="number" ng-model="heroDamageDone">
-                                </div>
-            
-                                <div class="form-element">
-                                    Healing Done <br>
-                                    <input type="number" ng-model="healingDone">
-                                </div>
-            
-                                <div class="form-element">
-                                    Deaths <br>
-                                    <input type="number" ng-model="deaths">
-                                </div>
-                            </div>
-                            <!-- right floating div end -->
-            
-                            <!-- General statistics end -->
-
-                            <br>
-            
-            
-                            <!-- Separate the general statistics from the hero specific ones-->
-                            <div class="separator"></div>
-            
-
-                            <!-- Friends -->
-                            <div class="content-generall-match-stats-left-float">
-                                <h3>Friends</h3>
-                                <div class="form-element">
-                                    Friend 1: <br>
-                                    <input type="text" ng-model="friend1">
-                                </div>  
-
-                                <div class="form-element">
-                                    Friend 2: <br>
-                                    <input type="text" ng-model="friend2">
-                                </div>
-                                <div class="form-element">
-                                    Friend 3: <br>
-                                    <input type="text" ng-model="friend3">
-                                </div>  
-
-                                <div class="form-element">
-                                    Friend 4: <br>
-                                    <input type="text" ng-model="friend4">
-                                </div>  
-
-                                <div class="form-element">
-                                    Friend 5: <br>
-                                    <input type="text" ng-model="friend5">
-                                </div>
-                            </div>
 
                             <!-- Heroes-->
                             <div>
@@ -547,6 +458,11 @@
                                     <select ng-model="selectedHero4" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                             </div>
+  
+            
+                            <!-- General statistics end -->
+
+                            
 
                             <div class="clear"></div>
                             <br>
