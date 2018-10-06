@@ -28,7 +28,6 @@ var dbEntries = [];
 var heroes = [];
 var maps = [];
 var dbIndex = 100;
-var mapDBIndex = 100;
 var mapDBSize = 0;
 var heroDBSize = 0;
 var dbSeason = [];
@@ -454,11 +453,9 @@ async function setupDatabase() {
         // if the array is empty, the index = 0
         if(maps.length == 0){
             mapDBSize = 0;
-            mapDBIndex = 100;
         }
         // else its the id of the last element
         else{
-            mapDBIndex = maps[maps.length-1]._id;
             mapDBSize = maps.length;
         }
 
@@ -468,223 +465,201 @@ async function setupDatabase() {
         if(mapdbSize == 0){
 
             // create object (Hanamura)
-            var tempMap = {_id: mapDBIndex.toString(), name: 'Hanamura'};
+            var tempMap = {_id: 'Hanamura', name: 'Hanamura', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Hanamura'});
+                maps.push({_id: 'Hanamura', name: 'Hanamura', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Horizon Lunar Colony)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Horizon Lunar Colony'};
+            tempMap = {_id: 'Horizon Lunar Colony', name: 'Horizon Lunar Colony', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Horizon Lunar Colony'});
+                maps.push({_id: 'Horizon Lunar Colony', name: 'Horizon Lunar Colony', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Temple of Anubis)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Temple of Anubis'};
+            tempMap = {_id: 'Temple of Anubis', name: 'Temple of Anubis', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Temple of Anubis'});
+                maps.push({_id: 'Temple of Anubis', name: 'Temple of Anubis', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
 
             // create object (Volskaya Industries)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Volskaya Industries'};
+            tempMap = {_id: 'Volskaya Industries', name: 'Volskaya Industries', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Volskaya Industries'});
+                maps.push({_id: 'Volskaya Industries', name: 'Volskaya Industries', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Assault'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Dorado)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Dorado'};
+            tempMap = {_id: 'Dorado', name: 'Dorado', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Dorado'});
+                maps.push({_id: 'Dorado', name: 'Dorado', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Junkertown)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Junkertown'};
+            tempMap = {_id: 'Junkertown', name: 'Junkertown', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Junkertown'});
+                maps.push({_id: 'Junkertown', name: 'Junkertown', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
 
 
             // create object (Rialto)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Rialto'};
+            tempMap = {_id: 'Rialto', name: 'Rialto', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Rialto'});
+                maps.push({_id: 'Rialto', name: 'Rialto', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Route 66)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Route 66'};
+            tempMap = {_id: 'Route 66', name: 'Route 66', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Route 66'});
+                maps.push({_id: 'Route 66', name: 'Route 66', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Watchpoint: Gibralta)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Watchpoint: Gibralta'};
+            tempMap = {_id: 'Watchpoint: Gibralta', name: 'Watchpoint: Gibralta', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Watchpoint: Gibralta'});
+                maps.push({_id: 'Watchpoint: Gibralta', name: 'Watchpoint: Gibralta', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Escort'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Blizzard World)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Blizzard World'};
+            tempMap = {_id: 'Blizzard World', name: 'Blizzard World', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Blizzard World'});
+                maps.push({_id: 'Blizzard World', name: 'Blizzard World', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Eichenwalde)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Eichenwalde'};
+            tempMap = {_id: 'Eichenwalde', name: 'Eichenwalde', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Eichenwalde'});
+                maps.push({_id: 'Eichenwalde', name: 'Eichenwalde', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Hollywood)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Hollywood'};
+            tempMap = {_id: 'Hollywood', name: 'Hollywood', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Hollywood'});
+                maps.push({_id: 'Hollywood', name: 'Hollywood', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
 
             // create object (King's Row)
-            tempMap = {_id: mapDBIndex.toString(), name: 'King\'s Row'};
+            tempMap = {_id: 'King\'s Row', name: 'King\'s Row', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'King\'s Row'});
+                maps.push({_id: 'King\'s Row', name: 'King\'s Row', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Numbani)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Numbani'};
+            tempMap = {_id: 'Numbani', name: 'Numbani', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Numbani'});
+                maps.push({_id: 'Numbani', name: 'Numbani', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Hybrid'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Ilios)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Ilios'};
+            tempMap = {_id: 'Ilios', name: 'Ilios', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Ilios'});
+                maps.push({_id: 'Ilios', name: 'Ilios', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
-
 
             // create object (Lijiang Tower)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Lijiang Tower'};
+            tempMap = {_id: 'Lijiang Tower', name: 'Lijiang Tower', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Lijiang Tower'});
+                maps.push({_id: 'Lijiang Tower', name: 'Lijiang Tower', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
 
             // create object (Nepal)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Nepal'};
+            tempMap = {_id: 'Nepal', name: 'Nepal', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Nepal'});
+                maps.push({_id: 'Nepal', name: 'Nepal', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
             
             // create object (Oasis)
-            tempMap = {_id: mapDBIndex.toString(), name: 'Oasis'};
+            tempMap = {_id: 'Oasis', name: 'Oasis', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'};
             // push to database
             mapDB.put(tempMap).then(function(response){
                 // response
-                maps.push({_id: mapDBIndex.toString(), name: 'Oasis'});
+                maps.push({_id: 'Oasis', name: 'Oasis', gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: 'Control'});
             }).catch(function (err){
                 console.log(err);
             }) 
-            // increment mapDBIndex
-            mapDBIndex++;
+
         }
         
     }).then(function(){
@@ -801,6 +776,7 @@ app.controller('ContentController', function($scope) {
     $scope.dbArray = dbEntries;
 
     $scope.heroBreakdownArray = [];
+    $scope.mapBreakdownArray = [];
 
     $scope.gamesplayed = 0;
     $scope.wins = 0;
@@ -814,6 +790,12 @@ app.controller('ContentController', function($scope) {
     $scope.heroBreakdownProperty = "name";
     $scope.heroBreakdownReverse = false;
     var heroBreakdownArrow = document.getElementById('img-heroBreakdown');
+
+    // var for map breakdown table
+    $scope.showMapBreakdown = false;
+    $scope.mapBreakdownProperty = "name";
+    $scope.mapBreakdownReverse = false;
+    var mapBreakdownArrow = document.getElementById('img-mapBreakdown');
 
 
     // setup charts
@@ -931,9 +913,9 @@ app.controller('ContentController', function($scope) {
     // charts END
     //  ----------
 
-    // test
+    // debug
     $scope.showDB = function(){
-
+        // currently empty
     }
 
     $scope.toggleShowHeroBreakdown = function(){
@@ -947,17 +929,27 @@ app.controller('ContentController', function($scope) {
         }
     }
 
+    $scope.toggleShowMapBreakdown = function(){
+        if($scope.showMapBreakdown == true){
+            $scope.showMapBreakdown = false;
+            mapBreakdownArrow.setAttribute('src', "../../img/baseline-keyboard_arrow_down-24px.svg")
+        }
+        else{
+            $scope.showMapBreakdown = true;
+            mapBreakdownArrow.setAttribute('src', "../../img/baseline-keyboard_arrow_up-24px.svg")
+        }
+    }
 
     $scope.toggleShowContentDelete = function(index){
         //
         $scope.showContentDelete[index] = !$scope.showContentDelete[index];
     }
 
+    // Herobreakdown: order by name
     $scope.setHeroBreakdownNameActive = function(){
         var name = document.getElementById('heroBreakdownName');
         var usage = document.getElementById('heroBreakdownUsage');
         var winrate = document.getElementById('heroBreakdownWinrate');
-
 
         name.setAttribute("class", "table-header-wide table-header-style-active");
         usage.setAttribute("class", "table-header-wide table-header-style");
@@ -965,14 +957,13 @@ app.controller('ContentController', function($scope) {
 
         $scope.heroBreakdownProperty = "name";
         $scope.heroBreakdownReverse = false;
-
     }
 
+    // herobreakdown: order by usage
     $scope.setHeroBreakdownUsageActive = function(){
         var name = document.getElementById('heroBreakdownName');
         var usage = document.getElementById('heroBreakdownUsage');
         var winrate = document.getElementById('heroBreakdownWinrate');
-
 
         name.setAttribute("class", "table-header-wide table-header-style");
         usage.setAttribute("class", "table-header-wide table-header-style-active");
@@ -980,14 +971,13 @@ app.controller('ContentController', function($scope) {
 
         $scope.heroBreakdownProperty = "usage";
         $scope.heroBreakdownReverse = true;
-
     }
 
+    // herobreakdown: order by winrate
     $scope.setHeroBreakdownWinrateActive = function(){
         var name = document.getElementById('heroBreakdownName');
         var usage = document.getElementById('heroBreakdownUsage');
         var winrate = document.getElementById('heroBreakdownWinrate');
-
 
         name.setAttribute("class", "table-header-wide table-header-style");
         usage.setAttribute("class", "table-header-wide table-header-style");
@@ -995,9 +985,48 @@ app.controller('ContentController', function($scope) {
 
         $scope.heroBreakdownProperty = "winrate";
         $scope.heroBreakdownReverse = true;
+    }
 
+    // map breakdown order by name
+    $scope.setMapBreakdownNameActive = function(){
+        var name = document.getElementById('mapBreakdownName');
+        var usage = document.getElementById('mapBreakdownUsage');
+        var winrate = document.getElementById('mapBreakdownWinrate');
 
+        name.setAttribute("class", "table-header-wide table-header-style-active");
+        usage.setAttribute("class", "table-header-wide table-header-style");
+        winrate.setAttribute("class", "table-header-wide table-header-style");
 
+        $scope.mapBreakdownProperty = "name";
+        $scope.mapBreakdownReverse = false;
+    }
+
+    // map breakdown order by usage
+    $scope.setMapBreakdownUsageActive = function(){
+        var name = document.getElementById('mapBreakdownName');
+        var usage = document.getElementById('mapBreakdownUsage');
+        var winrate = document.getElementById('mapBreakdownWinrate');
+
+        name.setAttribute("class", "table-header-wide table-header-style");
+        usage.setAttribute("class", "table-header-wide table-header-style-active");
+        winrate.setAttribute("class", "table-header-wide table-header-style");
+
+        $scope.mapBreakdownProperty = "usage";
+        $scope.mapBreakdownReverse = true;
+    }
+
+    // map breakdown: order by winrate
+    $scope.setMapBreakdownWinrateActive = function(){
+        var name = document.getElementById('mapBreakdownName');
+        var usage = document.getElementById('mapBreakdownUsage');
+        var winrate = document.getElementById('mapBreakdownWinrate');
+
+        name.setAttribute("class", "table-header-wide table-header-style");
+        usage.setAttribute("class", "table-header-wide table-header-style");
+        winrate.setAttribute("class", "table-header-wide table-header-style-active");
+
+        $scope.mapBreakdownProperty = "winrate";
+        $scope.mapBreakdownReverse = true;
     }
 
     $scope.removeItem = function(index){
@@ -1017,6 +1046,7 @@ app.controller('ContentController', function($scope) {
         var matchHero3 = deletedElement.hero3;
         var matchHero4 = deletedElement.hero4;
         var matchWinLoss = deletedElement.matchEnd;
+        var matchMap = deletedElement.map;
 
         // remove the entry from the match db
         matchDB.get(matchID.toString()).then(function(doc) {
@@ -1027,13 +1057,63 @@ app.controller('ContentController', function($scope) {
             console.log(err);
           });
 
+        // update the MapDB
+        if(matchMap != "Unknown"){
+            mapDB.get(matchMap).then(function(doc){
+                // update the docs
+                if(matchWinLoss == "Victory"){
+                    doc.wins--;
+                }
+                else if(matchWinLoss == "Defeat"){
+                    doc.losses--;
+                }
+                else if(matchWinLoss == "Draw"){
+                    doc.draws--;
+                }
+                else{
+                    doc.unknownWinLoss--;
+                }
+
+                doc.gamesPlayed--;
+
+                // update the array
+                for(i = 0; i < maps.length; i++){
+                    if(maps[i]._id == matchMap){
+                        if(matchWinLoss == "Victory"){
+                            maps[i].wins--;
+                        }
+                        else if(matchWinLoss == "Defeat"){
+                            maps[i].losses--;
+                        }
+                        else if(matchWinLoss == "Draw"){
+                            maps[i].draws--;
+                        }
+                        else{
+                            maps[i].unknownWinLoss--;
+                        }
+                        maps[i].gamesPlayed--;
+
+                    }
+                }
+
+                return doc;
+            }).then(function(response){
+                mapDB.put(response).then(function(res){
+
+                }).catch(function(err){
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log(err);
+            })
+        }
+
         // update the heroDB
         if(matchHero1 != "Unknown"){
             heroDB.get(matchHero1).then(function(doc){
                 // update the docs
                 if(matchWinLoss == "Victory"){
                     doc.wins--;
-                    console.log("Removed win from db");
                 }
                 else if(matchWinLoss == "Defeat"){
                     doc.losses--;
@@ -1501,6 +1581,7 @@ app.controller('ContentController', function($scope) {
         //
         // reset the heroBreakdownArray
         $scope.heroBreakdownArray = [];
+        $scope.mapBreakdownArray = [];
 
         var tempUsage = 0;
         var tempWinrate = 0;
@@ -1508,31 +1589,49 @@ app.controller('ContentController', function($scope) {
 
 
         for(var index in heroes){
-
             // get the name, the usage and the winrate
             if(heroes[index].gamesPlayed != 0){
+
                 tempUsage = (heroes[index].gamesPlayed / $scope.gamesplayed).toFixed(2);
                 if(tempUsage == 0){
                     tempUsage = 0; // get rid of unneded decimal digits
                 }
-            }
-            else{
-                tempUsage = 0;
-            }
 
-
-            if(heroes[index].gamesPlayed != 0){
                 tempWinrate = (heroes[index].wins / heroes[index].gamesPlayed).toFixed(2);
                 if(tempWinrate == 0){
                     tempWinrate = 0; // get rid of unneeded decimal digits
                 }
             }
             else{
+                tempUsage = 0;
                 tempWinrate = 0;
             }
-            
+
             // push to array
             $scope.heroBreakdownArray.push({name: heroes[index].name, usage: tempUsage, winrate: tempWinrate});
+        }
+
+
+        for(var i in maps){
+            // get the name the usage and the winrate
+            if(maps[i].gamesPlayed != 0){
+                tempUsage = (maps[i].gamesPlayed / $scope.gamesplayed).toFixed(2);
+                if(tempUsage == 0){
+                    tempUsage = 0; // get rid of unneded decimal digits
+                }
+
+                tempWinrate = (maps[i].wins / maps[i].gamesPlayed).toFixed(2);
+                if(tempWinrate == 0){
+                    tempWinrate = 0; // get rid of unneded decimal digits
+                }
+            }
+            else{
+                tempUsage = 0;
+                tempWinrate = 0;
+            }
+
+            // push to array
+            $scope.mapBreakdownArray.push({name: maps[i].name, usage: tempUsage, winrate: tempWinrate});
         }
 
         
@@ -1678,14 +1777,66 @@ app.controller('FormController', function($scope){
 
         // specify the map
         var specMap = null;
+        var specMapSearchDB = null;
 
         if($scope.map != null){
             specMap = $scope.map.name;
+            specMapSearchDB = $scope.map._id;
         }
         else{
             specMap = "Unknown";
+            specMapSearchDB = null;
         }
 
+        if(specMapSearchDB != null){
+            // get the map and modify the values
+            mapDB.get(specMapSearchDB).then(function(doc){
+                // modify the values
+                if(wl == "Victory"){
+                    doc.wins++;
+                }
+                else if(wl == "Defeat"){
+                    doc.losses++;
+                }
+                else if(wl == "Draw"){
+                    doc.draws++;
+                }
+                else{
+                    doc.unknownWinLoss++;
+                }
+
+                doc.gamesPlayed++;
+
+                // update the array
+                for(i = 0; i < maps.length; i++){
+                    if(maps[i]._id == specMapSearchDB){
+                        if(wl == "Victory"){
+                            maps[i].wins++;
+                        }
+                        else if(wl == "Defeat"){
+                            maps[i].losses++;
+                        }
+                        else if(wl == "Draw"){
+                            maps[i].draws++;
+                        }
+                        else{
+                            maps[i].unknownWinLoss++;
+                        }
+                        maps[i].gamesPlayed++;
+                    }
+                }
+
+                return doc;
+            }).then(function(response){
+                mapDB.put(response).then(function(res){
+
+                }).catch(function(err){
+                    console.log(err);
+                })
+            }).catch(function(err){
+                console.log(err);
+            })
+        }
 
 
 
@@ -2052,6 +2203,7 @@ app.controller('SettingsController', function($scope){
     $scope.nightmode = false;
 
     $scope.showAddHeroError = false;
+    $scope.showAddMapError = false;
 
     // get length of heroes array
     var heroesLength = heroes.length;
@@ -2083,7 +2235,7 @@ app.controller('SettingsController', function($scope){
     // toggle show content delete 
     $scope.toggleShowContentDeleteMap = function(index){
         //
-        $scope.showContentDeleteMap[index] = !$scope.showContentDeleteHeroes[index];
+        $scope.showContentDeleteMap[index] = !$scope.showContentDeleteMap[index];
     }
 
     $scope.toggleHeroDropDown = function(){
@@ -2129,7 +2281,7 @@ app.controller('SettingsController', function($scope){
         // get the id of the element
         var varIndex = x._id;
 
-        heroDB.get(varIndex.toString()).then(function(doc) {
+        heroDB.get(varIndex).then(function(doc) {
             return heroDB.remove(doc);
           }).then(function (result) {
             // handle result
@@ -2154,7 +2306,7 @@ app.controller('SettingsController', function($scope){
         // get the id of the element
         var varIndex = x._id;
 
-        mapDB.get(varIndex.toString()).then(function(doc) {
+        mapDB.get(varIndex).then(function(doc) {
             return mapDB.remove(doc);
           }).then(function (result) {
             // handle result
@@ -2202,11 +2354,45 @@ app.controller('SettingsController', function($scope){
     // add map
     $scope.addMap = function (){
         // add a new hero
-        // increment index
-        mapDBIndex++;
+
+
+        if($scope.mapMode == null || $scope.newMap == null){
+            $scope.showAddMapError = true;
+            $scope.mapMode = null;
+            $scope.newMap = null;
+            return;
+        }
+
+        for(i = 0; i < maps.length; i++){
+            if(maps[i].name == $scope.newMap){
+                $scope.showAddMapError = true;
+                $scope.mapMode = null;
+                $scope.newMap = null;
+                return;
+            }
+        }
+
+        $scope.showAddMapError = false;
+
+        var mode;
+
+        if($scope.mapMode == 1){
+            mode = "Assault";
+        }
+        else if($scope.mapMode == 2){
+            mode = "Escort";
+        }
+        else if($scope.mapMode == 3){
+            mode = "Hybrid";
+        }
+        else{
+            mode = "Control";
+        }
+
+
         
         // setup new object
-        newMapElement = {_id: mapDBIndex.toString(), name: $scope.newMap}
+        newMapElement = {_id: $scope.newMap, name: $scope.newMap, gamesPlayed: 0, wins: 0, losses: 0, draws: 0, unknownWinLoss: 0, type: mode};
 
         // add the hero to the data base
         mapDB.put(newMapElement).then(function (response) {
@@ -2220,6 +2406,7 @@ app.controller('SettingsController', function($scope){
 
         // clear the input field
         $scope.newMap = null;
+        $scope.mapMode = null;
         
     }
 
@@ -2463,3 +2650,30 @@ function resetHeroDB(){
     })
 }
 
+// group by filter
+app.filter("groupBy",["$parse","$filter",function($parse,$filter){
+    return function(array,groupByField){
+      var result	= [];
+              var prev_item = null;
+              var groupKey = false;
+              var filteredData = $filter('orderBy')(array,groupByField);
+              for(var i=0;i<filteredData.length;i++){
+                groupKey = false;
+                if(prev_item !== null){
+                  if(prev_item[groupByField] !== filteredData[i][groupByField]){
+                    groupKey = true;
+                  }
+                } else {
+                  groupKey = true;  
+                }
+                if(groupKey){
+                  filteredData[i]['group_by_key'] =true;  
+                } else {
+                  filteredData[i]['group_by_key'] =false;  
+                }
+                result.push(filteredData[i]);
+                prev_item = filteredData[i];
+              }
+              return result;
+    }
+  }])

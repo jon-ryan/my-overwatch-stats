@@ -102,17 +102,15 @@
             <div class="body-element">
                 <h3>Hero Breakdown</h3>
                 <!-- arrow for opening or collapsing -->
-                    <div class="float-right">
-                        <img class="icon light-padding-top" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="img-heroBreakdown" ng-click="toggleShowHeroBreakdown()">
-                    </div>
-                    <div class="light-padding-top">
-                        Toggle HeroBreakdown:
-                    </div>
-
-                    <!-- small spacer -->
-                    <div class="small-spacer">
-
-                    </div>
+                <div class="float-right">
+                    <img class="icon light-padding-top" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="img-heroBreakdown" ng-click="toggleShowHeroBreakdown()">
+                </div>
+                <div class="light-padding-top">
+                    Toggle Hero Breakdown:
+                </div>
+                <!-- small spacer -->
+                <div class="small-spacer">
+                </div>
 
                 <!-- show herobreakdown -->
                 <div ng-show="showHeroBreakdown">
@@ -138,6 +136,39 @@
 
             <div class="body-element">
                 <h3>Map Breakdown</h3>
+                <!-- arrow for opening or collapsing -->
+                <div class="float-right">
+                    <img class="icon light-padding-top" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="img-mapBreakdown" ng-click="toggleShowMapBreakdown()">
+                </div>
+                <div class="light-padding-top">
+                    Toggle Map Breakdown:
+                </div>
+                <!-- small spacer -->
+                <div class="small-spacer">
+                </div>
+
+                <!-- show herobreakdown -->
+                <div ng-show="showMapBreakdown">
+                        Click on the header of the table to sort the table differently.
+                        <!-- header of the table -->
+                        <div class="light-padding-top">
+                            <span class="table-header-wide table-header-style-active" ng-click="setMapBreakdownNameActive()" id="mapBreakdownName"><b>Name</b></span>
+                            <span class="table-header-wide table-header-style" ng-click="setMapBreakdownUsageActive()" id="mapBreakdownUsage"><b>Usage</b></span>
+                            <span class="table-header-wide table-header-style" ng-click="setMapBreakdownWinrateActive()" id="mapBreakdownWinrate"><b>Winrate</b></span>
+                        </div>
+        
+                        <div ng-repeat="x in mapBreakdownArray | orderBy: mapBreakdownProperty : mapBreakdownReverse" id="mapbreakdownID">
+                                <div class="overview-content-container">
+                                    <span class="table-header-wide">{{x.name}}</span>
+                                    <span class="table-header-wide">{{x.usage *100}}%</span>
+                                    <span class="table-header-wide">{{x.winrate *100}}%</span>
+                                </div>
+                        </div>
+                    </div>
+
+
+
+
             </div>
 
             <div class="body-element">
@@ -291,6 +322,16 @@
                     <br>
                     <input type="text" placeholder="Name of Map" ng-model="newMap">
                     <br>
+                    Mode: <br>
+                    <input type="radio" name="mapMode" ng-model="mapMode" value="1"> Assault <br>
+                    <input type="radio" name="mapMode" ng-model="mapMode" value="2"> Escort <br>
+                    <input type="radio" name="mapMode" ng-model="mapMode" value="3"> Hybrid <br>
+                    <input type="radio" name="mapMode" ng-model="mapMode" value="4"> Control <br>
+
+                    <div ng-show="showAddMapError">
+                        Error: Map already exists or missing data!
+                    </div>
+
                     <button class="blue-button light-margin-top" ng-click="addMap()">Add Map</button>
                     <br>
 
@@ -298,12 +339,24 @@
                         <img class="icon" src="../../img/baseline-keyboard_arrow_down-24px.svg" id="mapDropDown" ng-click="toggleMapDropDown()">
                     </div>
                     Overview of all maps:
+
+                    <div class="light-padding-top" ng-show="showMapDropDown">
+                            <span class="table-header-wide">Name</span>
+                            <span class="table-header-wide">Games Played</span>
+                            <span class="table-header-wide">Wins</span>
+                    </div>
                     
                     <!-- ng repeat start -->
-                    <div class="clear" ng-repeat="x in mapDBSettingsController | orderBy: 'name'"  ng-show="showMapDropDown">
+                    <div class="clear" ng-repeat="x in mapDBSettingsController | groupBy: 'type'"  ng-show="showMapDropDown">
                         <div class="overview-container">
+                            <!-- groupBy and display the group title -->
+                            <h4 class="light-margin-top" ng-show="x.group_by_key">{{x.type}}</h4>
+
+
                             <div class="overview-content-container">
                                 <span class="table-header-wide">{{x.name}}</span>
+                                <span class="table-header-wide">{{x.gamesPlayed}}</span>
+                                <span class="table-header-wide">{{x.wins}}</span>
     
                                 <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDeleteMap($index)">
                             </div>
