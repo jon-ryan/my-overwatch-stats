@@ -811,17 +811,43 @@ app.controller('ContentController', function($scope) {
 
     // var for hero breakdown table
     $scope.showHeroBreakdown = false;
-    $scope.heroBreakdownProperty = "usage";
-    $scope.heroBreakdownReverse = true;
+    $scope.heroBreakdownProperty = "name";
+    $scope.heroBreakdownReverse = false;
     var heroBreakdownArrow = document.getElementById('img-heroBreakdown');
 
 
-    // setup new chart for SR-Rating
+    // setup charts
     var srRatingCanvas = document.getElementById('srrating-canvas').getContext('2d');
     var winlossCanvas = document.getElementById('winloss-canvas');
+    var groupsizeBreakdownCanvas = document.getElementById('groupsize-breakdown');
 
     var srRatingChartData = [];
     var srRatingChartLabel = [];
+
+    var groupsizeBreakdownLabel = ["Solo-Queue (1)", "Dual-Queue (2)", "Tripple-Queue (3)", "Quad-Queue (4)", "Quintuple-Queue (5)", "Hexa-Queue (6)"];
+    var groupsizeBreakdownData = [];
+
+        // vars specifically for groupsize
+        var groupsizeOneTotalGames = 0;
+        var groupsizeOneWins = 0;
+
+        var groupsizeTwoTotalGames = 0;
+        var groupsizeTwoWins = 0;
+
+        var groupsizeThreeTotalGames = 0;
+        var groupsizeThreeWins = 0;
+
+        var groupsizeFourTotalGames = 0;
+        var groupsizeFourWins = 0;
+
+        var groupsizeFiveTotalGames = 0;
+        var groupsizeFiveWins = 0;
+
+        var groupsizeSixTotalGames = 0;
+        var groupsizeSixWins = 0;
+
+
+    var timeOfDayBreakdownLabel = ["Morning (06:00 - 12:00)", "Afternoon (12:00 - 18:00)", "Evening (18:00 - 00:00)", "Night (00:00 - 06:00)"];
 
     // get length of db array
     var length = dbEntries.length;
@@ -870,6 +896,28 @@ app.controller('ContentController', function($scope) {
                 backgroundColor: ['rgb(33,143,254)', 'rgb(249,158,26)', 'rgb(235,235,235)', 'rgb(150,150,150)']
             }]
         },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    var groupSizeBreakdownChart = new Chart(groupsizeBreakdownCanvas, {
+        // The type of chart we want to create
+        type: 'bar',
+    
+        // The data for our dataset
+        data: {
+            labels: groupsizeBreakdownLabel,
+            datasets: [{
+                label: "Win-Loss / Groupsize",
+                backgroundColor: 'rgb(33,143,254)',
+                borderColor: 'rgb(26, 120, 216)',
+                data: [],
+            }]
+        },
+    
+        // Configuration options go here
         options: {
             responsive: true,
             maintainAspectRatio: false
@@ -1285,34 +1333,31 @@ app.controller('ContentController', function($scope) {
     }
 
     $scope.updateView = function(){
-        
-        // update the charts
-
-        // update the srRating chart
-        // get the needed data from dbEntries
+                
+        // reset temp values
         srRatingChartData = new Array();
         srRatingChartLabel = new Array();
-        // fill the arrays
-        for(i = 0; i < dbEntries.length; i++){
-            srRatingChartData.push(dbEntries[i].sr);
-            srRatingChartLabel.push("Match " + (i+1).toString());
-        }
-        srRatingChart.data.labels = srRatingChartLabel;
-        srRatingChart.data.datasets[0].data = srRatingChartData;
-        srRatingChart.update({
-            duration: 800,
-            easing: 'easeOutBounce'
-        });
 
-        // get games played
-        $scope.gamesplayed = dbEntries.length;
+        groupsizeBreakdownData = new Array();
+
+        groupsizeOneTotalGames = groupsizeOneWins = groupsizeTwoTotalGames = groupsizeTwoWins = groupsizeThreeTotalGames = groupsizeThreeWins = 0;
+        groupsizeFourTotalGames = groupsizeFourWins = groupsizeFiveTotalGames = groupsizeFiveWins = groupsizeSixTotalGames = groupsizeSixWins = 0;
 
         // reset wins, losses and draws
         $scope.wins = $scope.losses = $scope.draws = $scope.unknownWinLoss = $scope.avgdelta = 0;
-        // get wins
-        // get losses
-        // get draws
+
+
+        // get the needed data from dbEntries
         for(i = 0; i < dbEntries.length; i++){
+            // get the sr rating per element
+            srRatingChartData.push(dbEntries[i].sr);
+            srRatingChartLabel.push("Match " + (i+1).toString());
+
+
+            // get the main statistics
+            // get wins
+            // get losses
+            // get draws
             if(dbEntries[i].matchEnd == "Victory"){
                 $scope.wins++;
             }
@@ -1326,12 +1371,125 @@ app.controller('ContentController', function($scope) {
                 $scope.unknownWinLoss++;
             }
             $scope.avgdelta = $scope.avgdelta + dbEntries[i].delta;
+
+
+
+            // groupsize unknown
+            if(dbEntries[i].groupsize == 0){
+
+            }
+            // groupsize 1
+            else if(dbEntries[i].groupsize == 1){
+                groupsizeOneTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeOneWins++;
+                }
+            }
+            // groupsize 2
+            else if(dbEntries[i].groupsize == 2){
+                groupsizeTwoTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeTwoWins++;
+                }
+            }
+            // groupsize 3
+            else if(dbEntries[i].groupsize == 3){
+                groupsizeThreeTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeThreeWins++;
+                }
+            }
+            // groupsize 4
+            else if(dbEntries[i].groupsize == 4){
+                groupsizeFourTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeFourWins++;
+                }
+            }
+            // groupsize 5
+            else if(dbEntries[i].groupsize == 5){
+                groupsizeFiveTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeFiveWins++;
+                } 
+            }
+            // groupsize 6
+            else{
+                groupsizeSixTotalGames++;
+                if(dbEntries[i].matchEnd == "Victory"){
+                    groupsizeSixWins++;
+                } 
+            }
+
+
         }
 
-        $scope.avgdelta = ($scope.avgdelta / dbEntries.length).toFixed(2);
 
+        // update the sr rating chart
+        srRatingChart.data.labels = srRatingChartLabel;
+        srRatingChart.data.datasets[0].data = srRatingChartData;
+        srRatingChart.update({
+            duration: 800,
+            easing: 'easeOutBounce'
+        });
+
+        // get games played
+        $scope.gamesplayed = dbEntries.length;
+
+        
+        // calculate the avg delta
+        if(dbEntries.length == 0){
+            $scope.avgdelta = 0;
+        }
+        else{
+            $scope.avgdelta = ($scope.avgdelta / dbEntries.length).toFixed(2);
+        }
+        
+
+        // update the win/loss chart
         winlossChart.data.datasets[0].data = [$scope.wins, $scope.losses, $scope.draws, $scope.unknownWinLoss];
         winlossChart.update({
+            duration: 800,
+            easing: 'easeOutBounce'
+        })
+
+        // update the groupsize chart
+        // calculate the win/loss rates
+        var gsOneWL = 0;
+        if(groupsizeOneTotalGames != 0){
+            gsOneWL = (groupsizeOneWins / groupsizeOneTotalGames).toFixed(2);
+        }
+
+        var gsTwoWL = 0;
+        if(groupsizeTwoTotalGames != 0){
+            gsTwoWL = (groupsizeTwoWins / groupsizeTwoTotalGames).toFixed(2);
+        }
+
+        var gsThreeWL = 0;
+        if(groupsizeThreeTotalGames != 0){
+            gsThreeWL = (groupsizeThreeWins / groupsizeThreeTotalGames).toFixed(2);
+        }
+
+        var gsFourWL = 0;
+        if(groupsizeFiveTotalGames != 0){
+            gsFourWL = (groupsizeFourWins / groupsizeFourTotalGames).toFixed(2);
+        }
+
+        var gsFiveWL = 0;
+        if(groupsizeFiveTotalGames != 0){
+            gsFiveWL = (groupsizeFiveWins / groupsizeFiveTotalGames).toFixed(2);
+        }
+
+        var gsSixWL = 0;
+        if(groupsizeSixTotalGames != 0){
+            gsSixWL = (groupsizeSixWins / groupsizeSixTotalGames).toFixed(2);
+        }
+
+        groupsizeBreakdownData = [gsOneWL, gsTwoWL, gsThreeWL, gsFourWL, gsFiveWL, gsSixWL];
+
+        // update the chart data
+        groupSizeBreakdownChart.data.datasets[0].data = groupsizeBreakdownData;
+        groupSizeBreakdownChart.update({
             duration: 800,
             easing: 'easeOutBounce'
         })
@@ -1837,7 +1995,7 @@ app.controller('FormController', function($scope){
         // heroes
         hero1: hero1, hero2: hero2, hero3: hero3, hero4: hero4,
         // friends
-        groupSize: group,
+        groupsize: group,
         // date and time
         date: dateIdentifier};
 

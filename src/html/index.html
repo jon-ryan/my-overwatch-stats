@@ -116,10 +116,11 @@
 
                 <!-- show herobreakdown -->
                 <div ng-show="showHeroBreakdown">
+                    Click on the header of the table to sort the table differently.
                     <!-- header of the table -->
                     <div class="light-padding-top">
-                        <span class="table-header-wide table-header-style" ng-click="setHeroBreakdownNameActive()" id="heroBreakdownName"><b>Name</b></span>
-                        <span class="table-header-wide table-header-style-active" ng-click="setHeroBreakdownUsageActive()" id="heroBreakdownUsage"><b>Usage</b></span>
+                        <span class="table-header-wide table-header-style-active" ng-click="setHeroBreakdownNameActive()" id="heroBreakdownName"><b>Name</b></span>
+                        <span class="table-header-wide table-header-style" ng-click="setHeroBreakdownUsageActive()" id="heroBreakdownUsage"><b>Usage</b></span>
                         <span class="table-header-wide table-header-style" ng-click="setHeroBreakdownWinrateActive()" id="heroBreakdownWinrate"><b>Winrate</b></span>
                     </div>
     
@@ -145,6 +146,10 @@
 
             <div class="body-element">
                 <h3>Groupsize Breakdown</h3>
+                Note that unknown groupsizes will not be listed here.
+                <div class="srrating-chart-container">
+                    <canvas id="groupsize-breakdown"></canvas>
+                </div>
             </div>
 
 
@@ -421,12 +426,12 @@
                                 <!-- input for groupsize -->
                                 <div class="form-element">
                                     <h3>Groupsize:</h3>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="1"> 1 (Single Queue) <br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="2"> 2 (One Friend)<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="3"> 3 (Two Friends)<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="4"> 4 (Three Friends)<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="5"> 5 (Four Friends)<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="6"> 6 (Five Friends)<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="1"> Single Queue - 1<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="2"> Dual Queue - 2<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="3"> Tripple Queue - 3<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="4"> Quad Queue - 4<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="5"> Quintuple Queue - 5<br>
+                                    <input type="radio" name="groupsize" ng-model="groupsize" value="6"> Hexa Queue - 6<br>
 
                                 </div>
 
