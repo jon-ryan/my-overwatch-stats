@@ -1714,7 +1714,7 @@ app.controller('ContentController', function($scope) {
 
 
 
-        for(var index in heroes){
+        for(index = 0; index < heroes.length; index++){
             // get the name, the usage and the winrate
             if(heroes[index].gamesPlayed != 0){
 
@@ -1738,7 +1738,7 @@ app.controller('ContentController', function($scope) {
         }
 
 
-        for(var i in maps){
+        for(i = 0; i < maps.length; i++){
             // get the name the usage and the winrate
             if(maps[i].gamesPlayed != 0){
                 tempUsage = (maps[i].gamesPlayed / $scope.gamesplayed).toFixed(2);
@@ -2661,6 +2661,7 @@ app.controller('SeasonController', function($scope){
 
         // reset heroDB and mapDB
         resetHeroDB();
+        resetMapDB();
         
 
 
@@ -2765,8 +2766,49 @@ function resetHeroDB(){
         // update settings
         angular.element(document.getElementById('container-settings')).scope().updateView();
         angular.element(document.getElementById('controllerBody')).scope().updateView();
-        //angular.element(document.getElementById('controllerBody')).scope().$apply();
     }).catch(function (err){
+        console.log(err);
+    })
+}
+
+function resetMapDB(){
+    // reset the map array
+    maps = [];
+
+    // reset the db
+    mapDB.allDocs({include_docs: true}).then(function(res){
+        // iterate through every element
+        var tempId;
+
+        for(i = 0; i < res.rows.length; i++){
+            //
+            tempId = res.rows[i].doc._id;
+
+            mapDB.get(tempId).then(function(doc){
+                // reset the values of the map
+                doc.gamesPlayed = 0;
+                doc.wins = 0;
+                doc.losses = 0;
+                doc.draws = 0;
+                doc.unknownWinLoss = 0;
+
+                // return hero
+                return doc;
+            }).then(function(map){
+                // put it back into the DB
+                mapDB.put(map).then(function(res){
+                    // push it to the maps array
+                })
+                return map;
+            }).then(function(map){
+                maps.push(map);
+            })
+        }
+    }).then(function(){
+        // update settings
+        angular.element(document.getElementById('container-settings')).scope().updateView();
+        angular.element(document.getElementById('controllerBody')).scope().updateView();
+    }).catch(function(err){
         console.log(err);
     })
 }
