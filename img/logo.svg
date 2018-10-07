@@ -10,13 +10,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1969"
+   width="500"
    height="500"
-   viewBox="0 0 520.96324 132.29167"
+   viewBox="0 0 132.29135 132.29167"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="D:\Jonathan\60 Coding and Creating\Electron\my-overwatch-stats\img\logo.png"
+   inkscape:export-xdpi="114.88"
+   inkscape:export-ydpi="114.88">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -27,7 +30,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="1053.4107"
+     inkscape:cx="885.2203"
      inkscape:cy="54.081442"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -49,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,7 +62,8 @@
      id="layer1"
      transform="translate(0,-164.70832)">
     <g
-       id="g855">
+       id="g855"
+       transform="translate(-1.5831347e-4,-1.4941409e-6)">
       <image
          width="130.96875"
          height="130.96875"

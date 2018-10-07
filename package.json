@@ -15,7 +15,9 @@
   "homepage": "https://github.com/jon-ryan/my-overwatch-stats#readme",
   "main": "src/javascript/index.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "pack": "build",
+    "build-win": "electron-packager ./src --platform win32 --icon ./img/icon.ico --out ./dist --overwrite --asar"
   },
   "repository": {
     "type": "git",
@@ -34,18 +36,23 @@
   "devDependencies": {
     "chart.js": "^2.7.2",
     "electron": "^3.0.0",
+    "electron-packager": "^12.2.0",
     "pouchdb-browser": "^7.0.0"
   },
   "dependencies": {
-    "electron-builder": "^20.28.4",
-    "electron-store": "^2.0.0"
+    "electron-store": "^2.0.0",
+    "chart.js": "^2.7.2",
+    "electron": "^3.0.0",
+    "electron-packager": "^12.2.0",
+    "pouchdb-browser": "^7.0.0"
   },
-  "build":{
+  "build": {
     "appId": "my-overwatch-stats",
+    "productName": "My Overwatch Stats",
     "win": {
       "target": "nsis",
-      "arch": ["x64", "ia32"]
-      
+      "icon": "img/icon.png",
+      "title": "My Overwatch Stats"
     }
   }
 }
