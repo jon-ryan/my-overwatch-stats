@@ -330,10 +330,29 @@
                     <input type="text" placeholder="Name of Map" ng-model="newMap">
                     <br>
                     Mode: <br>
-                    <input type="radio" name="mapMode" ng-model="mapMode" value="1"> Assault <br>
-                    <input type="radio" name="mapMode" ng-model="mapMode" value="2"> Escort <br>
-                    <input type="radio" name="mapMode" ng-model="mapMode" value="3"> Hybrid <br>
-                    <input type="radio" name="mapMode" ng-model="mapMode" value="4"> Control <br>
+                    <label class="radiobutton-container">
+                        Assault
+                        <input type="radio" name="mapMode" ng-model="mapMode" value="1">
+                        <span class="radiobutton-checkmark"></span>
+                    </label>
+
+                    <label class="radiobutton-container">
+                        Escort
+                        <input type="radio" name="mapMode" ng-model="mapMode" value="2">
+                        <span class="radiobutton-checkmark"></span>
+                    </label>
+
+                    <label class="radiobutton-container">
+                        Hybrid
+                        <input type="radio" name="mapMode" ng-model="mapMode" value="3">
+                        <span class="radiobutton-checkmark"></span>
+                    </label>
+
+                    <label class="radiobutton-container">
+                        Control
+                        <input type="radio" name="mapMode" ng-model="mapMode" value="4">
+                        <span class="radiobutton-checkmark"></span>
+                    </label>
 
                     <div ng-show="showAddMapError">
                         Error: Map already exists or missing data!
@@ -473,9 +492,24 @@
             
                                 <!--Input for Win/Loss-->
                                 <div class="form-element">
-                                    <input type="radio" name="win_loss" ng-model="winLoss"  value="1"> Victory    &ensp;
-                                    <input type="radio" name="win_loss" ng-model="winLoss"  value="-1"> Defeat     &ensp;
-                                    <input type="radio" name="win_loss" ng-model="winLoss"  value="0"> Draw   
+                                    <label class="radiobutton-container">
+                                        Victory
+                                        <input type="radio" name="winloss" ng-model="winloss" value="1">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Defeat
+                                        <input type="radio" name="winloss" ng-model="winloss" value="-1">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Draw
+                                        <input type="radio" name="winloss" ng-model="winloss" value="0">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+                                    
                                 </div>
 
                                 <div class="form-element">
@@ -486,12 +520,42 @@
                                 <!-- input for groupsize -->
                                 <div class="form-element">
                                     <h3>Groupsize:</h3>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="1"> Single Queue - 1<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="2"> Dual Queue - 2<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="3"> Tripple Queue - 3<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="4"> Quad Queue - 4<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="5"> Quintuple Queue - 5<br>
-                                    <input type="radio" name="groupsize" ng-model="groupsize" value="6"> Hexa Queue - 6<br>
+
+                                    <label class="radiobutton-container">
+                                        Single Queue - 1
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="1">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Dual Queue - 2
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="2">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Tripple Queue - 3
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="3">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Quad Queue - 4
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="4">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Quintuple Queue - 5
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="5">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
+
+                                    <label class="radiobutton-container">
+                                        Hexa Queue - 6
+                                        <input type="radio" name="groupsize" ng-model="groupsize" value="6">
+                                        <span class="radiobutton-checkmark"></span>
+                                    </label>
 
                                 </div>
 
