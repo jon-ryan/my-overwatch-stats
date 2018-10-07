@@ -35,11 +35,12 @@
 
     <header>
         <div class="content-container navbar-container">
-            <ul>
-                <li> <a class="active"  ng-click="showOverviewContainer()"  href="#" id="overview"  >Overview   </a>    </li>
-                <li> <a class=""        ng-click="showSettingsContainer()"  href="#" id="settings"  >Settings   </a>    </li>
-                <li> <a class=""        ng-click="showSeasons()"            href="#" id="season"    >Seasons   </a>    </li>
-                <li> <a class=""        ng-click="showAddMatch()"           href="#" id="match"     >+ Match    </a>    </li>
+            <ul class="header-ul">
+                <li class="header-li"> <a class="active"  ng-click="showOverviewContainer()"  href="#" id="overview"  >Overview   </a>    </li>
+                <li class="header-li"> <a class=""        ng-click="showSettingsContainer()"  href="#" id="settings"  >Settings   </a>    </li>
+                <li class="header-li"> <a class=""        ng-click="showSeasons()"            href="#" id="season"    >Seasons   </a>    </li>
+                <li class="header-li"> <a class=""        ng-click="showAddMatch()"           href="#" id="match"     >+ Match    </a>    </li>
+                <li class="header-li"> <a class=""        ng-click="showAboutContainer()"              href="#" id="about"     >Donate! / About   </a>    </li>
             </ul>
         </div>
     </header>
@@ -537,6 +538,36 @@
                         </form>  
                 </div>
 
+
+        </div>
+
+
+        <div id="about" ng-show="showAbout">
+
+            <div class="body-element">
+                <h3>Donation</h3>
+                You like my program? I really appreciate if you consider a donation.
+                <div class="spacer">
+
+                </div>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="83U9B6EBPWS72">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+                </form>             
+            </div>
+
+            <div class="body-element">
+                <h3>About</h3>
+                This program was built using the following:
+                <ul class="about-ul">
+                    <li class="about-li"><a class="text-color link-about" target="_blank" href="https://electronjs.org/">Electron</a></li>
+                    <li class="about-li"><a class="text-color link-about" target="_blank" href="https://angularjs.org/">AngularJS</a></li>
+                    <li class="about-li"><a class="text-color link-about" target="_blank" href="https://material.io/">Material.io</a></li>
+
+                </ul>
+            </div>
 
         </div>
 

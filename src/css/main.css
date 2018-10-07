@@ -27,18 +27,18 @@ html{
     border-bottom: 2px solid white;
 }
 
-ul{
+.header-ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-li{
+.header-li{
     float: left;
 }
 
-li a{
+.header-li a{
     display: block;
     color: white;
     text-align: center;
@@ -46,7 +46,7 @@ li a{
     text-decoration: none;
 }
 
-li a:hover:not(.active){
+.header-li a:hover:not(.active){
     background-color: rgba(225,225,225, 0.3);
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
@@ -55,6 +55,28 @@ li a:hover:not(.active){
 .active{
     background-color: rgba(225,225,225, 0.3);
 }
+
+.about-ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.about-li{
+    float: left;
+}
+.about-li a{
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.link-about:hover{
+    color: rgb(0, 132, 255);
+}
+
 
 /* Specify the styling for a body element *//*
 .body-element{

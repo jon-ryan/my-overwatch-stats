@@ -695,6 +695,7 @@ $scope.showOverview = true;
 $scope.showSettings = false;
 $scope.showForm = false;
 $scope.showSeason = false;
+$scope.showAbout = false;
 
 
 // get reference to the nav bar
@@ -702,6 +703,7 @@ var overviewLink = document.getElementById("overview");
 var settingsLink = document.getElementById("settings");
 var seasonLink = document.getElementById("season");
 var matchLink = document.getElementById("match");
+var aboutLink = document.getElementById("about");
 
 
 $scope.showSettingsContainer = function(){
@@ -710,11 +712,13 @@ $scope.showSettingsContainer = function(){
     $scope.showSettings = true;
     $scope.showSeason = false;
     $scope.showForm = false;
+    $scope.showAbout = false;
 
     overviewLink.setAttribute("class", "");
     settingsLink.setAttribute("class", "active");
     seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "");
+    aboutLink.setAttribute("class", "");
 
 }
 
@@ -725,11 +729,13 @@ $scope.showOverviewContainer = function(){
     $scope.showSettings = false;
     $scope.showSeason = false;
     $scope.showForm = false;
+    $scope.showAbout = false;
 
     overviewLink.setAttribute("class", "active");
     settingsLink.setAttribute("class", "");
     seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "");
+    aboutLink.setAttribute("class", "");
 }
 
 $scope.showAddMatch = function(){
@@ -738,11 +744,13 @@ $scope.showAddMatch = function(){
     $scope.showSettings = false;
     $scope.showSeason = false;
     $scope.showForm = true;
+    $scope.showAbout = false;
 
     overviewLink.setAttribute("class", "");
     settingsLink.setAttribute("class", "");
     seasonLink.setAttribute("class", "");
     matchLink.setAttribute("class", "active");
+    aboutLink.setAttribute("class", "");
     }
 
     $scope.showSeasons = function(){
@@ -751,11 +759,30 @@ $scope.showAddMatch = function(){
         $scope.showSettings = false;
         $scope.showSeason = true;
         $scope.showForm = false;
+        $scope.showAbout = false;
 
         overviewLink.setAttribute("class", "");
         settingsLink.setAttribute("class", "");
         seasonLink.setAttribute("class", "active");
         matchLink.setAttribute("class", "");
+        aboutLink.setAttribute("class", "");
+    }
+
+
+    $scope.showAboutContainer = function(){
+
+         // modify the content
+         $scope.showOverview = false;
+         $scope.showSettings = false;
+         $scope.showSeason = false;
+         $scope.showForm = false;
+         $scope.showAbout = true;
+ 
+         overviewLink.setAttribute("class", "");
+         settingsLink.setAttribute("class", "");
+         seasonLink.setAttribute("class", "");
+         matchLink.setAttribute("class", "");
+         aboutLink.setAttribute("class", "active");
     }
 
 
