@@ -17,7 +17,7 @@ const {app, BrowserWindow} = require('electron')
   function createWindow () {
     // Create the browser window
     //set the default width to 1500px, default height to 1000px and the minimum width to 1250px
-    win = new BrowserWindow({width: 1500, height: 1000, minWidth: 700, minHeight: 400});
+    win = new BrowserWindow({width: 1500, height: 1000, minWidth: 700, minWidth: 400, minHeight: 300});
 
     win.setMenu(null);
 
@@ -32,7 +32,7 @@ const {app, BrowserWindow} = require('electron')
         win.show();
     })
     // Open the DevTools.
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 
     // Emitted when the window is closed.
     win.on('closed', () => {

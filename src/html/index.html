@@ -173,11 +173,15 @@
 
             <div class="body-element">
                 <h3>Time of Day Breakdown</h3>
+                Note that unknown Win/Loss will not influence this breakdown.
+                <div class="srrating-chart-container">
+                    <canvas id="timeOfDay-breakdown"></canvas>
+                </div>
             </div>
 
             <div class="body-element">
                 <h3>Groupsize Breakdown</h3>
-                Note that unknown groupsizes will not be listed here.
+                Note that unknown groupsizes will not influence this breakdown.
                 <div class="srrating-chart-container">
                     <canvas id="groupsize-breakdown"></canvas>
                 </div>
@@ -194,7 +198,8 @@
                     <span class="table-header"><b>Skill Rating</b></span>
                     <span class="table-header"><b>Delta</b></span>
                     <span class="table-header"><b>Win/Loss</b></span>
-                    <span class="table-header"><b>Date/Time</b></span>
+                    <span class="table-header"><b>Date</b></span>
+                    <span class="table-header"><b>Time</b></span>
                 </div>
 
 
@@ -206,6 +211,7 @@
                             <span class="table-header">{{x.delta}}</span>
                             <span class="table-header">{{x.matchEnd}}</span>
                             <span class="table-header">{{x.date}}</span>
+                            <span class="table-header">{{x.time}}</span>
 
                             <img class="icon" src="../../img/baseline-delete-24px.svg" ng-click="toggleShowContentDelete($index)">
                         </div>

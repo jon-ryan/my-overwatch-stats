@@ -802,6 +802,7 @@ app.controller('ContentController', function($scope) {
     var srRatingCanvas = document.getElementById('srrating-canvas').getContext('2d');
     var winlossCanvas = document.getElementById('winloss-canvas');
     var groupsizeBreakdownCanvas = document.getElementById('groupsize-breakdown');
+    var timeOfDayBreakdownCanvas = document.getElementById('timeOfDay-breakdown');
 
     var srRatingChartData = [];
     var srRatingChartLabel = [];
@@ -829,7 +830,9 @@ app.controller('ContentController', function($scope) {
         var groupsizeSixWins = 0;
 
 
+    
     var timeOfDayBreakdownLabel = ["Morning (06:00 - 12:00)", "Afternoon (12:00 - 18:00)", "Evening (18:00 - 00:00)", "Night (00:00 - 06:00)"];
+    var timeOfDayBreakdownData = [];
 
     // get length of db array
     var length = dbEntries.length;
@@ -906,6 +909,28 @@ app.controller('ContentController', function($scope) {
         }
     });
 
+
+    var timeOfDayBreakdownChart = new Chart(timeOfDayBreakdownCanvas, {
+        // The type of chart we want to create
+        type: 'bar',
+    
+        // The data for our dataset
+        data: {
+            labels: timeOfDayBreakdownLabel,
+            datasets: [{
+                label: "Win-Loss / Time Of Day",
+                backgroundColor: 'rgb(33,143,254)',
+                borderColor: 'rgb(26, 120, 216)',
+                data: [],
+            }]
+        },
+    
+        // Configuration options go here
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
     
 
 
@@ -1420,6 +1445,16 @@ app.controller('ContentController', function($scope) {
 
         groupsizeBreakdownData = new Array();
 
+        // vars for time of day breakdown
+        var morningTotal = 0;
+        var morningWins = 0;
+        var afternoonTotal = 0;
+        var afternoonWins = 0;
+        var eveningTotal = 0;
+        var eveningWins = 0;
+        var nightTotal = 0;
+        var nightWins = 0;
+
         groupsizeOneTotalGames = groupsizeOneWins = groupsizeTwoTotalGames = groupsizeTwoWins = groupsizeThreeTotalGames = groupsizeThreeWins = 0;
         groupsizeFourTotalGames = groupsizeFourWins = groupsizeFiveTotalGames = groupsizeFiveWins = groupsizeSixTotalGames = groupsizeSixWins = 0;
 
@@ -1501,8 +1536,72 @@ app.controller('ContentController', function($scope) {
                 } 
             }
 
+            // get the values for the time of day breakdown
+            // only take entries into account where win/loss is not unknown
+            if(dbEntries[i].matchEnd != "Unknown"){
+                // get the time value
+                if(dbEntries[i].hours >= 6 && dbEntries[i].hours < 12){
+                    // its morning
+                    morningTotal++;
+                    if(dbEntries[i].matchEnd == "Victory"){
+                        morningWins++;
+                    }
+                }
+                // else is it afternoon
+                else if(dbEntries[i].hours >= 12 && dbEntries[i].hours < 18){
+                    // its afternoon
+                    afternoonTotal++;
+                    if(dbEntries[i].matchEnd == "Victory"){
+                        afternoonWins++;
+                    }
+                }
+                // else is it evening
+                else if(dbEntries[i].hours >= 18){ // highest value is 24:00 <-> 00:00 -> no top limit needed
+                    eveningTotal++;
+                    if(dbEntries[i].matchEnd == "Victory"){
+                        eveningWins++;
+                    }
+                }
+                // else its night
+                else{ // 00:00 - 05:59
+                    nightTotal++;
+                    if(dbEntries[i].matchEnd == "Victory"){
+                        nightWins++;
+                    }
+                }
+            }
+
 
         }
+
+        // update the timeOfDayBreakdown chart
+        var morningWinrate = 0;
+        var afternoonWinrate = 0;
+        var eveningWinrate = 0;
+        var nightWinrate = 0;
+
+        if(morningTotal != 0){
+            morningWinrate = morningWins / morningTotal;
+        }
+
+        if(afternoonTotal != 0){
+            afternoonWinrate = afternoonWins / afternoonTotal;
+        }
+
+        if(eveningTotal != 0){
+            eveningWinrate = eveningWins / eveningTotal;
+        }
+
+        if(nightTotal != 0){
+            nightWinrate = nightWins / nightTotal;
+        }
+
+        timeOfDayBreakdownData = [morningWinrate, afternoonWinrate, eveningWinrate, nightWinrate];
+        timeOfDayBreakdownChart.data.datasets[0].data = timeOfDayBreakdownData;
+        timeOfDayBreakdownChart.update({
+            duration: 800,
+            easing: 'easeOutBounce'
+        })
 
 
         // update the sr rating chart
@@ -1717,6 +1816,8 @@ app.controller('FormController', function($scope){
             wl = "Unknown";
         }
 
+
+
         // get the date and the current time
         var date = new Date();
 
@@ -1739,11 +1840,12 @@ app.controller('FormController', function($scope){
             day = day.toString();
         }
 
-        var currentDate = date.getFullYear().toString() + month + day;
+        var dateString = date.getFullYear().toString() + "." + month + "." + day;
 
         // format HHMMSS
         // making the hours 2 digits (leading 0)
         var hours = date.getHours();
+        var hoursDaytime = hours;
         if(hours < 10){
             hours = "0" + hours.toString();
         }
@@ -1760,17 +1862,9 @@ app.controller('FormController', function($scope){
             minutes = minutes.toString();
         }
 
-        // making seconds 2 digits (leading 0)
-        var seconds = date.getSeconds();
-        if(seconds < 10){
-            seconds = "0" + seconds.toString();
-        }
-        else{
-            seconds = seconds.toString();
-        }
-        var currentTime = hours + minutes + seconds;
+        var time = hours + ":" +  minutes;
 
-        var dateIdentifier = parseInt(currentDate + currentTime, 10);
+        var dateTimeLong = dateString + "-" + time;
 
 
 
@@ -2148,7 +2242,7 @@ app.controller('FormController', function($scope){
         // friends
         groupsize: group,
         // date and time
-        date: dateIdentifier};
+        dateTimeLong: dateTimeLong, date: dateString, time: time, hours: hoursDaytime};
 
 
         // add the entry to the array
