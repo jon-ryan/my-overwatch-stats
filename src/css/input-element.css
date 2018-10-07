@@ -169,3 +169,22 @@ select {
   }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~ Style select box ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~ Style text box ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+input[type=text]{
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+    margin: 2px;
+}
+
+input[type=number]{
+    border: none;
+    font-size: 16px;
+    padding: 5px;
+    margin: 2px;
+}
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~ Style text box ~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
