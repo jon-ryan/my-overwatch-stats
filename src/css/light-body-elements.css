@@ -11,6 +11,10 @@
     color: rgb(34, 34, 34);
 }
 
+.background-color{
+    background-color: rgb(200, 200, 200);
+}
+
 .table-header-style-active{
     border-bottom: 1px solid rgb(34, 34, 34);
 }

@@ -23,6 +23,9 @@
     <!-- Import Angular JS -->
     <script src="../javascript/angularjsmin.js"></script>
 
+    <!-- Import custom select bod logic -->
+    <script src="../javascript/selectBox.js"></script>
+
     <!-- include script for showing different tabs -->
     <script src="../javascript/overview.js"></script>
 
@@ -514,7 +517,8 @@
 
                                 <div class="form-element">
                                     Map: 
-                                    <select ng-model="map" ng-options="x.name for x in maps | orderBy: 'name'"></select>
+                                    <select class="background-color text-color" ng-model="map" ng-options="x.name for x in maps | orderBy: 'name'"></select>
+                                    
                                 </div>
 
                                 <!-- input for groupsize -->
@@ -557,6 +561,9 @@
                                         <span class="radiobutton-checkmark"></span>
                                     </label>
 
+
+
+
                                 </div>
 
 
@@ -572,19 +579,19 @@
                                 
                                 <div class="form-element">
                                     Hero 1: 
-                                    <select ng-model="selectedHero1" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
+                                    <select class="background-color text-color" ng-model="selectedHero1" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 2:
-                                    <select ng-model="selectedHero2" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
+                                    <select class="background-color text-color" ng-model="selectedHero2" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 3:
-                                    <select ng-model="selectedHero3" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
+                                    <select class="background-color text-color" ng-model="selectedHero3" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                                 <div class="form-element">
                                     Hero 4:
-                                    <select ng-model="selectedHero4" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
+                                    <select class="background-color text-color" ng-model="selectedHero4" ng-options="x.name for x in heroes | orderBy: 'name'"></select>
                                 </div>
                             </div>
   
