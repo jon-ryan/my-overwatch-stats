@@ -38,7 +38,6 @@
     "electron": "^3.0.0",
     "electron-packager": "^12.2.0",
     "pouchdb-browser": "^7.0.0"
-    "minimist": ">=1.2.2"
   },
   "dependencies": {
     "electron-store": "^2.0.0",
